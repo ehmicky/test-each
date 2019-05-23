@@ -6,8 +6,8 @@ import { fixDuplicate } from './duplicate.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
-export const testEach = function(...inputArgs) {
-  const { iterables, func } = parseInput(inputArgs)
+export const testEach = function(...args) {
+  const { iterables, func } = parseInput(args)
 
   const iterablesA = iterables.map(addRepeat)
 

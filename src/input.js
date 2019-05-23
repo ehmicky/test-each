@@ -1,11 +1,11 @@
 import { isRepeat } from './repeat.js'
 
 // Parse and validate main input
-export const parseInput = function(inputArgs) {
-  const iterables = inputArgs.slice(0, -1)
+export const parseInput = function(args) {
+  const iterables = args.slice(0, -1)
   iterables.forEach(validateIterable)
 
-  const func = inputArgs[inputArgs.length - 1]
+  const func = args[args.length - 1]
   validateFunc(func)
 
   return { iterables, func }
