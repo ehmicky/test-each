@@ -3,7 +3,7 @@ import prettyFormat, { plugins } from 'pretty-format'
 import { isPlainObject } from './utils.js'
 
 // Retrieve unique test names for each loop.
-// To customize names, generate them using the iterated function parameters.
+// Users can customize names by using the iterated function parameters.
 export const addNames = function({ index, indexes, params }) {
   const names = params.map(getName)
   const name = names.join(' ')
