@@ -99,6 +99,8 @@ npm install -D test-each
 
 # Usage
 
+<!-- eslint-disable no-empty-function -->
+
 ```js
 const testEach = require('test-each')
 
