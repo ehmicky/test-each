@@ -10,12 +10,13 @@
 Repeats tests using different inputs
 ([Data-Driven Testing](https://en.wikipedia.org/wiki/Data-driven_testing)):
 
-- test runner independent: `test-each` works with your current test setup
+- test runner independent: works with your current test setup
 - loops over every possible combination of inputs
   ([cartesian product](https://github.com/ehmicky/fast-cartesian))
 - can use random generating functions
   ([fuzz testing](https://en.wikipedia.org/wiki/Fuzzing))
-- stringifies inputs into a unique `name` to use in test titles
+- [stringifies](https://github.com/facebook/jest/tree/master/packages/pretty-format)
+  inputs into a unique `name` to use in test titles
 - [snapshot testing](https://github.com/bahmutov/snap-shot-it#use) friendly
 - works any
   [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables):
@@ -38,9 +39,10 @@ const { multiply, divide, add, substract } = require('./math.js')
 // Repeat test using different inputs and expected values
 testEach(
   [{ first: 2, second: 2, result: 4 }, { first: 3, second: 3, result: 9 }],
-  // `name` are the parameters, stringified.
   ({ name }, { first, second, result }) => {
-    test(`should multiply results | ${name}`, t => {
+    // Test title will be:
+    //   'should multiply | {"first": 2, "second": 2, "result": 4}', etc.
+    test(`should multiply | ${name}`, t => {
       t.is(multiply(first, second), result)
     })
   },
@@ -49,7 +51,6 @@ testEach(
 // Snapshot testing
 testEach(
   [{ first: 2, second: 2 }, { first: 3, second: 3 }],
-  // `name` are the parameters, stringified.
   ({ name }, { first, second }) => {
     test(`should multiply results | ${name}`, t => {
       t.snapshot(multiply(first, second))
