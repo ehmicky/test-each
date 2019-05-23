@@ -60,7 +60,7 @@ testEach(
 )
 
 // Cartesian product.
-// Run this test 10 times using every possible combination of methods and inputs
+// Run this test 12 times using every possible combination of methods and inputs
 testEach(
   [multiply, divide, add, substract],
   ['invalid', false, null],
