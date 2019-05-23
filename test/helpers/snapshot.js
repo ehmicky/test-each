@@ -5,7 +5,7 @@ import prettyFormat from 'pretty-format'
 import testEach from '../../src/main.js'
 
 // For each `args` in `allArgs`, call `testEach(...args)` and snapshot the
-// return value
+// return value.
 export const testSnapshots = function(
   title,
   allArgs,
@@ -14,6 +14,7 @@ export const testSnapshots = function(
   allArgs.forEach(args => snapshotArgs(args, title, useCallback))
 }
 
+// We don't use `testEach()` itself since we are testing it.
 const snapshotArgs = function(args, title, useCallback) {
   const name = prettyFormat(args, { min: true })
   test(`${title} | ${name}`, t => {
