@@ -20,10 +20,10 @@ const testEach = function(...args) {
   return results
 }
 
-// The `name`, `names`, etc. are passed as first parameter so that:
-//  - user can put `params` in an array (if needs be) using variadic syntax
-//    `...params`
-//  - user can omit `params` if only the information in the first parameter
+// The `name`, `names`, etc. are passed as first argument (not the last one)
+// so that:
+//  - user can put `params` in an array (if needs be) using variadic `...params`
+//  - user can omit `params` if only the information in the first argument
 //    is needed
 // The return value of `func` is returned so that:
 //  - `Promise.all(results)` can be use used if `func` is async
