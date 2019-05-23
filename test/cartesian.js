@@ -21,7 +21,7 @@ testSnapshots('Iterable arguments', [
   [generator()],
 ])
 
-testSnapshots('Function paramaters', [
+testSnapshots('Function parameters', [
   [[() => 'a']],
   [[(argA, argB, argC) => `${argB} ${argC}`], ['b'], ['c']],
 ])

@@ -11,8 +11,8 @@ export const testSnapshots = function(title, allArgs, { useCallback = true } = {
 }
 
 const snapshotArgs = function(args, title, useCallback) {
-  const titleA = `${title} | ${prettyFormat(args)}`
-  test(titleA, t => {
+  const name = prettyFormat(args, { min: true })
+  test(`${title} | ${name}`, t => {
     const loops = getLoops(args, useCallback)
     t.snapshot(loops)
   })
