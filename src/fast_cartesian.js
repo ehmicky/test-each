@@ -1,6 +1,7 @@
 // Does a cartesian product on several iterables.
 // Works with any iterable, including arrays, strings, generators, maps, sets.
-export const fastCartesian = function(...iterables) {
+// eslint-disable-next-line import/unambiguous
+const fastCartesian = function(...iterables) {
   iterables.forEach(validateIterable)
 
   if (iterables.length === 0) {
@@ -37,3 +38,8 @@ const iterate = function(iterables, result, values, index) {
   }
 }
 /* eslint-enable max-params, fp/no-loops, fp/no-mutating-methods */
+
+// We do not use `export default` because Babel transpiles it in a way that
+// requires CommonJS users to `require(...).default` instead of `require(...)`.
+// eslint-disable-next-line import/no-commonjs
+module.exports = fastCartesian
