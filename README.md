@@ -120,7 +120,7 @@ to prevent side-effects in the next iterations. You can use
 // This should not be done, as the objects are re-used in several iterations
 testEach(
   [{ attr: true }, { attr: false }],
-  ['prod', 'dev'],
+  ['dev', 'staging', 'production'],
   (info, value, env) => {
     value.attr = !value.attr
   },
@@ -129,7 +129,7 @@ testEach(
 // But this is safe
 testEach(
   [() => ({ attr: true }), () => ({ attr: false })],
-  ['prod', 'dev'],
+  ['dev', 'staging', 'production'],
   (info, value, env) => {
     value.attr = !value.attr
   },
@@ -181,10 +181,11 @@ testEach(
   (info, day, month, year, date) => {},
 )
 
-// To pass a function as input without firing it, either wrap it in an object,
-// or return it in another function
-const getTrue = () => true
-testEach([{ getTrue }, () => getTrue], (info, param) => {})
+// To pass a function as input without firing it, wrap it in an object
+testEach(
+  [{ getValue: () => true }, { getValue: () => false }],
+  (info, { getValue }) => {},
+)
 ```
 
 This enables [fuzz testing](https://en.wikipedia.org/wiki/Fuzzing) when combined
@@ -198,9 +199,21 @@ const faker = require('faker')
 testEach(
   1000,
   [faker.random.uuid],
-  [faker.internet.url],
-  (info, randomUuid, randomUrl) => {},
+  [faker.random.arrayElement(['dev', 'staging', 'production'])],
+  (info, randomUuid, randomEnv) => {},
 )
+```
+
+You can combine this with closures in order to persist state between iterations.
+
+```js
+const getExponential = function() {
+  let count = 1
+  return () => (count *= 2)
+}
+
+// `number` will be 2 -> 4 -> 8 -> etc.
+testEach(1000, [getExponential()], (info, number) => {})
 ```
 
 ### Snapshot testing
