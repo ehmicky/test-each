@@ -5,7 +5,83 @@
 [![Twitter](https://img.shields.io/badge/%E2%80%8B-twitter-4cc61e.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ehmicky)
 [![Medium](https://img.shields.io/badge/%E2%80%8B-medium-4cc61e.svg?logo=medium)](https://medium.com/@ehmicky)
 
-Work in progress
+🤖 Repeat tests. Repeat tests. Repeat tests.
+
+Repeats tests using different inputs
+([Data-Driven Testing](https://en.wikipedia.org/wiki/Data-driven_testing)):
+
+- test runner independent: `test-each` works with your current test setup
+- loops over every possible combination of inputs
+  ([cartesian product](https://github.com/ehmicky/fast-cartesian))
+- can use random generating functions
+  ([fuzz testing](https://en.wikipedia.org/wiki/Fuzzing))
+- stringifies inputs into a unique `name` to use in test titles
+- [snapshot testing](https://github.com/bahmutov/snap-shot-it#use) friendly
+- works any
+  [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables):
+  arrays,
+  [generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator),
+  strings, maps, sets, etc.
+
+# Example
+
+<!-- eslint-disable max-nested-callbacks -->
+
+```js
+// The examples use Ava but any test runner works (Jest, Mocha, etc.)
+const test = require('ava')
+const testEach = require('test-each')
+
+// The code we are testing
+const { multiply, divide, add, substract } = require('./math.js')
+
+// Repeat test using different inputs and expected values
+testEach(
+  [{ first: 2, second: 2, result: 4 }, { first: 3, second: 3, result: 9 }],
+  // `name` are the parameters, stringified.
+  ({ name }, { first, second, result }) => {
+    test(`should multiply results | ${name}`, t => {
+      t.is(multiply(first, second), result)
+    })
+  },
+)
+
+// Snapshot testing
+testEach(
+  [{ first: 2, second: 2 }, { first: 3, second: 3 }],
+  // `name` are the parameters, stringified.
+  ({ name }, { first, second }) => {
+    test(`should multiply results | ${name}`, t => {
+      t.snapshot(multiply(first, second))
+    })
+  },
+)
+
+// Cartesian product: tries every possible combination of methods and inputs
+testEach(
+  [multiply, divide, add, substract],
+  ['invalid', false, null],
+  ({ name }, method, input) => {
+    test(`should only allow numbers as input | ${name}`, t => {
+      t.throws(() => method(input))
+    })
+  },
+)
+
+// Fuzz testing
+testEach(1000, [() => Math.random()], ({ name }, index, randomNumber) => {
+  test(`should correctly substract floats | ${name}`, t => {
+    t.is(substract(randomNumber, randomNumber), 0)
+  })
+})
+
+// Works with any iterable
+testEach('012345679', ({ name }, digit) => {
+  test(`should allow stringified numbers | ${name}`, t => {
+    t.is(multiply(digit, 1), digit)
+  })
+})
+```
 
 # Support
 
