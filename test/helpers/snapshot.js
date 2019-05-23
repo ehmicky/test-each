@@ -28,7 +28,7 @@ const getLoops = function(args, useCallback) {
   try {
     return testEach(...args, callback)
   } catch (error) {
-    return String(error)
+    return error
   }
 }
 
