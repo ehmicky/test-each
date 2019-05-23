@@ -1,5 +1,5 @@
 // Using an integer is a shortcut for [0, 1, ...]
-// This can be used together with functions to do fuzz testing.
+// This can be used together with function parameters to do fuzz testing.
 export const addRepeat = function(iterable) {
   if (!isRepeat(iterable)) {
     return iterable
