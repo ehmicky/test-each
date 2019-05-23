@@ -5,7 +5,7 @@ import { addNames } from './name.js'
 import { fixDuplicate } from './duplicate.js'
 
 // Repeat a function with a combination of parameters.
-// Meant for test-driven development.
+// Meant for data-driven testing and fuzzy testing.
 export const testEach = function(...inputArgs) {
   const { iterables, func } = parseInput(inputArgs)
 
