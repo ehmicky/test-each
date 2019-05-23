@@ -108,13 +108,20 @@ npm install -D test-each
 ```js
 const testEach = require('test-each')
 
+const inputs = [
+  { first: 2, second: 2, result: 4 },
+  { first: 3, second: 3, result: 9 },
+]
 testEach(...inputs, function callback(info, ...params) {})
 ```
 
 Iterates over `inputs` and fires `callback` with each set of parameters.
 
-You can do anything inside `callback`. The most common use case is to define
-tests (using any test runner).
+`callback` can do anything but the most common use case is to define tests
+(using any test runner).
+
+[`info`](#info) is an `object` whose properties can be used in
+[test titles](#names).
 
 ### Cartesian product
 
@@ -125,27 +132,24 @@ If several `inputs` are specified, their
 
 ```js
 // Run callback five times: a -> b -> c -> d -> e
-testEach(['a', 'b', 'c', 'd', 'e'], (info, value) => {})
+testEach(['a', 'b', 'c', 'd', 'e'], (info, param) => {})
 
 // Run callback six times: a c -> a d -> a e -> b c -> b d -> b e
-testEach(['a', 'b'], ['c', 'd', 'e'], (info, value, otherValue) => {})
+testEach(['a', 'b'], ['c', 'd', 'e'], (info, param, otherParam) => {})
 
 // Nested arrays are not iterated.
 // So this runs callback twice: ['a', 'b'] -> ['c', 'd', 'e']
-testEach([['a', 'b'], ['c', 'd', 'e']], (info, value) => {})
-
-// Strings are iterable.
-// Run callback five times: a -> b -> c -> d -> e
-testEach('abcde', (info, value) => {})
+testEach([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
 ```
 
-### Fuzz testing
+### Input functions
 
-If an `input` is a `function`, each iteration will fire it and use its return
-value instead. The `function` is called with the other parameters as arguments.
+If an `input` is a `function`, it is fired by each iteration and its return
+value is used instead. The `function` is called with the same parameters as the
+`callback` except [`info`](#info).
 
-An `input` can also be an `integer` to repeat the tests with the same `inputs`
-several times.
+An `input` can also be an `integer` in order to repeat each iteration several
+times.
 
 <!-- eslint-disable no-empty-function, max-params -->
 
@@ -153,7 +157,8 @@ several times.
 // Run callback 1000 times with a different random number each time
 testEach(1000, [() => Math.random()], (info, randomNumber) => {})
 
-// Input functions are called with the other parameters as arguments
+// Input functions are called with the same parameters as the callback
+// except `info`
 testEach(
   ['02', '15', '30'],
   ['January', 'February', 'March'],
@@ -172,8 +177,11 @@ testEach(
 )
 ```
 
-This enables [fuzz testing](https://en.wikipedia.org/wiki/Fuzzing) when combined
-with libraries like [faker.js](https://github.com/marak/Faker.js),
+### Fuzz testing
+
+[Input functions](#input-functions) can be used for
+[fuzz testing](https://en.wikipedia.org/wiki/Fuzzing) when combined with
+libraries like [faker.js](https://github.com/marak/Faker.js),
 [chance.js](https://github.com/chancejs/chancejs) or
 [json-schema-faker](https://github.com/json-schema-faker/json-schema-faker).
 
@@ -182,6 +190,7 @@ with libraries like [faker.js](https://github.com/marak/Faker.js),
 ```js
 const faker = require('faker')
 
+// Run callback 1000 times with a random UUID and `env` each time
 testEach(
   1000,
   [faker.random.uuid],
@@ -190,7 +199,9 @@ testEach(
 )
 ```
 
-You can combine this with closures in order to persist state between iterations.
+### Stateful iterations
+
+Closures can be used to persist state between iterations.
 
 <!-- eslint-disable fp/no-let, fp/no-mutation, no-empty-function -->
 
@@ -209,6 +220,12 @@ testEach(1000, [getExponential()], (info, number) => {})
 This library works well with
 [snapshot testing](https://github.com/bahmutov/snap-shot-it#use).
 
+Any library can be used
+([`snap-shot-it`](https://github.com/bahmutov/snap-shot-it),
+[Ava snapshots](https://github.com/avajs/ava/blob/master/docs/04-snapshot-testing.md),
+[Jest snapshots](https://jestjs.io/docs/en/snapshot-testing),
+[Node TAP snapshots](https://www.node-tap.org/snapshots/), etc.).
+
 <!-- eslint-disable max-nested-callbacks -->
 
 ```js
@@ -226,32 +243,33 @@ testEach(
 
 ### Names
 
-Each combination of `inputs` is stringified as a `name`. It is passed in the
-`callback`'s first argument.
+Each combination of parameters is stringified as a `name`. It is available in
+the `callback`'s first argument.
 
-This should be included in test titles in order to:
+Names should be included in test titles in order to:
 
 - make them more descriptive
 - ensure they are unique. An incrementing counter is appended to duplicates.
 
 Every JavaScript type is
-[supported](https://github.com/facebook/jest/tree/master/packages/pretty-format).
+[supported](https://github.com/facebook/jest/tree/master/packages/pretty-format),
+not only JSON.
+
 Names are kept short and truncated if needs be.
 
-To customize names you can either:
+You can customize names either by:
 
-- define `name` properties in `inputs`, providing those are
-  [plain objects](https://stackoverflow.com/questions/52453407/the-different-between-object-and-plain-object-in-javascript).
-- use the `info` argument
+- defining `name` properties in `inputs` if they are
+  [plain objects](https://stackoverflow.com/questions/52453407/the-different-between-object-and-plain-object-in-javascript)
+- using the [`info` argument](#info)
 
 <!-- eslint-disable max-nested-callbacks, no-empty-function -->
 
 ```js
-// `name` will be '{"attr": true}' then '{"attr": false}'
 testEach([{ attr: true }, { attr: false }], ({ name }, object) => {
   // Test titles will be:
-  //   'should work | {"attr": true}'
-  //   'should work | {"attr": false}'
+  //   should work | {"attr": true}
+  //   should work | {"attr": false}
   test(`should work | ${name}`, () => {})
 })
 
@@ -260,18 +278,18 @@ testEach(
   [{ attr: true, name: 'True' }, { attr: false, name: 'False' }],
   ({ name }, object) => {
     // Test titles will be:
-    //   'should work | True'
-    //   'should work | False'
+    //   should work | True
+    //   should work | False
     test(`should work | ${name}`, () => {})
   },
 )
 
 // The `info` argument can be used for more flexible names
-testEach([{ attr: true }, { attr: false }], ({ index }, object) => {
+testEach([{ attr: true }, { attr: false }], (info, object) => {
   // Test titles will be:
-  //   'should work | 0'
-  //   'should work | 1'
-  test(`should work | ${name}`, () => {})
+  //   should work | 0
+  //   should work | 1
+  test(`should work | ${info.index}`, () => {})
 })
 ```
 
@@ -281,40 +299,50 @@ testEach([{ attr: true }, { attr: false }], ({ index }, object) => {
 [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables):
 `array`,
 [`generator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator),
-`string`, `Map`, `Set`, etc.).
+`string`, `Map`, `Set`, etc.
+
+<!-- eslint-disable no-empty-function -->
+
+```js
+// Run callback five times: a -> b -> c -> d -> e
+testEach('abcde', (info, param) => {})
+```
 
 ### Modifying parameters
 
-If the parameters are objects and you need to modify them, they should be cloned
-to prevent side-effects in the next iterations. You can use
+If the parameters are objects that need to be modified, they should be cloned to
+prevent side-effects for the next iterations. You can use
 [input functions](#fuzz-testing) to achieve this without additional libraries.
 
 <!-- eslint-disable fp/no-mutation, no-param-reassign -->
 
 ```js
-// This should not be done, as the objects are re-used in several iterations
 testEach(
   [{ attr: true }, { attr: false }],
   ['dev', 'staging', 'production'],
-  (info, value, env) => {
-    value.attr = !value.attr
+  (info, param, env) => {
+    // This should not be done, as the objects are re-used in several iterations
+    param.attr = !param.attr
   },
 )
 
-// But this is safe
+// But this is safe since each iteration creates a new object
 testEach(
   [() => ({ attr: true }), () => ({ attr: false })],
   ['dev', 'staging', 'production'],
-  (info, value, env) => {
-    value.attr = !value.attr
+  (info, param, env) => {
+    param.attr = !param.attr
   },
 )
 ```
 
-### Retrieving parameters
+### Return value
 
-The return value of each `callback` is returned as an `array`. This means
-`callback` arguments can be retrieved outside of the `callback`.
+Just like `Array.map()`, `testEach()` aggregates the return value of each
+`callback` and return it as an `array`.
+
+This can be used to pass information (for example the parameters) from the
+`callback` to its caller.
 
 ```js
 // `values` will be ['ac', 'ad', 'bc', 'bd']
@@ -327,8 +355,9 @@ const values = testEach(['a', 'b'], ['c', 'd'], (info, first, second) => {
 
 ## testEach(...inputs, callback)
 
-`inputs`: `iterable | integer` <br>`callback`: `function(info, ...params)` <br>
-_Return value_: `any[]`
+`inputs`: [`iterable`](#iterables) or [`integer`](#input-functions) (one or
+[several](#cartesian-product))<br>`callback`: `function(info, ...params)` <br>
+[_Return value_](#return-value): `any[]`
 
 ### info
 
@@ -338,13 +367,13 @@ _Type_: `object`
 
 _Type_: `string`
 
-Callback's `params` stringified. Should be used in test titles.
+Like [`params`](#params) but stringified. Should be used in test titles.
 
 #### info.names
 
 _Type_: `string[]`
 
-Like `info.name` but for each `params`.
+Like [`info.name`](#infoname) but for each [`params`](#params).
 
 #### info.index
 
@@ -356,11 +385,12 @@ Incremented on each iteration. Starts at `0`.
 
 _Type_: `integer[]`
 
-Index of each `params` inside the initial `inputs`.
+Index of each [`params`](#params) inside the initial
+[`inputs`](#testeachinputs-callback).
 
 ### params
 
-_Type_: `any`
+_Type_: `any` (one or [several](#cartesian-product))
 
 # Support
 
