@@ -99,46 +99,16 @@ npm install -D test-each
 
 # Usage
 
+```js
+const testEach = require('test-each')
+
+testEach(...inputs, function callback(info, ...params) {})
+```
+
 Iterates over `inputs` and fires `callback` with each set of parameters.
 
 You can do anything inside `callback`. The most common use case is to define
 tests (using any test runner).
-
-The return value of each `callback` is returned as an `array`. This means
-`callback` arguments can be retrieved outside of the `callback`.
-
-```js
-// `values` will be ['ac', 'ad', 'bc', 'bd']
-const values = testEach(['a', 'b'], ['c', 'd'], (info, first, second) => {
-  return `${first}${second}`
-})
-```
-
-If the parameters are objects and you need to modify them, they should be cloned
-to prevent side-effects in the next iterations. You can use
-[input functions](#fuzz-testing) to achieve this without additional libraries.
-
-<!-- eslint-disable fp/no-mutation, no-param-reassign -->
-
-```js
-// This should not be done, as the objects are re-used in several iterations
-testEach(
-  [{ attr: true }, { attr: false }],
-  ['dev', 'staging', 'production'],
-  (info, value, env) => {
-    value.attr = !value.attr
-  },
-)
-
-// But this is safe
-testEach(
-  [() => ({ attr: true }), () => ({ attr: false })],
-  ['dev', 'staging', 'production'],
-  (info, value, env) => {
-    value.attr = !value.attr
-  },
-)
-```
 
 ### Cartesian product
 
@@ -306,6 +276,46 @@ testEach([{ attr: true }, { attr: false }], ({ index }, object) => {
 `array`,
 [`generator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator),
 `string`, `Map`, `Set`, etc.).
+
+### Modifying parameters
+
+If the parameters are objects and you need to modify them, they should be cloned
+to prevent side-effects in the next iterations. You can use
+[input functions](#fuzz-testing) to achieve this without additional libraries.
+
+<!-- eslint-disable fp/no-mutation, no-param-reassign -->
+
+```js
+// This should not be done, as the objects are re-used in several iterations
+testEach(
+  [{ attr: true }, { attr: false }],
+  ['dev', 'staging', 'production'],
+  (info, value, env) => {
+    value.attr = !value.attr
+  },
+)
+
+// But this is safe
+testEach(
+  [() => ({ attr: true }), () => ({ attr: false })],
+  ['dev', 'staging', 'production'],
+  (info, value, env) => {
+    value.attr = !value.attr
+  },
+)
+```
+
+### Retrieving parameters
+
+The return value of each `callback` is returned as an `array`. This means
+`callback` arguments can be retrieved outside of the `callback`.
+
+```js
+// `values` will be ['ac', 'ad', 'bc', 'bd']
+const values = testEach(['a', 'b'], ['c', 'd'], (info, first, second) => {
+  return `${first}${second}`
+})
+```
 
 # API
 
