@@ -5,6 +5,8 @@
 [![Twitter](https://img.shields.io/badge/%E2%80%8B-twitter-4cc61e.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ehmicky)
 [![Medium](https://img.shields.io/badge/%E2%80%8B-medium-4cc61e.svg?logo=medium)](https://medium.com/@ehmicky)
 
+Work in progress, not published to `npm` yet!
+
 🤖 Repeat tests. Repeat tests. Repeat tests.
 
 Repeats tests using different inputs
