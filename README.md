@@ -326,37 +326,37 @@ const values = testEach(['a', 'b'], ['c', 'd'], (info, first, second) => {
 `inputs`: `iterable | integer` <br>`callback`: `function(info, ...params)` <br>
 _Return value_: `any[]`
 
-### `info`
+### info
 
 _Type_: `object`
 
 First argument of each `callback`.
 
-#### `info.name`
+#### info.name
 
 _Type_: `string`
 
 Callback's `params` stringified. Should be used in test titles.
 
-#### `info.names`
+#### info.names
 
 _Type_: `string[]`
 
 Like `info.name` but for each `params`.
 
-#### `info.index`
+#### info.index
 
 _Type_: `integer`
 
 Incremented on each iteration. Starts at `0`.
 
-#### `info.indexes`
+#### info.indexes
 
 _Type_: `integer[]`
 
 Index of each `params` inside the initial `inputs`.
 
-### `params`
+### params
 
 _Type_: `any`
 
