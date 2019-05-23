@@ -118,6 +118,8 @@ If the parameters are objects and you need to modify them, they should be cloned
 to prevent side-effects in the next iterations. You can use
 [input functions](#fuzz-testing) to achieve this without additional libraries.
 
+<!-- eslint-disable fp/no-mutation, no-param-reassign -->
+
 ```js
 // This should not be done, as the objects are re-used in several iterations
 testEach(
@@ -143,6 +145,8 @@ testEach(
 If several `inputs` are specified, their
 [cartesian product](https://github.com/ehmicky/fast-cartesian) is used.
 
+<!-- eslint-disable no-empty-function -->
+
 ```js
 // Run callback five times: a -> b -> c -> d -> e
 testEach(['a', 'b', 'c', 'd', 'e'], (info, value) => {})
@@ -166,6 +170,8 @@ value instead. The `function` is called with the other parameters as arguments.
 
 An `input` can also be an `integer` to repeat the tests with the same `inputs`
 several times.
+
+<!-- eslint-disable no-empty-function, max-params -->
 
 ```js
 // Run callback 1000 times with a different random number each time
@@ -195,6 +201,8 @@ with libraries like [faker.js](https://github.com/marak/Faker.js),
 [chance.js](https://github.com/chancejs/chancejs) or
 [json-schema-faker](https://github.com/json-schema-faker/json-schema-faker).
 
+<!-- eslint-disable no-empty-function -->
+
 ```js
 const faker = require('faker')
 
@@ -207,6 +215,8 @@ testEach(
 ```
 
 You can combine this with closures in order to persist state between iterations.
+
+<!-- eslint-disable fp/no-let, fp/no-mutation, no-empty-function -->
 
 ```js
 const getExponential = function() {
@@ -222,6 +232,8 @@ testEach(1000, [getExponential()], (info, number) => {})
 
 This library works well with
 [snapshot testing](https://github.com/bahmutov/snap-shot-it#use).
+
+<!-- eslint-disable max-nested-callbacks -->
 
 ```js
 // The `result` is implicitly set on the first run,
@@ -255,6 +267,8 @@ To customize names you can either:
 - define `name` properties in `inputs`, providing those are
   [plain objects](https://stackoverflow.com/questions/52453407/the-different-between-object-and-plain-object-in-javascript).
 - use the `info` argument
+
+<!-- eslint-disable max-nested-callbacks, no-empty-function -->
 
 ```js
 // `name` will be '{"attr": true}' then '{"attr": false}'
