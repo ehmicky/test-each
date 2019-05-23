@@ -59,7 +59,8 @@ testEach(
   },
 )
 
-// Cartesian product: tries every possible combination of methods and inputs
+// Cartesian product.
+// Run this test 10 times using every possible combination of methods and inputs
 testEach(
   [multiply, divide, add, substract],
   ['invalid', false, null],
@@ -77,7 +78,7 @@ testEach(1000, [() => Math.random()], ({ name }, index, randomNumber) => {
   })
 })
 
-// Works with any iterable
+// Works with any iterable. Run this test 10 times using different digits.
 testEach('012345679', ({ name }, digit) => {
   test(`should allow stringified numbers | ${name}`, t => {
     t.is(multiply(digit, 1), digit)
