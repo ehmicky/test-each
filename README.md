@@ -48,7 +48,8 @@ testEach(
   },
 )
 
-// Snapshot testing
+// Snapshot testing. The `result` is implicitly set on the first run,
+// then re-used in the next runs.
 testEach(
   [{ first: 2, second: 2 }, { first: 3, second: 3 }],
   ({ name }, { first, second }) => {
@@ -69,7 +70,7 @@ testEach(
   },
 )
 
-// Fuzz testing
+// Fuzz testing. Run this test 1000 times using different numbers.
 testEach(1000, [() => Math.random()], ({ name }, index, randomNumber) => {
   test(`should correctly substract floats | ${name}`, t => {
     t.is(substract(randomNumber, randomNumber), 0)
