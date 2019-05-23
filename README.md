@@ -330,8 +330,6 @@ _Return value_: `any[]`
 
 _Type_: `object`
 
-First argument of each `callback`.
-
 #### info.name
 
 _Type_: `string`
@@ -359,8 +357,6 @@ Index of each `params` inside the initial `inputs`.
 ### params
 
 _Type_: `any`
-
-Last arguments of each `callback`.
 
 # Support
 
