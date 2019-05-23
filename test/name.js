@@ -1,10 +1,10 @@
 import { testSnapshots } from './helpers/snapshot.js'
 
 testSnapshots('`name` property', [
-  [[{name: 'a'}]],
-  [[{name: ''}]],
-  [[{name: ' '}]],
-  [[{name: true}]],
+  [[{ name: 'a' }]],
+  [[{ name: '' }]],
+  [[{ name: ' ' }]],
+  [[{ name: true }]],
 ])
 
 testSnapshots('Truncating names', [
@@ -56,7 +56,7 @@ testSnapshots('Names serialization', [
   [[new WeakSet([{}])]],
 
   // Keys should be sorted
-  [[{argB: true, argA: true, [Symbol('arg')]: true}]],
+  [[{ argB: true, argA: true, [Symbol('arg')]: true }]],
 
   // Serialiazing circular references
   [[self]],
@@ -65,7 +65,7 @@ testSnapshots('Names serialization', [
   [[{ toJSON: () => 'toJSON result' }]],
 
   // Serializing deep objects
-  [[{argA:{argB:{argC: true}}}]],
+  [[{ argA: { argB: { argC: true } } }]],
 
   // Serializing ANSI sequences
   [['\u001B[31mtext\u001B[39m']],

@@ -6,7 +6,11 @@ import testEach from '../../src/main.js'
 
 // For each `args` in `allArgs`, call `testEach(...args)` and snapshot the
 // return value
-export const testSnapshots = function(title, allArgs, { useCallback = true } = {}) {
+export const testSnapshots = function(
+  title,
+  allArgs,
+  { useCallback = true } = {},
+) {
   allArgs.forEach(args => snapshotArgs(args, title, useCallback))
 }
 

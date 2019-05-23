@@ -1,18 +1,13 @@
 import { testSnapshots } from './helpers/snapshot.js'
 
-const generator = function* () {
+const generator = function*() {
   yield 'a'
   yield 'b'
 }
 
-testSnapshots('Normal iterations', [
-  [['a']],
-  [['a', 'b'], ['c', 'd']],
-])
+testSnapshots('Normal iterations', [[['a']], [['a', 'b'], ['c', 'd']]])
 
-testSnapshots('No arguments', [
-  [],
-])
+testSnapshots('No arguments', [[]])
 
 testSnapshots('Iterable arguments', [
   [new Map([[{}, 'a'], [{}, 'b']])],
