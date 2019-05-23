@@ -1,10 +1,18 @@
-import test from 'ava'
-
-import testEach from '../src/main.js'
+import { testSnapshots } from './helpers/snapshot.js'
 
 const generator = function* () {
   yield 'a'
   yield 'b'
+}
+
+const getNamedFunction = function() {
+  // eslint-disable-next-line no-empty-function
+  return function func() {}
+}
+
+const getAnonymousFunction = function() {
+  // eslint-disable-next-line no-empty-function, func-names
+  return function() {}
 }
 
 const self = {}
@@ -15,7 +23,8 @@ self.self = self
 class Custom {}
 
 // TODO: last argument not being a function
-const ARGS = [
+
+testSnapshots('dummy', [
   // Invalid inputs
   [true],
   [-1],
@@ -70,10 +79,8 @@ const ARGS = [
   [[-Infinity]],
   [[NaN]],
   [[Symbol('a')]],
-  // eslint-disable-next-line no-empty-function, func-names
-  [[() => function () {}]],
-  // eslint-disable-next-line no-empty-function
-  [[() => function func() {}]],
+  [[getNamedFunction]],
+  [[getAnonymousFunction]],
   [[new Date(0)]],
   [[new Date(NaN)]],
   [[new Error('message')]],
@@ -95,19 +102,4 @@ const ARGS = [
   [[{argA:{argB:{argC: true}}}]],
   // Serializing ANSI sequences
   [['\u001B[31mtext\u001B[39m']],
-]
-
-const getLoops = function(args) {
-  try {
-    return testEach(...args, (...loopArgs) => loopArgs)
-  } catch (error) {
-    return String(error)
-  }
-}
-
-ARGS.forEach(args => {
-  test('dummy', t => {
-    const loops = getLoops(args)
-    t.snapshot(loops)
-  })
-})
+])
