@@ -54,7 +54,7 @@ const PRETTY_FORMAT_OPTS = {
   ],
 }
 
-// Make names short by truncating them
+// Make names short by truncating them in the middle
 const truncateName = function(name) {
   if (name.length <= MAX_NAME_LENGTH) {
     return name
@@ -62,9 +62,10 @@ const truncateName = function(name) {
 
   const start = name.slice(0, TRUNCATE_START_LENGTH)
   const end = name.slice(name.length - TRUNCATE_END_LENGTH)
-  return `${start}...${end}`
+  return `${start}${ELLIPSIS}${end}`
 }
 
 const MAX_NAME_LENGTH = 120
-const TRUNCATE_START_LENGTH = Math.ceil((MAX_NAME_LENGTH - 3) / 2)
-const TRUNCATE_END_LENGTH = Math.floor((MAX_NAME_LENGTH - 3) / 2)
+const ELLIPSIS = '...'
+const TRUNCATE_START_LENGTH = Math.ceil((MAX_NAME_LENGTH - ELLIPSIS.length) / 2)
+const TRUNCATE_END_LENGTH = Math.floor((MAX_NAME_LENGTH - ELLIPSIS.length) / 2)
