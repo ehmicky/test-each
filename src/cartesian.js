@@ -20,7 +20,7 @@ const packParamIndex = function(param, index) {
   return { index, param }
 }
 
-// Invert it after cartesian product
+// Revert it after cartesian product
 const unpackParamIndexes = function(loop, index) {
   const indexes = loop.map(unpackIndex)
   const params = loop.map(unpackParam).map(invokeFunc)
