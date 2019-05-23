@@ -6,7 +6,7 @@ import { fixDuplicate } from './duplicate.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
-export const testEach = function(...args) {
+const testEach = function(...args) {
   const { iterables, func } = parseInput(args)
 
   const iterablesA = iterables.map(addRepeat)
@@ -31,3 +31,7 @@ export const testEach = function(...args) {
 const fireFunc = function({ name, names, index, indexes, params }, func) {
   return func({ name, names, index, indexes }, ...params)
 }
+
+// We do not use `export default` because Babel transpiles it in a way that
+// requires CommonJS users to `require(...).default` instead of `require(...)`.
+module.exports = testEach
