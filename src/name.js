@@ -35,7 +35,7 @@ const hasName = function(param) {
 //  - works in browsers
 //  - is fast
 //  - has human-friendly output
-//  - can minify output
+//  - can minify output (including maxDepth)
 //  - handles circular references
 //  - can serialize DOM
 const serialize = function(param) {
