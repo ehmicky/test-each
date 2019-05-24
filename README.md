@@ -13,10 +13,10 @@ Repeats tests using different inputs
 - test runner independent: works with your current test setup
 - loops over every possible combination of inputs
   ([cartesian product](#cartesian-product))
-- can use random generating functions ([fuzz testing](#fuzz-testing))
-- stringifies inputs into a [unique `name`](#names) to use in test titles
+- can use random functions ([fuzz testing](#fuzz-testing))
+- generates [nice test titles](#names)
 - [snapshot testing](#snapshot-testing) friendly
-- works any [iterable](#iterables): arrays,
+- works with any [iterable](#iterables): arrays,
   [generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator),
   strings, maps, sets, etc.
 
@@ -37,7 +37,8 @@ testEach(
   [{ first: 2, second: 2, result: 4 }, { first: 3, second: 3, result: 9 }],
   ({ name }, { first, second, result }) => {
     // Test title will be:
-    //   'should multiply | {"first": 2, "second": 2, "result": 4}', etc.
+    //   should multiply | {"first": 2, "second": 2, "result": 4}
+    //   should multiply | {"first": 4, "second": 4, "result": 9}
     test(`should multiply | ${name}`, t => {
       t.is(multiply(first, second), result)
     })
@@ -60,21 +61,21 @@ testEach(
 testEach(
   [multiply, divide, add, substract],
   ['invalid', false, null],
-  ({ name }, method, input) => {
+  ({ name }, method, param) => {
     test(`should only allow numbers as input | ${name}`, t => {
-      t.throws(() => method(input))
+      t.throws(() => method(param, param))
     })
   },
 )
 
 // Fuzz testing. Run this test 1000 times using different numbers.
-testEach(1000, [() => Math.random()], ({ name }, index, randomNumber) => {
+testEach(1000, [Math.random], ({ name }, index, randomNumber) => {
   test(`should correctly substract floats | ${name}`, t => {
     t.is(substract(randomNumber, randomNumber), 0)
   })
 })
 
-// Works with any iterable. Run this test 10 times using different digits.
+// Works with any iterable. Run this test 10 times using each digit.
 testEach('012345679', ({ name }, digit) => {
   test(`should allow stringified numbers | ${name}`, t => {
     t.is(multiply(digit, 1), digit)
@@ -106,19 +107,16 @@ npm install -D test-each
 ```js
 const testEach = require('test-each')
 
-const inputs = [
-  { first: 2, second: 2, result: 4 },
-  { first: 3, second: 3, result: 9 },
-]
-testEach(...inputs, function callback(info, ...params) {})
+const inputs = [['red', 'green'], [0, 10, 50]]
+testEach(...inputs, function callback(info, color, number) {})
 ```
 
-Iterates over `inputs` and fires `callback` with each set of parameters.
+Fires `callback` once for each possible combination of `inputs`.
 
-`callback` can do anything but the most common use case is to define tests
-(using any test runner).
+`callback` can do anything. A common use case is to define tests (using any test
+runner).
 
-[`info`](#info) is an `object` whose properties can be used in
+[`info`](#info) is an `object` whose properties can be used to generate
 [test titles](#names).
 
 ### Cartesian product
@@ -136,24 +134,23 @@ testEach(['a', 'b', 'c', 'd', 'e'], (info, param) => {})
 testEach(['a', 'b'], ['c', 'd', 'e'], (info, param, otherParam) => {})
 
 // Nested arrays are not iterated.
-// So this runs callback twice: ['a', 'b'] -> ['c', 'd', 'e']
+// This runs callback twice with an array `param`: ['a', 'b'] -> ['c', 'd', 'e']
 testEach([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
 ```
 
 ### Input functions
 
-If an `input` is a `function`, it is fired by each iteration and its return
+If an `input` is a `function`, it is fired once per iteration and its return
 value is used instead. The `function` is called with the same parameters as the
 `callback` except [`info`](#info).
 
-An `input` can also be an `integer` in order to repeat each iteration several
-times.
+Integers can be used instead of iterables to multiply the number of iterations.
 
 <!-- eslint-disable no-empty-function, max-params -->
 
 ```js
 // Run callback 1000 times with a different random number each time
-testEach(1000, [() => Math.random()], (info, randomNumber) => {})
+testEach(1000, [Math.random], (info, randomNumber) => {})
 
 // Input functions are called with the same parameters as the callback
 // except `info`
@@ -250,14 +247,14 @@ Names should be included in test titles in order to:
 - ensure they are unique. An incrementing counter is appended to duplicates.
 
 Every JavaScript type is
-[supported](https://github.com/facebook/jest/tree/master/packages/pretty-format),
-not only JSON.
+[stringified](https://github.com/facebook/jest/tree/master/packages/pretty-format),
+not just JSON.
 
-Names are kept short and truncated if needs be.
+Long names are truncated.
 
 You can customize names either by:
 
-- defining `name` properties in `inputs` if they are
+- defining `name` properties in `inputs` that are
   [plain objects](https://stackoverflow.com/questions/52453407/the-different-between-object-and-plain-object-in-javascript)
 - using the [`info` argument](#info)
 
@@ -308,8 +305,8 @@ testEach('abcde', (info, param) => {})
 
 ### Modifying parameters
 
-If the parameters are objects that need to be modified, they should be cloned to
-prevent side-effects for the next iterations. You can use
+Object parameters that are directly modified should be cloned to prevent
+side-effects for the next iterations. You can use
 [input functions](#fuzz-testing) to achieve this without additional libraries.
 
 <!-- eslint-disable fp/no-mutation, no-param-reassign -->
