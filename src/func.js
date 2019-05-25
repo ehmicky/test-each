@@ -14,17 +14,20 @@
 //        - use `info.index` in input function
 //        - use closures
 export const callFuncs = function({ index, indexes, params }) {
-  const paramsA = params
-    .map(param => callFunc({ index, indexes, param, params }))
+  // `name` and `names` cannot be passed since they rely on the return value
+  // of this function
+  const info = { index, indexes }
+  const paramsA = params.reduce(callFunc.bind(null, info), [])
   return { index, indexes, params: paramsA }
 }
 
-const callFunc = function({ index, indexes, param, params }) {
+// eslint-disable-next-line max-params
+const callFunc = function(info, previous, param, paramIndex, params) {
   if (typeof param !== 'function') {
-    return param
+    return [...previous, param]
   }
 
-  // `name` and `names` cannot be passed since they rely on the return value
-  // of this function
-  return param({ index, indexes }, ...params)
+  // Return values from previous input functions can be used, but not next ones
+  const paramA = param(info, ...previous, ...params.slice(paramIndex))
+  return [...previous, paramA]
 }
