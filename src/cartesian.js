@@ -23,8 +23,12 @@ const packParamIndex = function(param, index) {
 // Revert it after cartesian product
 const unpackParamIndexes = function(loop, index) {
   const indexes = loop.map(unpackIndex)
-  const params = loop.map(unpackParam).map(invokeFunc)
-  return { index, indexes, params }
+  const paramsA = loop
+    .map(unpackParam)
+    .map((param, indexA, params) =>
+      invokeFunc({ index, indexes, param, params }),
+    )
+  return { index, indexes, params: paramsA }
 }
 
 const unpackIndex = function({ index }) {
@@ -50,10 +54,10 @@ const unpackParam = function({ param }) {
 //     - otherwise, either:
 //        - use `info.index` in input function
 //        - use closures
-const invokeFunc = function(param, index, params) {
+const invokeFunc = function({ index, indexes, param, params }) {
   if (typeof param !== 'function') {
     return param
   }
 
-  return param(...params)
+  return param({ index, indexes }, ...params)
 }

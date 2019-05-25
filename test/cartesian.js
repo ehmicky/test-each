@@ -18,5 +18,6 @@ testSnapshots('Iterable arguments', [
 
 testSnapshots('Function parameters', [
   [[() => 'a']],
-  [[(argA, argB, argC) => `${argB} ${argC}`], ['b'], ['c']],
+  // eslint-disable-next-line max-params
+  [[(info, argA, argB, argC) => `${argB} ${argC}`], ['b'], ['c']],
 ])
