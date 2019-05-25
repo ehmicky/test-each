@@ -194,6 +194,13 @@ testEach(
   [faker.random.arrayElement(['green', 'red', 'blue'])],
   (info, randomUuid, randomColor) => {},
 )
+
+// `info.index` can be used as a seed for reproducible randomness
+testEach(
+  1000,
+  [({ index }) => faker.seed(index) && faker.random.uuid()],
+  (info, randomUuid) => {},
+)
 ```
 
 ### Snapshot testing
