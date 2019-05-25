@@ -193,22 +193,6 @@ testEach(
 )
 ```
 
-### Stateful iterations
-
-Closures can be used to persist state between iterations.
-
-<!-- eslint-disable fp/no-let, fp/no-mutation, no-empty-function -->
-
-```js
-const getExponential = function() {
-  let count = 1
-  return () => (count *= 2)
-}
-
-// `number` will be 2 -> 4 -> 8 -> etc.
-testEach(1000, [getExponential()], (info, number) => {})
-```
-
 ### Snapshot testing
 
 This library works well with
