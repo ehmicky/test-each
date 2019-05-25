@@ -36,7 +36,7 @@ const { multiply, divide, add, substract } = require('./math.js')
 testEach(
   [{ first: 2, second: 2, output: 4 }, { first: 3, second: 3, output: 9 }],
   ({ name }, { first, second, output }) => {
-    // Test title will be:
+    // Test titles will be:
     //   should multiply | {"first": 2, "second": 2, "output": 4}
     //   should multiply | {"first": 4, "second": 4, "output": 9}
     test(`should multiply | ${name}`, t => {
@@ -113,8 +113,7 @@ testEach(...inputs, function callback(info, color, number) {})
 
 Fires `callback` once for each possible combination of `inputs`.
 
-`callback` can do anything. A common use case is to define tests (using any test
-runner).
+A common use case for `callback` is to define tests (using any test runner).
 
 [`info`](#info) is an `object` whose properties can be used to generate
 [test titles](#names).
@@ -238,19 +237,16 @@ testEach(
 
 ### Names
 
-Each combination of parameters is stringified as a `name`. It is available in
-the `callback`'s first argument.
+Each combination of parameters is stringified as a `name` available in the
+`callback`'s first argument.
 
-Names should be included in test titles in order to:
+Names should be included in test titles to make them descriptive and unique.
 
-- make them more descriptive
-- ensure they are unique. An incrementing counter is appended to duplicates.
+Long names are truncated. An incrementing counter is appended to duplicates.
 
-Every JavaScript type is
+Any JavaScript type is
 [stringified](https://github.com/facebook/jest/tree/master/packages/pretty-format),
 not just JSON.
-
-Long names are truncated.
 
 You can customize names either by:
 
@@ -279,7 +275,7 @@ testEach(
   },
 )
 
-// The `info` argument can be used for more flexible names
+// The `info` argument can be used for dynamic names
 testEach([{ attr: true }, { attr: false }], (info, object) => {
   // Test titles will be:
   //   should work | 0
@@ -334,7 +330,7 @@ testEach(
 ### Return value
 
 Just like `Array.map()`, `testEach()` aggregates the return value of each
-`callback` and return it as an `array`.
+`callback` and returns it as an `array`.
 
 This can be used to pass information (for example the parameters) from the
 `callback` to its caller.
