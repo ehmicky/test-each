@@ -188,12 +188,12 @@ with [input functions](#input-functions) and libraries like
 ```js
 const faker = require('faker')
 
-// Run callback 1000 times with a random UUID and `env` each time
+// Run callback 1000 times with a random UUID and color each time
 testEach(
   1000,
   [faker.random.uuid],
-  [faker.random.arrayElement(['dev', 'staging', 'production'])],
-  (info, randomUuid, randomEnv) => {},
+  [faker.random.arrayElement(['green', 'red', 'blue'])],
+  (info, randomUuid, randomColor) => {},
 )
 ```
 
@@ -298,8 +298,8 @@ side-effects for the next iterations. You can use
 ```js
 testEach(
   [{ attr: true }, { attr: false }],
-  ['dev', 'staging', 'production'],
-  (info, param, env) => {
+  ['green', 'red', 'blue'],
+  (info, param, color) => {
     // This should not be done, as the objects are re-used in several iterations
     param.attr = !param.attr
   },
@@ -308,8 +308,8 @@ testEach(
 // But this is safe since each iteration creates a new object
 testEach(
   [() => ({ attr: true }), () => ({ attr: false })],
-  ['dev', 'staging', 'production'],
-  (info, param, env) => {
+  ['green', 'red', 'blue'],
+  (info, param, color) => {
     param.attr = !param.attr
   },
 )
