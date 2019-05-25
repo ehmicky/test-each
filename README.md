@@ -32,25 +32,25 @@ const testEach = require('test-each')
 // The code we are testing
 const { multiply, divide, add, substract } = require('./math.js')
 
-// Repeat test using different inputs and expected values
+// Repeat test using different inputs and expected outputs
 testEach(
-  [{ first: 2, second: 2, result: 4 }, { first: 3, second: 3, result: 9 }],
-  ({ name }, { first, second, result }) => {
+  [{ first: 2, second: 2, output: 4 }, { first: 3, second: 3, output: 9 }],
+  ({ name }, { first, second, output }) => {
     // Test title will be:
-    //   should multiply | {"first": 2, "second": 2, "result": 4}
-    //   should multiply | {"first": 4, "second": 4, "result": 9}
+    //   should multiply | {"first": 2, "second": 2, "output": 4}
+    //   should multiply | {"first": 4, "second": 4, "output": 9}
     test(`should multiply | ${name}`, t => {
-      t.is(multiply(first, second), result)
+      t.is(multiply(first, second), output)
     })
   },
 )
 
-// Snapshot testing. The `result` is implicitly set on the first run,
+// Snapshot testing. The `output` is implicitly set on the first run,
 // then re-used in the next runs.
 testEach(
   [{ first: 2, second: 2 }, { first: 3, second: 3 }],
   ({ name }, { first, second }) => {
-    test(`should multiply results | ${name}`, t => {
+    test(`should multiply outputs | ${name}`, t => {
       t.snapshot(multiply(first, second))
     })
   },
@@ -224,12 +224,12 @@ Any library can be used
 <!-- eslint-disable max-nested-callbacks -->
 
 ```js
-// The `result` is implicitly set on the first run,
+// The `output` is implicitly set on the first run,
 // then re-used in the next runs.
 testEach(
   [{ first: 2, second: 2 }, { first: 3, second: 3 }],
   ({ name }, { first, second }) => {
-    test(`should multiply results | ${name}`, t => {
+    test(`should multiply outputs | ${name}`, t => {
       t.snapshot(multiply(first, second))
     })
   },
