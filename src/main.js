@@ -1,6 +1,7 @@
 import { parseInput } from './input.js'
 import { addRepeat } from './repeat.js'
 import { getCartesianLoops } from './cartesian.js'
+import { callFuncs } from './func.js'
 import { addNames } from './name.js'
 import { fixDuplicate } from './duplicate.js'
 
@@ -13,10 +14,11 @@ const testEach = function(...args) {
 
   const loops = getCartesianLoops(iterablesA)
 
-  const loopsA = loops.map(addNames)
-  const loopsB = loopsA.map(fixDuplicate)
+  const loopsA = loops.map(callFuncs)
+  const loopsB = loopsA.map(addNames)
+  const loopsC = loopsB.map(fixDuplicate)
 
-  const results = loopsB.map(loop => fireFunc(loop, func))
+  const results = loopsC.map(loop => fireFunc(loop, func))
   return results
 }
 
