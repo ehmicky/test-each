@@ -143,13 +143,15 @@ If an `input` is a `function`, it is fired once per iteration and its return
 value is used instead. The `function` is called with the same parameters as the
 `callback` except [`info`](#info).
 
-Integers can be used instead of iterables to multiply the number of iterations.
-
 <!-- eslint-disable no-empty-function, max-params -->
 
 ```js
-// Run callback 1000 times with a different random number each time
-testEach(1000, [Math.random], (info, randomNumber) => {})
+// Run callback with a different random number each time
+testEach(
+  ['red', 'green', 'blue'],
+  [Math.random],
+  (info, color, randomNumber) => {},
+)
 
 // Input functions are called with the same parameters as the callback
 // except `info`
@@ -173,9 +175,11 @@ testEach(
 
 ### Fuzz testing
 
-[Input functions](#input-functions) can be used for
-[fuzz testing](https://en.wikipedia.org/wiki/Fuzzing) when combined with
-libraries like [faker.js](https://github.com/marak/Faker.js),
+Integers can be used instead of iterables to multiply the number of iterations.
+
+This enables [fuzz testing](https://en.wikipedia.org/wiki/Fuzzing) when combined
+with [input functions](#input-functions) and libraries like
+[faker.js](https://github.com/marak/Faker.js),
 [chance.js](https://github.com/chancejs/chancejs) or
 [json-schema-faker](https://github.com/json-schema-faker/json-schema-faker).
 
