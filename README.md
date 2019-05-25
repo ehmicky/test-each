@@ -141,7 +141,7 @@ testEach([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
 
 If an `input` is a `function`, it is fired once per iteration and its return
 value is used instead. The `function` is called with the same parameters as the
-`callback` except [`info`](#info).
+`callback`.
 
 <!-- eslint-disable no-empty-function, max-params -->
 
@@ -154,14 +154,13 @@ testEach(
 )
 
 // Input functions are called with the same parameters as the callback
-// except `info`
 testEach(
   ['02', '15', '30'],
   ['January', 'February', 'March'],
   ['1980', '1981'],
   [
-    (day, month, year) => `${day}/${month}/${year}`,
-    (day, month, year) => `${month}/${day}/${year}`,
+    (info, day, month, year) => `${day}/${month}/${year}`,
+    (info, day, month, year) => `${month}/${day}/${year}`,
   ],
   (info, day, month, year, date) => {},
 )
