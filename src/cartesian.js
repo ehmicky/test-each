@@ -59,5 +59,7 @@ const invokeFunc = function({ index, indexes, param, params }) {
     return param
   }
 
+  // `name` and `names` cannot be passed since they rely on the return value
+  // of this function
   return param({ index, indexes }, ...params)
 }
