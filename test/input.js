@@ -9,6 +9,6 @@ testSnapshots('Invalid iterable arguments', [
   [Infinity],
 ])
 
-testSnapshots('Invalid function argument', [[['a']], []], {
+testSnapshots('Optional callback', [[], [['a']], [['a', 'b'], ['c', 'd']]], {
   useCallback: false,
 })
