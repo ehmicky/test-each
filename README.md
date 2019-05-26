@@ -191,7 +191,8 @@ testEach(
   (info, randomUuid, randomColor) => {},
 )
 
-// `info.index` can be used as a seed for reproducible randomness
+// `info.index` can be used as a seed for reproducible randomness.
+// The following series of 1000 UUIDs will remain the same across executions.
 testEach(
   1000,
   [({ index }) => faker.seed(index) && faker.random.uuid()],
@@ -247,30 +248,30 @@ You can customize names either by:
 <!-- eslint-disable max-nested-callbacks, no-empty-function -->
 
 ```js
-testEach([{ attr: true }, { attr: false }], ({ name }, object) => {
+testEach([{ color: 'red' }, { color: 'green' }], ({ name }, param) => {
   // Test titles will be:
-  //   should work | {"attr": true}
-  //   should work | {"attr": false}
-  test(`should work | ${name}`, () => {})
+  //    should test color | {"color": "red"}
+  //    should test color | {"color": "green"}
+  test(`should test color | ${name}`, () => {})
 })
 
 // Plain objects can override this using a `name` property
 testEach(
-  [{ attr: true, name: 'True' }, { attr: false, name: 'False' }],
-  ({ name }, object) => {
+  [{ color: 'red', name: 'Red' }, { color: 'green', name: 'Green' }],
+  ({ name }, param) => {
     // Test titles will be:
-    //   should work | True
-    //   should work | False
-    test(`should work | ${name}`, () => {})
+    //    should test color | Red
+    //    should test color | Green
+    test(`should test color | ${name}`, () => {})
   },
 )
 
 // The `info` argument can be used for dynamic names
-testEach([{ attr: true }, { attr: false }], (info, object) => {
+testEach([{ color: 'red' }, { color: 'green' }], (info, param) => {
   // Test titles will be:
-  //   should work | 0
-  //   should work | 1
-  test(`should work | ${info.index}`, () => {})
+  //    should test color | 0 red
+  //    should test color | 1 green
+  test(`should test color | ${info.index} ${param.color}`, () => {})
 })
 ```
 
@@ -289,30 +290,31 @@ testEach([{ attr: true }, { attr: false }], (info, object) => {
 testEach('abcde', (info, param) => {})
 ```
 
-### Modifying parameters
+### Side effects
 
-Object parameters that are directly modified should be cloned to prevent
-side-effects for the next iterations. You can use
-[input functions](#fuzz-testing) to achieve this without additional libraries.
+Object parameters that are directly modified should be cloned to prevent side
+effects for the next iterations.
+
+[input functions](#fuzz-testing) can be used for that purpose.
 
 <!-- eslint-disable fp/no-mutation, no-param-reassign -->
 
 ```js
 testEach(
-  [{ attr: true }, { attr: false }],
+  [{ active: true }, { active: false }],
   ['green', 'red', 'blue'],
   (info, param, color) => {
     // This should not be done, as the objects are re-used in several iterations
-    param.attr = !param.attr
+    param.active = !param.active
   },
 )
 
 // But this is safe since each iteration creates a new object
 testEach(
-  [() => ({ attr: true }), () => ({ attr: false })],
+  [() => ({ active: true }), () => ({ active: false })],
   ['green', 'red', 'blue'],
   (info, param, color) => {
-    param.attr = !param.attr
+    param.active = !param.active
   },
 )
 ```
@@ -372,6 +374,8 @@ Index of each [`params`](#params) inside the initial
 ### params
 
 _Type_: `any` (one or [several](#cartesian-product))
+
+Combination of inputs for the current iteration.
 
 # Support
 
