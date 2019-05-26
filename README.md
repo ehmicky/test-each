@@ -335,6 +335,8 @@ const values = testEach(
 
 If no `callback` is passed, iterations arguments will be returned as is.
 
+<!-- eslint-disable no-empty-function -->
+
 ```js
 const values = testEach([['red', 'blue'], [0, 5, 50]])
 values.forEach(([info, color, number]) => {})
