@@ -24,10 +24,10 @@ const snapshotArgs = function(args, title, useCallback) {
 }
 
 const getLoops = function(args, useCallback) {
-  const callback = useCallback ? defaultCallback : undefined
+  const callback = useCallback ? [defaultCallback] : []
 
   try {
-    return testEach(...args, callback)
+    return testEach(...args, ...callback)
   } catch (error) {
     return error
   }
