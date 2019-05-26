@@ -2,20 +2,20 @@ import { isRepeat } from './repeat.js'
 
 // Parse and validate main input
 export const parseInput = function(args) {
-  const { iterables, func } = splitInput(args)
+  const { iterables, callback } = splitInput(args)
   iterables.forEach(validateIterable)
-  return { iterables, func }
+  return { iterables, callback }
 }
 
 const splitInput = function(args) {
   const lastArg = args[args.length - 1]
 
   if (typeof lastArg !== 'function') {
-    return { iterables: args, func: defaultCallback }
+    return { iterables: args, callback: defaultCallback }
   }
 
   const iterables = args.slice(0, -1)
-  return { iterables, func: lastArg }
+  return { iterables, callback: lastArg }
 }
 
 const defaultCallback = function(...args) {

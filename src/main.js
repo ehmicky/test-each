@@ -8,7 +8,7 @@ import { fixDuplicate } from './duplicate.js'
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
 const testEach = function(...args) {
-  const { iterables, func } = parseInput(args)
+  const { iterables, callback } = parseInput(args)
 
   const iterablesA = iterables.map(addRepeat)
 
@@ -18,7 +18,7 @@ const testEach = function(...args) {
   const loopsB = loopsA.map(addNames)
   const loopsC = loopsB.map(fixDuplicate)
 
-  const results = loopsC.map(loop => fireFunc(loop, func))
+  const results = loopsC.map(loop => fireCallback(loop, callback))
   return results
 }
 
@@ -27,10 +27,12 @@ const testEach = function(...args) {
 //  - user can put `params` in an array (if needs be) using variadic `...params`
 //  - user can omit `params` if only the information in the first argument
 //    is needed
-// The return value of `func` is returned so that:
-//  - `Promise.all(results)` can be use used if `func` is async
-//  - user can retrieve `params`, `indexes`, etc. by returning them in `func`
-const fireFunc = function({ name, names, index, indexes, params }, func) {
+// `callback` is optional and is a shortcut to `testEach(...).map(([...])=>{})`
+// I.e. it behaves like `Array.map()`:
+//  - more flexible and functional
+//  - `Promise.all(results)` can be use used if `callback` is async
+//  - user can retrieve `params`, `indexes`, etc. outside of `callback`
+const fireCallback = function({ name, names, index, indexes, params }, func) {
   return func({ name, names, index, indexes }, ...params)
 }
 
