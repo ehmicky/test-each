@@ -18,6 +18,7 @@ const splitInput = function(args) {
   return { iterables, callback: lastArg }
 }
 
+// `callback` is optional and defaults to returning arguments as is
 const defaultCallback = function(...args) {
   return args
 }
