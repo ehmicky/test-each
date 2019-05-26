@@ -103,7 +103,7 @@ npm install -D test-each
 ```js
 const testEach = require('test-each')
 
-const inputs = [['red', 'green'], [0, 10, 50]]
+const inputs = [['red', 'blue'], [0, 5, 50]]
 testEach(...inputs, function callback(info, color, number) {})
 ```
 
@@ -248,29 +248,29 @@ You can customize names either by:
 <!-- eslint-disable max-nested-callbacks, no-empty-function -->
 
 ```js
-testEach([{ color: 'red' }, { color: 'green' }], ({ name }, param) => {
+testEach([{ color: 'red' }, { color: 'blue' }], ({ name }, param) => {
   // Test titles will be:
   //    should test color | {"color": "red"}
-  //    should test color | {"color": "green"}
+  //    should test color | {"color": "blue"}
   test(`should test color | ${name}`, () => {})
 })
 
 // Plain objects can override this using a `name` property
 testEach(
-  [{ color: 'red', name: 'Red' }, { color: 'green', name: 'Green' }],
+  [{ color: 'red', name: 'Red' }, { color: 'blue', name: 'Blue' }],
   ({ name }, param) => {
     // Test titles will be:
     //    should test color | Red
-    //    should test color | Green
+    //    should test color | Blue
     test(`should test color | ${name}`, () => {})
   },
 )
 
 // The `info` argument can be used for dynamic names
-testEach([{ color: 'red' }, { color: 'green' }], (info, param) => {
+testEach([{ color: 'red' }, { color: 'blue' }], (info, param) => {
   // Test titles will be:
   //    should test color | 0 red
-  //    should test color | 1 green
+  //    should test color | 1 blue
   test(`should test color | ${info.index} ${param.color}`, () => {})
 })
 ```
@@ -324,19 +324,25 @@ testEach(
 Just like `Array.map()`, `testEach()` aggregates the return value of each
 `callback` and returns it as an `array`.
 
-This can be used to pass information (for example the parameters) from the
-`callback` to its caller.
+```js
+// `values` will be ['red 0', 'red 5', 'red 50', 'blue 0', 'blue 5', 'blue 50']
+const values = testEach(
+  ['red', 'blue'],
+  [0, 5, 50],
+  (info, color, number) => `${color} ${number}`,
+)
+```
+
+If no `callback` is passed, iterations arguments will be returned as is.
 
 ```js
-// `values` will be ['ac', 'ad', 'bc', 'bd']
-const values = testEach(['a', 'b'], ['c', 'd'], (info, first, second) => {
-  return `${first}${second}`
-})
+const values = testEach([['red', 'blue'], [0, 5, 50]])
+values.forEach(([info, color, number]) => {})
 ```
 
 # API
 
-## testEach(...inputs, callback)
+## testEach(...inputs, [callback])
 
 `inputs`: [`iterable`](#iterables) or [`integer`](#input-functions) (one or
 [several](#cartesian-product))<br>`callback`: `function(info, ...params)` <br>
