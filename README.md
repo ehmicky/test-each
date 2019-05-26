@@ -30,7 +30,7 @@ const test = require('ava')
 const testEach = require('test-each')
 
 // The code we are testing
-const { multiply, divide, add, substract } = require('./math.js')
+const multiply = require('./multiply.js')
 
 // Repeat test using different inputs and expected outputs
 testEach(
@@ -38,7 +38,7 @@ testEach(
   ({ name }, { first, second, output }) => {
     // Test titles will be:
     //   should multiply | {"first": 2, "second": 2, "output": 4}
-    //   should multiply | {"first": 4, "second": 4, "output": 9}
+    //   should multiply | {"first": 3, "second": 3, "output": 9}
     test(`should multiply | ${name}`, t => {
       t.is(multiply(first, second), output)
     })
@@ -57,21 +57,17 @@ testEach(
 )
 
 // Cartesian product.
-// Run this test 12 times using every possible combination of methods and inputs
-testEach(
-  [multiply, divide, add, substract],
-  ['invalid', false, null],
-  ({ name }, method, param) => {
-    test(`should only allow numbers as input | ${name}`, t => {
-      t.throws(() => method(param, param))
-    })
-  },
-)
+// Run this test 4 times using every possible combination of inputs
+testEach([0.5, 10], [2.5, 5], ({ name }, first, second) => {
+  test(`should mix integers and floats | ${name}`, t => {
+    t.is(typeof multiply(first, second), 'number')
+  })
+})
 
 // Fuzz testing. Run this test 1000 times using different numbers.
 testEach(1000, [Math.random], ({ name }, index, randomNumber) => {
-  test(`should correctly substract floats | ${name}`, t => {
-    t.is(substract(randomNumber, randomNumber), 0)
+  test(`should correctly multiply floats | ${name}`, t => {
+    t.is(multiply(randomNumber, 1), randomNumber)
   })
 })
 
