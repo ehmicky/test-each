@@ -7,17 +7,17 @@ import testEach from '../../src/main.js'
 // For each `args` in `allArgs`, call `testEach(...args)` and snapshot the
 // return value.
 export const testSnapshots = function(
-  title,
+  testTitle,
   allArgs,
   { useCallback = true } = {},
 ) {
-  allArgs.forEach(args => snapshotArgs(args, title, useCallback))
+  allArgs.forEach(args => snapshotArgs(args, testTitle, useCallback))
 }
 
 // We don't use `testEach()` itself since we are testing it.
-const snapshotArgs = function(args, title, useCallback) {
-  const name = prettyFormat(args, { min: true })
-  test(`${title} | ${name}`, t => {
+const snapshotArgs = function(args, testTitle, useCallback) {
+  const title = prettyFormat(args, { min: true })
+  test(`${testTitle} | ${title}`, t => {
     const loops = getLoops(args, useCallback)
     t.snapshot(loops)
   })
