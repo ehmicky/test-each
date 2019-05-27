@@ -1,6 +1,6 @@
 {
   "name": "test-each",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "build/src/main.js",
   "files": [
     "build/src",
