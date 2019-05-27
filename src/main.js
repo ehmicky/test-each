@@ -2,7 +2,7 @@ import { parseInput } from './input.js'
 import { addRepeat } from './repeat.js'
 import { getCartesianLoops } from './cartesian.js'
 import { callFuncs } from './func.js'
-import { addNames } from './name.js'
+import { addNames } from './title.js'
 import { fixDuplicate } from './duplicate.js'
 
 // Repeat a function with a combination of parameters.
