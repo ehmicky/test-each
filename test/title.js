@@ -31,7 +31,7 @@ self.self = self
 // eslint-disable-next-line fp/no-class
 class Custom {}
 
-testSnapshots('Names serialization', [
+testSnapshots('Titles serialization', [
   [[true]],
   [[null]],
   [[undefined]],
