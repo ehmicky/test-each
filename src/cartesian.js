@@ -1,4 +1,4 @@
-import fastCartesian from './fast_cartesian.js'
+import fastCartesian from 'fast-cartesian'
 
 // Do a cartesian product between iterables, while remembering initial indexes
 export const getCartesianLoops = function(iterables) {
