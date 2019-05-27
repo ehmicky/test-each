@@ -1,6 +1,8 @@
 import { testSnapshots } from './helpers/snapshot.js'
 
 testSnapshots('Invalid iterable arguments', [
+  [undefined],
+  [null],
   [true],
   [-1],
   // eslint-disable-next-line no-magic-numbers

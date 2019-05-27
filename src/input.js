@@ -23,9 +23,17 @@ const defaultCallback = function(...args) {
 }
 
 const validateIterable = function(iterable) {
-  if (iterable[Symbol.iterator] === undefined && !isRepeat(iterable)) {
+  if (!isIterable(iterable) && !isRepeat(iterable)) {
     throw new TypeError(
       `Argument must be an iterable or a positive integer: ${iterable}`,
     )
   }
+}
+
+const isIterable = function(iterable) {
+  return (
+    iterable !== undefined &&
+    iterable !== null &&
+    iterable[Symbol.iterator] !== undefined
+  )
 }
