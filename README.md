@@ -35,11 +35,11 @@ const multiply = require('./multiply.js')
 // Repeat test using different inputs and expected outputs
 testEach(
   [{ first: 2, second: 2, output: 4 }, { first: 3, second: 3, output: 9 }],
-  ({ name }, { first, second, output }) => {
+  ({ title }, { first, second, output }) => {
     // Test titles will be:
     //   should multiply | {"first": 2, "second": 2, "output": 4}
     //   should multiply | {"first": 3, "second": 3, "output": 9}
-    test(`should multiply | ${name}`, t => {
+    test(`should multiply | ${title}`, t => {
       t.is(multiply(first, second), output)
     })
   },
@@ -49,8 +49,8 @@ testEach(
 // then re-used in the next runs.
 testEach(
   [{ first: 2, second: 2 }, { first: 3, second: 3 }],
-  ({ name }, { first, second }) => {
-    test(`should multiply outputs | ${name}`, t => {
+  ({ title }, { first, second }) => {
+    test(`should multiply outputs | ${title}`, t => {
       t.snapshot(multiply(first, second))
     })
   },
@@ -58,22 +58,22 @@ testEach(
 
 // Cartesian product.
 // Run this test 4 times using every possible combination of inputs
-testEach([0.5, 10], [2.5, 5], ({ name }, first, second) => {
-  test(`should mix integers and floats | ${name}`, t => {
+testEach([0.5, 10], [2.5, 5], ({ title }, first, second) => {
+  test(`should mix integers and floats | ${title}`, t => {
     t.is(typeof multiply(first, second), 'number')
   })
 })
 
 // Fuzz testing. Run this test 1000 times using different numbers.
-testEach(1000, [Math.random], ({ name }, index, randomNumber) => {
-  test(`should correctly multiply floats | ${name}`, t => {
+testEach(1000, [Math.random], ({ title }, index, randomNumber) => {
+  test(`should correctly multiply floats | ${title}`, t => {
     t.is(multiply(randomNumber, 1), randomNumber)
   })
 })
 
 // Works with any iterable. Run this test 10 times using each digit.
-testEach('012345679', ({ name }, digit) => {
-  test(`should allow stringified numbers | ${name}`, t => {
+testEach('012345679', ({ title }, digit) => {
+  test(`should allow stringified numbers | ${title}`, t => {
     t.is(multiply(digit, 1), digit)
   })
 })
@@ -112,7 +112,7 @@ Fires `callback` once for each possible combination of `inputs`.
 A common use case for `callback` is to define tests (using any test runner).
 
 [`info`](#info) is an `object` whose properties can be used to generate
-[test titles](#names).
+[test titles](#test-titles).
 
 ### Cartesian product
 
@@ -217,8 +217,8 @@ Any library can be used
 // then re-used in the next runs.
 testEach(
   [{ first: 2, second: 2 }, { first: 3, second: 3 }],
-  ({ name }, { first, second }) => {
-    test(`should multiply outputs | ${name}`, t => {
+  ({ title }, { first, second }) => {
+    test(`should multiply outputs | ${title}`, t => {
       t.snapshot(multiply(first, second))
     })
   },
@@ -227,45 +227,45 @@ testEach(
 
 ### Test titles
 
-Each combination of parameters is stringified as a `name` available in the
+Each combination of parameters is stringified as a `title` available in the
 `callback`'s first argument.
 
-Names should be included in test titles to make them descriptive and unique.
+Titles should be included in test titles to make them descriptive and unique.
 
-Long names are truncated. An incrementing counter is appended to duplicates.
+Long titles are truncated. An incrementing counter is appended to duplicates.
 
 Any JavaScript type is
 [stringified](https://github.com/facebook/jest/tree/master/packages/pretty-format),
 not just JSON.
 
-You can customize names either by:
+You can customize titles either by:
 
-- defining `name` properties in `inputs` that are
+- defining `title` properties in `inputs` that are
   [plain objects](https://stackoverflow.com/questions/52453407/the-different-between-object-and-plain-object-in-javascript)
 - using the [`info` argument](#info)
 
 <!-- eslint-disable max-nested-callbacks, no-empty-function -->
 
 ```js
-testEach([{ color: 'red' }, { color: 'blue' }], ({ name }, param) => {
+testEach([{ color: 'red' }, { color: 'blue' }], ({ title }, param) => {
   // Test titles will be:
   //    should test color | {"color": "red"}
   //    should test color | {"color": "blue"}
-  test(`should test color | ${name}`, () => {})
+  test(`should test color | ${title}`, () => {})
 })
 
-// Plain objects can override this using a `name` property
+// Plain objects can override this using a `title` property
 testEach(
-  [{ color: 'red', name: 'Red' }, { color: 'blue', name: 'Blue' }],
-  ({ name }, param) => {
+  [{ color: 'red', title: 'Red' }, { color: 'blue', title: 'Blue' }],
+  ({ title }, param) => {
     // Test titles will be:
     //    should test color | Red
     //    should test color | Blue
-    test(`should test color | ${name}`, () => {})
+    test(`should test color | ${title}`, () => {})
   },
 )
 
-// The `info` argument can be used for dynamic names
+// The `info` argument can be used for dynamic titles
 testEach([{ color: 'red' }, { color: 'blue' }], (info, param) => {
   // Test titles will be:
   //    should test color | 0 red
@@ -353,17 +353,17 @@ values.forEach(([info, color, number]) => {})
 
 _Type_: `object`
 
-#### info.name
+#### info.title
 
 _Type_: `string`
 
 Like [`params`](#params) but stringified. Should be used in test titles.
 
-#### info.names
+#### info.titles
 
 _Type_: `string[]`
 
-Like [`info.name`](#infoname) but for each [`params`](#params).
+Like [`info.title`](#infotitle) but for each [`params`](#params).
 
 #### info.index
 
