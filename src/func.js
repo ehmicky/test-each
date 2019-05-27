@@ -14,7 +14,7 @@
 //        - use `info.index` in input function
 //        - use closures
 export const callFuncs = function({ index, indexes, params }) {
-  // `name` and `names` cannot be passed since they rely on the return value
+  // `title` and `titles` cannot be passed since they rely on the return value
   // of this function
   const info = { index, indexes }
   const paramsA = params.reduce(callFunc.bind(null, info), [])

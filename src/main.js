@@ -2,7 +2,7 @@ import { parseInput } from './input.js'
 import { addRepeat } from './repeat.js'
 import { getCartesianLoops } from './cartesian.js'
 import { callFuncs } from './func.js'
-import { addNames } from './title.js'
+import { addTitles } from './title.js'
 import { fixDuplicate } from './duplicate.js'
 
 // Repeat a function with a combination of parameters.
@@ -15,14 +15,14 @@ const testEach = function(...args) {
   const loops = getCartesianLoops(iterablesA)
 
   const loopsA = loops.map(callFuncs)
-  const loopsB = loopsA.map(addNames)
+  const loopsB = loopsA.map(addTitles)
   const loopsC = loopsB.map(fixDuplicate)
 
   const results = loopsC.map(loop => fireCallback(loop, callback))
   return results
 }
 
-// The `name`, `names`, etc. are passed as first argument (not the last one)
+// The `title`, `titles`, etc. are passed as first argument (not the last one)
 // so that:
 //  - user can put `params` in an array (if needs be) using variadic `...params`
 //  - user can omit `params` if only the information in the first argument
@@ -32,8 +32,8 @@ const testEach = function(...args) {
 //  - more flexible and functional
 //  - `Promise.all(results)` can be use used if `callback` is async
 //  - user can retrieve `params`, `indexes`, etc. outside of `callback`
-const fireCallback = function({ name, names, index, indexes, params }, func) {
-  return func({ name, names, index, indexes }, ...params)
+const fireCallback = function({ title, titles, index, indexes, params }, func) {
+  return func({ title, titles, index, indexes }, ...params)
 }
 
 // We do not use `export default` because Babel transpiles it in a way that

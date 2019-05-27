@@ -2,23 +2,23 @@ import prettyFormat, { plugins } from 'pretty-format'
 
 import { isPlainObject } from './utils.js'
 
-// Retrieve unique test names for each loop.
-// Users can customize names by using the iterated function parameters.
-export const addNames = function({ index, indexes, params }) {
-  const names = params.map(getName)
-  const name = names.join(' ')
-  return { name, names, index, indexes, params }
+// Retrieve unique test titles for each loop.
+// Users can customize titles by using the iterated function parameters.
+export const addTitles = function({ index, indexes, params }) {
+  const titles = params.map(getTitle)
+  const title = titles.join(' ')
+  return { title, titles, index, indexes, params }
 }
 
-const getName = function(param) {
+const getTitle = function(param) {
   if (hasTitle(param)) {
     return param.title
   }
 
-  const name = serialize(param)
+  const title = serialize(param)
 
-  const nameA = truncateName(name)
-  return nameA
+  const titleA = truncateTitle(title)
+  return titleA
 }
 
 // `{ title }` can be used to override the serialization logic
@@ -54,18 +54,18 @@ const PRETTY_FORMAT_OPTS = {
   ],
 }
 
-// Make names short by truncating them in the middle
-const truncateName = function(name) {
-  if (name.length <= MAX_NAME_LENGTH) {
-    return name
+// Make titles short by truncating them in the middle
+const truncateTitle = function(title) {
+  if (title.length <= MAX_TITLE_SIZE) {
+    return title
   }
 
-  const start = name.slice(0, TRUNCATE_START_LENGTH)
-  const end = name.slice(name.length - TRUNCATE_END_LENGTH)
+  const start = title.slice(0, TRUNCATE_START_LENGTH)
+  const end = title.slice(title.length - TRUNCATE_END_LENGTH)
   return `${start}${ELLIPSIS}${end}`
 }
 
-const MAX_NAME_LENGTH = 120
+const MAX_TITLE_SIZE = 120
 const ELLIPSIS = '...'
-const TRUNCATE_START_LENGTH = Math.ceil((MAX_NAME_LENGTH - ELLIPSIS.length) / 2)
-const TRUNCATE_END_LENGTH = Math.floor((MAX_NAME_LENGTH - ELLIPSIS.length) / 2)
+const TRUNCATE_START_LENGTH = Math.ceil((MAX_TITLE_SIZE - ELLIPSIS.length) / 2)
+const TRUNCATE_END_LENGTH = Math.floor((MAX_TITLE_SIZE - ELLIPSIS.length) / 2)
