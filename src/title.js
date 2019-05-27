@@ -11,8 +11,8 @@ export const addNames = function({ index, indexes, params }) {
 }
 
 const getName = function(param) {
-  if (hasName(param)) {
-    return param.name
+  if (hasTitle(param)) {
+    return param.title
   }
 
   const name = serialize(param)
@@ -21,12 +21,12 @@ const getName = function(param) {
   return nameA
 }
 
-// `{ name }` can be used to override the serialization logic
-const hasName = function(param) {
+// `{ title }` can be used to override the serialization logic
+const hasTitle = function(param) {
   return (
     isPlainObject(param) &&
-    typeof param.name === 'string' &&
-    param.name.trim() !== ''
+    typeof param.title === 'string' &&
+    param.title.trim() !== ''
   )
 }
 

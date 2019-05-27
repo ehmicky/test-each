@@ -1,10 +1,10 @@
 import { testSnapshots } from './helpers/snapshot.js'
 
 testSnapshots('`title` property', [
-  [[{ name: 'a' }]],
-  [[{ name: '' }]],
-  [[{ name: ' ' }]],
-  [[{ name: true }]],
+  [[{ title: 'a' }]],
+  [[{ title: '' }]],
+  [[{ title: ' ' }]],
+  [[{ title: true }]],
 ])
 
 testSnapshots('Truncating titles', [
