@@ -1,3 +1,3 @@
 import { testSnapshots } from './helpers/snapshot.js'
 
-testSnapshots('Duplicate names', [[['a', 'a', 'b'], ['c', 'd']]])
+testSnapshots('Duplicate titles', [[['a', 'a', 'b'], ['c', 'd']]])

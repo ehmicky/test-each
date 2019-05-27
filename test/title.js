@@ -61,7 +61,7 @@ testSnapshots('Titles serialization', [
   // Serialiazing circular references
   [[self]],
 
-  // Names of objects with `toJSON()`
+  // Titles of objects with `toJSON()`
   [[{ toJSON: () => 'toJSON result' }]],
 
   // Serializing deep objects
