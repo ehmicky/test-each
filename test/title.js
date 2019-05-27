@@ -1,13 +1,13 @@
 import { testSnapshots } from './helpers/snapshot.js'
 
-testSnapshots('`name` property', [
+testSnapshots('`title` property', [
   [[{ name: 'a' }]],
   [[{ name: '' }]],
   [[{ name: ' ' }]],
   [[{ name: true }]],
 ])
 
-testSnapshots('Truncating names', [
+testSnapshots('Truncating titles', [
   // eslint-disable-next-line no-magic-numbers
   [['a'.repeat(118)]],
   // eslint-disable-next-line no-magic-numbers
