@@ -10,11 +10,11 @@
 Repeats tests using different inputs
 ([Data-Driven Testing](https://en.wikipedia.org/wiki/Data-driven_testing)):
 
-- test runner independent: works with your current test setup
+- test runner independent: works with your current setup
 - loops over every possible combination of inputs
   ([cartesian product](#cartesian-product))
 - can use random functions ([fuzz testing](#fuzz-testing))
-- generates [nice test titles](#names)
+- generates [nice test titles](#test-titles)
 - [snapshot testing](#snapshot-testing) friendly
 - works with any [iterable](#iterables): arrays,
   [generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator),
@@ -135,9 +135,8 @@ testEach([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
 
 ### Input functions
 
-If an `input` is a `function`, it is fired once per iteration and its return
-value is used instead. The `function` is called with the same parameters as the
-`callback`.
+If an `input` is a `function`, each iteration fires it ans uses its return value
+instead. The `function` is called with the same arguments as the `callback`.
 
 <!-- eslint-disable no-empty-function, max-params -->
 
@@ -149,7 +148,7 @@ testEach(
   (info, color, randomNumber) => {},
 )
 
-// Input functions are called with the same parameters as the callback
+// Input functions are called with the same arguments as the callback
 testEach(
   ['02', '15', '30'],
   ['January', 'February', 'March'],
@@ -226,7 +225,7 @@ testEach(
 )
 ```
 
-### Names
+### Test titles
 
 Each combination of parameters is stringified as a `name` available in the
 `callback`'s first argument.
@@ -292,10 +291,10 @@ testEach('abcde', (info, param) => {})
 
 ### Side effects
 
-Object parameters that are directly modified should be cloned to prevent side
-effects for the next iterations.
+If `callback`'s parameters are directly modified, they should be cloned to
+prevent side effects for the next iterations.
 
-[input functions](#fuzz-testing) can be used for that purpose.
+[Input functions](#fuzz-testing) can be used for that purpose.
 
 <!-- eslint-disable fp/no-mutation, no-param-reassign -->
 
