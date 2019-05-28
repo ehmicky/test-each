@@ -45,7 +45,7 @@ testEach(
   },
 )
 
-// Snapshot testing. The `output` is implicitly set on the first run,
+// Snapshot testing. The `output` is automatically set on the first run,
 // then re-used in the next runs.
 testEach(
   [{ first: 2, second: 2 }, { first: 3, second: 3 }],
@@ -213,7 +213,7 @@ Any library can be used
 <!-- eslint-disable max-nested-callbacks -->
 
 ```js
-// The `output` is implicitly set on the first run,
+// The `output` is automatically set on the first run,
 // then re-used in the next runs.
 testEach(
   [{ first: 2, second: 2 }, { first: 3, second: 3 }],
