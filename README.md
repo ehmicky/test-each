@@ -292,8 +292,8 @@ testEach('abcde', (info, param) => {})
 
 ### Side effects
 
-If `callback`'s parameters are directly modified, they should be cloned to
-prevent side effects for the next iterations.
+If `callback`'s [parameters](#params) are directly modified, they should be
+cloned to prevent side effects for the next iterations.
 
 [Input functions](#fuzz-testing) can be used for that purpose.
 
@@ -358,7 +358,8 @@ _Type_: `object`
 
 _Type_: `string`
 
-Like [`params`](#params) but stringified. Should be used in test titles.
+Like [`params`](#params) but stringified. Should be used in
+[test titles](#test-titles).
 
 #### info.titles
 
