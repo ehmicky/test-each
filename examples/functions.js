@@ -22,6 +22,7 @@ testEach(
 )
 
 // Input functions are called with the same arguments as the callback
+/* eslint-disable max-params */
 testEach(
   ['02', '15', '30'],
   ['January', 'February', 'March'],
@@ -34,6 +35,7 @@ testEach(
     console.log(date)
   },
 )
+/* eslint-enable max-params */
 
 // To pass a function as input without firing it, wrap it in an object
 testEach(

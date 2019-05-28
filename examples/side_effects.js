@@ -12,6 +12,7 @@ require('./utils.js')
 
 const testEach = require('test-each')
 
+/* eslint-disable fp/no-mutation, no-param-reassign */
 testEach(
   ['green', 'red', 'blue'],
   [{ active: true }, { active: false }],
@@ -29,3 +30,4 @@ testEach(
     param.active = !param.active
   },
 )
+/* eslint-enable fp/no-mutation, no-param-reassign */
