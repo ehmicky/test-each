@@ -242,7 +242,7 @@ not just JSON.
 You can customize titles either by:
 
 - defining `title` properties in `inputs` that are
-  [plain objects](https://stackoverflow.com/questions/52453407/the-different-between-object-and-plain-object-in-javascript)
+  [plain objects](https://stackoverflow.com/a/52453477/1526301)
 - using the [`info` argument](#info)
 
 <!-- eslint-disable max-nested-callbacks, no-empty-function -->
