@@ -229,7 +229,7 @@ testEach(
 ### Test titles
 
 Each combination of parameters is stringified as a `title` available in the
-`callback`'s first argument.
+`callback`'s [first argument](#infotitle).
 
 Titles should be included in test titles to make them descriptive and unique.
 
