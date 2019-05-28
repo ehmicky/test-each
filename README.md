@@ -37,8 +37,8 @@ testEach(
   [{ first: 2, second: 2, output: 4 }, { first: 3, second: 3, output: 9 }],
   ({ title }, { first, second, output }) => {
     // Test titles will be:
-    //   should multiply | {"first": 2, "second": 2, "output": 4}
-    //   should multiply | {"first": 3, "second": 3, "output": 9}
+    //    should multiply | {"first": 2, "second": 2, "output": 4}
+    //    should multiply | {"first": 3, "second": 3, "output": 9}
     test(`should multiply | ${title}`, t => {
       t.is(multiply(first, second), output)
     })
