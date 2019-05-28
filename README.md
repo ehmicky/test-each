@@ -73,12 +73,10 @@ testEach(1000, [Math.random], ({ title }, index, randomNumber) => {
 // Works with any iterable. Run this test 10 times using each digit.
 testEach('012345679', ({ title }, digit) => {
   test(`should allow stringified numbers | ${title}`, t => {
-    t.is(multiply(digit, 1), digit)
+    t.is(multiply(digit, 1), Number(digit))
   })
 })
 ```
-
-<!--
 
 # Demo
 
@@ -86,8 +84,6 @@ You can try this library:
 
 - either directly [in your browser](https://repl.it/@ehmicky/test-each).
 - or by executing the [`examples` files](examples/README.md) in a terminal.
-
--->
 
 # Install
 
@@ -301,9 +297,9 @@ cloned to prevent side effects for the next iterations.
 
 ```js
 testEach(
-  [{ active: true }, { active: false }],
   ['green', 'red', 'blue'],
-  (info, param, color) => {
+  [{ active: true }, { active: false }],
+  (info, color, param) => {
     // This should not be done, as the objects are re-used in several iterations
     param.active = !param.active
   },
@@ -311,9 +307,9 @@ testEach(
 
 // But this is safe since each iteration creates a new object
 testEach(
-  [() => ({ active: true }), () => ({ active: false })],
   ['green', 'red', 'blue'],
-  (info, param, color) => {
+  [() => ({ active: true }), () => ({ active: false })],
+  (info, color, param) => {
     param.active = !param.active
   },
 )
@@ -338,7 +334,7 @@ If no `callback` is passed, iterations arguments will be returned as is.
 <!-- eslint-disable no-empty-function -->
 
 ```js
-const values = testEach([['red', 'blue'], [0, 5, 50]])
+const values = testEach(['red', 'blue'], [0, 5, 50])
 values.forEach(([info, color, number]) => {})
 ```
 
