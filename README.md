@@ -16,9 +16,8 @@ Repeats tests using different inputs
 - can use random functions ([fuzz testing](#fuzz-testing))
 - generates [nice test titles](#test-titles)
 - [snapshot testing](#snapshot-testing) friendly
-- works with any [iterable](#iterables): arrays,
-  [generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator),
-  strings, maps, sets, etc.
+- works with any [iterable](#iterables): arrays, generators, strings, maps,
+  sets, etc.
 
 # Example
 
@@ -136,7 +135,9 @@ testEach([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
 ### Input functions
 
 If an `input` is a `function`, each iteration fires it ans uses its return value
-instead. The `function` is called with the same arguments as the `callback`.
+instead. The `function` is called with the
+[same arguments](https://github.com/ehmicky/test-each#testeachinputs-callback)
+as the `callback`.
 
 <!-- eslint-disable no-empty-function, max-params -->
 
