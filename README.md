@@ -25,7 +25,7 @@ Repeats tests using different inputs
 <!-- eslint-disable max-nested-callbacks -->
 
 ```js
-// The examples use Ava but any test runner works (Jest, Mocha, etc.)
+// The examples use Ava but any test runner works (Jest, Mocha, Jasmine, etc.)
 const test = require('ava')
 const testEach = require('test-each')
 
