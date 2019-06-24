@@ -59,7 +59,7 @@
     "ava": "^2.1.0",
     "gulp": "^4.0.2",
     "gulp-shared-tasks": "^0.30.5",
-    "husky": "^2.4.1"
+    "husky": "^2.5.0"
   },
   "engines": {
     "node": ">=8.12.0"
