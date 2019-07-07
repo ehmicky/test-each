@@ -15,6 +15,5 @@ They can also be run directly
 - [Input functions](functions.js)
 - [Fuzz testing](fuzz.js)
 - [Test titles](title.js)
-- [Iterables](iterables.js)
 - [Side effects](side_effects.js)
 - [Return values](return.js)

@@ -16,8 +16,6 @@ Repeats tests using different inputs
 - can use random functions ([fuzz testing](#fuzz-testing))
 - generates [nice test titles](#test-titles)
 - [snapshot testing](#snapshot-testing) friendly
-- works with any [iterable](#iterables): arrays, generators, strings, maps,
-  sets, etc.
 
 # Example
 
@@ -67,13 +65,6 @@ testEach([0.5, 10], [2.5, 5], ({ title }, first, second) => {
 testEach(1000, Math.random, ({ title }, index, randomNumber) => {
   test(`should correctly multiply floats | ${title}`, t => {
     t.is(multiply(randomNumber, 1), randomNumber)
-  })
-})
-
-// Works with any iterable. Run this test 10 times using each digit.
-testEach('012345679', ({ title }, digit) => {
-  test(`should allow stringified numbers | ${title}`, t => {
-    t.is(multiply(digit, 1), Number(digit))
   })
 })
 ```
@@ -130,7 +121,7 @@ testEach([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
 
 ### Input functions
 
-If a `function` is used instead of an iterable, each iteration fires it and uses
+If a `function` is used instead of an array, each iteration fires it and uses
 its return value instead. The `function` is called with the
 [same arguments](https://github.com/ehmicky/test-each#testeachinputs-callback)
 as the `callback`.
@@ -157,7 +148,7 @@ testEach(
 
 ### Fuzz testing
 
-Integers can be used instead of iterables to multiply the number of iterations.
+Integers can be used instead of arrays to multiply the number of iterations.
 
 This enables [fuzz testing](https://en.wikipedia.org/wiki/Fuzzing) when combined
 with [input functions](#input-functions) and libraries like
@@ -262,21 +253,6 @@ testEach([{ color: 'red' }, { color: 'blue' }], (info, param) => {
 })
 ```
 
-### Iterables
-
-`inputs` can be any
-[iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables):
-`array`,
-[`generator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator),
-`string`, `Map`, `Set`, etc.
-
-<!-- eslint-disable no-empty-function -->
-
-```js
-// Run callback five times: a -> b -> c -> d -> e
-testEach('abcde', (info, param) => {})
-```
-
 ### Side effects
 
 If `callback`'s [parameters](#params) are directly modified, they should be
@@ -328,7 +304,7 @@ values.forEach(([info, color, number]) => {})
 
 ## testEach(...inputs, [callback])
 
-`inputs`: `iterable | integer | function` (one or
+`inputs`: `Array | integer | function` (one or
 [several](#cartesian-product))<br>`callback`: `function(info, ...params)` <br>
 [_Return value_](#return-value): `any[]`
 
