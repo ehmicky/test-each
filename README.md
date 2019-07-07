@@ -64,7 +64,7 @@ testEach([0.5, 10], [2.5, 5], ({ title }, first, second) => {
 })
 
 // Fuzz testing. Run this test 1000 times using different numbers.
-testEach(1000, [Math.random], ({ title }, index, randomNumber) => {
+testEach(1000, Math.random, ({ title }, index, randomNumber) => {
   test(`should correctly multiply floats | ${title}`, t => {
     t.is(multiply(randomNumber, 1), randomNumber)
   })
@@ -130,8 +130,8 @@ testEach([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
 
 ### Input functions
 
-If an `input` is a `function`, each iteration fires it ans uses its return value
-instead. The `function` is called with the
+If a `function` is used instead of an iterable, each iteration fires it and uses
+its return value instead. The `function` is called with the
 [same arguments](https://github.com/ehmicky/test-each#testeachinputs-callback)
 as the `callback`.
 
@@ -141,7 +141,7 @@ as the `callback`.
 // Run callback with a different random number each time
 testEach(
   ['red', 'green', 'blue'],
-  [Math.random],
+  Math.random,
   (info, color, randomNumber) => {},
 )
 
@@ -150,17 +150,8 @@ testEach(
   ['02', '15', '30'],
   ['January', 'February', 'March'],
   ['1980', '1981'],
-  [
-    (info, day, month, year) => `${day}/${month}/${year}`,
-    (info, day, month, year) => `${month}/${day}/${year}`,
-  ],
+  (info, day, month, year) => `${day}/${month}/${year}`,
   (info, day, month, year, date) => {},
-)
-
-// To pass a function as input without firing it, wrap it in an object
-testEach(
-  [{ getValue: () => true }, { getValue: () => false }],
-  (info, { getValue }) => {},
 )
 ```
 
@@ -182,8 +173,8 @@ const faker = require('faker')
 // Run callback 1000 times with a random UUID and color each time
 testEach(
   1000,
-  [faker.random.uuid],
-  [faker.random.arrayElement(['green', 'red', 'blue'])],
+  faker.random.uuid,
+  faker.random.arrayElement(['green', 'red', 'blue']),
   (info, randomUuid, randomColor) => {},
 )
 
@@ -191,7 +182,7 @@ testEach(
 // The following series of 1000 UUIDs will remain the same across executions.
 testEach(
   1000,
-  [({ index }) => faker.seed(index) && faker.random.uuid()],
+  ({ index }) => faker.seed(index) && faker.random.uuid(),
   (info, randomUuid) => {},
 )
 ```
@@ -302,15 +293,10 @@ testEach(
   (info, color, param) => {
     // This should not be done, as the objects are re-used in several iterations
     param.active = !param.active
-  },
-)
 
-// But this is safe since each iteration creates a new object
-testEach(
-  ['green', 'red', 'blue'],
-  [() => ({ active: true }), () => ({ active: false })],
-  (info, color, param) => {
-    param.active = !param.active
+    // But this is safe since it's a copy
+    const newParam = { ...param }
+    newParam.active = !newParam.active
   },
 )
 ```
@@ -342,7 +328,7 @@ values.forEach(([info, color, number]) => {})
 
 ## testEach(...inputs, [callback])
 
-`inputs`: [`iterable`](#iterables) or [`integer`](#input-functions) (one or
+`inputs`: `iterable | integer | function` (one or
 [several](#cartesian-product))<br>`callback`: `function(info, ...params)` <br>
 [_Return value_](#return-value): `any[]`
 
