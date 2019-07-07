@@ -18,10 +18,11 @@ const concatArgs = function(info, argA, argB, argC) {
 }
 
 testSnapshots('Function parameters', [
-  [[() => 'a']],
+  [() => 'a'],
   // eslint-disable-next-line max-params
-  [[(info, argA, argB, argC) => `${argB} ${argC}`], ['b'], ['c']],
-  [[getTrue], [concatArgs], [getTrue]],
-  [[getIndex], ['a', 'b'], ['c', 'd']],
-  [[getIndexes], ['a', 'b'], ['c', 'd']],
+  [(info, argA, argB, argC) => `${argB} ${argC}`, ['b'], ['c']],
+  [getTrue, concatArgs, getTrue],
+  [getIndex, ['a', 'b'], ['c', 'd']],
+  [getIndexes, ['a', 'b'], ['c', 'd']],
+  [[getTrue]],
 ])
