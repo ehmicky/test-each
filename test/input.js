@@ -1,6 +1,6 @@
 import { testSnapshots } from './helpers/snapshot.js'
 
-testSnapshots('Invalid iterable arguments', [
+testSnapshots('Invalid inputs', [
   [undefined],
   [null],
   [true],

@@ -14,7 +14,7 @@ export const fixDuplicate = function(loop, index, loops) {
 // The duplicate counter is scoped to each specific duplicates group.
 // This makes the duplicate counters more stable:
 //   - when changing other non-duplicate data
-//   - when changing other duplicate data in the same iterable
+//   - when changing other duplicate data in the same array
 // This is important in case the `title` is used in test snapshots.
 // This also makes more sense for the users.
 const getDuplicateCounter = function({ title, index }, loops) {

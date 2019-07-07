@@ -1,4 +1,4 @@
-// Inputs can be functions instead of iterables. We wrap those in an array
+// Inputs can be functions instead of arrays. We wrap those in an array
 // before performing the cartesian product so they are multiplied, then we
 // trigger each of them.
 export const normalizeFunc = function(input) {
@@ -19,7 +19,7 @@ export const normalizeFunc = function(input) {
 //  - because of this, this is not documented as it leads to wrong usages.
 //    Instead users can:
 //     - if state should be repeated across cartesian dimentions, either:
-//        - pre-compute iterable, or use a generator
+//        - pre-compute array
 //        - use `info.indexes` in input function
 //     - otherwise, either:
 //        - use `info.index` in input function

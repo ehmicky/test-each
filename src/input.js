@@ -3,7 +3,7 @@ import { isRepeat } from './repeat.js'
 // Parse and validate main input
 export const parseInputs = function(inputs) {
   const [inputsA, callback] = splitInputs(inputs)
-  inputsA.forEach(validateArg)
+  inputsA.forEach(validateInput)
   return [inputsA, callback]
 }
 
@@ -22,18 +22,14 @@ const defaultCallback = function(info, ...params) {
   return [info, ...params]
 }
 
-const validateArg = function(input) {
-  if (!isIterable(input) && !isRepeat(input) && typeof input !== 'function') {
+const validateInput = function(input) {
+  if (
+    !Array.isArray(input) &&
+    !isRepeat(input) &&
+    typeof input !== 'function'
+  ) {
     throw new TypeError(
-      `Argument must be an iterable, a positive integer or a function: ${input}`,
+      `Argument must be an array, a positive integer or a function: ${input}`,
     )
   }
-}
-
-const isIterable = function(input) {
-  return (
-    input !== undefined &&
-    input !== null &&
-    input[Symbol.iterator] !== undefined
-  )
 }

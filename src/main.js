@@ -11,9 +11,9 @@ const testEach = function(...inputs) {
   const [inputsA, callback] = parseInputs(inputs)
 
   const inputsB = inputsA.map(addRepeat)
-  const iterables = inputsB.map(normalizeFunc)
+  const arrays = inputsB.map(normalizeFunc)
 
-  const loops = getCartesianLoops(iterables)
+  const loops = getCartesianLoops(arrays)
 
   const loopsA = loops.map(callFuncs)
   const loopsB = loopsA.map(addTitles)
