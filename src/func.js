@@ -1,12 +1,12 @@
-// Arguments can be functions instead of iterables. We wrap those in an array
+// Inputs can be functions instead of iterables. We wrap those in an array
 // before performing the cartesian product so they are multiplied, then we
 // trigger each of them.
-export const normalizeFunc = function(arg) {
-  if (typeof arg !== 'function') {
-    return arg
+export const normalizeFunc = function(input) {
+  if (typeof input !== 'function') {
+    return input
   }
 
-  return [wrapFunc(arg)]
+  return [wrapFunc(input)]
 }
 
 // If an argument is a function, its return value will be used instead:
@@ -55,8 +55,8 @@ const shouldCall = function(param) {
   )
 }
 
-const wrapFunc = function(param) {
-  return { [funcSymbol]: param }
+const wrapFunc = function(input) {
+  return { [funcSymbol]: input }
 }
 
 const unwrapFunc = function(param) {

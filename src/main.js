@@ -1,4 +1,4 @@
-import { parseInput } from './input.js'
+import { parseInputs } from './input.js'
 import { addRepeat } from './repeat.js'
 import { getCartesianLoops } from './cartesian.js'
 import { normalizeFunc, callFuncs } from './func.js'
@@ -7,11 +7,11 @@ import { fixDuplicate } from './duplicate.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
-const testEach = function(...args) {
-  const [argsA, callback] = parseInput(args)
+const testEach = function(...inputs) {
+  const [inputsA, callback] = parseInputs(inputs)
 
-  const argsB = argsA.map(addRepeat)
-  const iterables = argsB.map(normalizeFunc)
+  const inputsB = inputsA.map(addRepeat)
+  const iterables = inputsB.map(normalizeFunc)
 
   const loops = getCartesianLoops(iterables)
 
