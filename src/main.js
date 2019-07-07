@@ -2,7 +2,7 @@ import { parseInputs } from './input.js'
 import { addRepeat } from './repeat.js'
 import { getCartesianLoops } from './cartesian.js'
 import { normalizeFunc, callFuncs } from './func.js'
-import { addTitles } from './title.js'
+import { addTitles, joinTitles } from './title.js'
 import { fixDuplicate } from './duplicate.js'
 
 // Repeat a function with a combination of parameters.
@@ -11,12 +11,13 @@ const testEach = function(...inputs) {
   const [inputsA, callback] = parseInputs(inputs)
 
   const inputsB = inputsA.map(addRepeat)
-  const arrays = inputsB.map(normalizeFunc)
+  const inputsC = inputsB.map(addTitles)
+  const arrays = inputsC.map(normalizeFunc)
 
   const loops = getCartesianLoops(arrays)
 
   const loopsA = loops.map(callFuncs)
-  const loopsB = loopsA.map(addTitles)
+  const loopsB = loopsA.map(joinTitles)
   const loopsC = loopsB.map(fixDuplicate)
 
   const results = loopsC.map(loop => fireCallback(loop, callback))

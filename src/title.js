@@ -2,15 +2,41 @@ import prettyFormat, { plugins } from 'pretty-format'
 
 import { isPlainObject } from './utils.js'
 
-// Retrieve unique test titles for each loop.
-// Users can customize titles by using the iterated function parameters.
-export const addTitles = function({ index, indexes, params }) {
-  const titles = params.map(getTitle)
+// Add `title` to each `param`
+// We do it before the cartesian product for performance reasons
+// However titles of input functions must be computed afterwards since we use
+// their return value, which is performed after the cartesian product
+export const addTitles = function(param) {
+  if (typeof param === 'function') {
+    return param
+  }
+
+  return param.map(addTitle)
+}
+
+const addTitle = function(param) {
+  const title = getTitle(param)
+  return { param, title }
+}
+
+export const joinTitles = function({ index, indexes, paramTitles }) {
+  const params = paramTitles.map(unpackParam)
+  const titles = paramTitles.map(unpackTitle)
   const title = titles.join(' ')
   return { title, titles, index, indexes, params }
 }
 
-const getTitle = function(param) {
+const unpackParam = function({ param }) {
+  return param
+}
+
+const unpackTitle = function({ title }) {
+  return title
+}
+
+// Retrieve unique titles for each loop.
+// Users can customize titles by using the iterated function parameters.
+export const getTitle = function(param) {
   if (hasTitle(param)) {
     return param.title
   }

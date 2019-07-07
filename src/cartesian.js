@@ -2,34 +2,34 @@ import fastCartesian from 'fast-cartesian'
 
 // Do a cartesian product between arrays, while remembering initial indexes
 export const getCartesianLoops = function(arrays) {
-  const arraysA = arrays.map(packParamIndexes)
+  const arraysA = arrays.map(packParams)
 
   const loops = fastCartesian(...arraysA)
 
-  const loopsA = loops.map(unpackParamIndexes)
+  const loopsA = loops.map(unpackParams)
   return loopsA
 }
 
 // Remember indexes in arrays, so we can retrieve it after cartesian product
-const packParamIndexes = function(array) {
-  return array.map(packParamIndex)
+const packParams = function(array) {
+  return array.map(packParam)
 }
 
-const packParamIndex = function(param, index) {
-  return { index, param }
+const packParam = function(paramTitle, index) {
+  return { index, paramTitle }
 }
 
 // Revert it after cartesian product
-const unpackParamIndexes = function(loop, index) {
+const unpackParams = function(loop, index) {
   const indexes = loop.map(unpackIndex)
-  const params = loop.map(unpackParam)
-  return { index, indexes, params }
+  const paramTitles = loop.map(unpackParamTitle)
+  return { index, indexes, paramTitles }
 }
 
 const unpackIndex = function({ index }) {
   return index
 }
 
-const unpackParam = function({ param }) {
-  return param
+const unpackParamTitle = function({ paramTitle }) {
+  return paramTitle
 }
