@@ -13,13 +13,9 @@ require('./utils.js')
 const testEach = require('test-each')
 
 // Run callback with a different random number each time
-testEach(
-  ['red', 'green', 'blue'],
-  [Math.random],
-  (info, color, randomNumber) => {
-    console.log(color, randomNumber)
-  },
-)
+testEach(['red', 'green', 'blue'], Math.random, (info, color, randomNumber) => {
+  console.log(color, randomNumber)
+})
 
 // Input functions are called with the same arguments as the callback
 /* eslint-disable max-params */
@@ -27,20 +23,9 @@ testEach(
   ['02', '15', '30'],
   ['January', 'February', 'March'],
   ['1980', '1981'],
-  [
-    (info, day, month, year) => `${day}/${month}/${year}`,
-    (info, day, month, year) => `${month}/${day}/${year}`,
-  ],
+  (info, day, month, year) => `${day}/${month}/${year}`,
   (info, day, month, year, date) => {
     console.log(date)
   },
 )
 /* eslint-enable max-params */
-
-// To pass a function as input without firing it, wrap it in an object
-testEach(
-  [{ getValue: () => true }, { getValue: () => false }],
-  (info, { getValue }) => {
-    console.log(getValue())
-  },
-)

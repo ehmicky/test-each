@@ -18,7 +18,7 @@ const testEach = require('test-each')
 const multiply = require('./multiply.js')
 
 // Fuzz testing. Run this test 1000 times using different numbers.
-testEach(1000, [Math.random], ({ title }, index, randomNumber) => {
+testEach(1000, Math.random, ({ title }, index, randomNumber) => {
   assert(
     multiply(randomNumber, 1) === randomNumber,
     `should correctly multiply floats | ${title}`,

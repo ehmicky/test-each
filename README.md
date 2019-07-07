@@ -292,11 +292,11 @@ testEach(
   [{ active: true }, { active: false }],
   (info, color, param) => {
     // This should not be done, as the objects are re-used in several iterations
-    param.active = !param.active
+    param.active = false
 
     // But this is safe since it's a copy
     const newParam = { ...param }
-    newParam.active = !newParam.active
+    newParam.active = false
   },
 )
 ```

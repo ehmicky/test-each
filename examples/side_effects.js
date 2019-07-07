@@ -12,22 +12,17 @@ require('./utils.js')
 
 const testEach = require('test-each')
 
-/* eslint-disable fp/no-mutation, no-param-reassign */
+/* eslint-disable fp/no-mutation */
 testEach(
   ['green', 'red', 'blue'],
   [{ active: true }, { active: false }],
   (info, color, param) => {
     // This should not be done, as the objects are re-used in several iterations
-    param.active = !param.active
-  },
-)
+    // param.active = false
 
-// But this is safe since each iteration creates a new object
-testEach(
-  ['green', 'red', 'blue'],
-  [() => ({ active: true }), () => ({ active: false })],
-  (info, color, param) => {
-    param.active = !param.active
+    // But this is safe since it's a copy
+    const newParam = { ...param }
+    newParam.active = false
   },
 )
-/* eslint-enable fp/no-mutation, no-param-reassign */
+/* eslint-enable fp/no-mutation */
