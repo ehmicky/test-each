@@ -258,8 +258,6 @@ testEach([{ color: 'red' }, { color: 'blue' }], (info, param) => {
 If `callback`'s [parameters](#params) are directly modified, they should be
 cloned to prevent side effects for the next iterations.
 
-[Input functions](#fuzz-testing) can be used for that purpose.
-
 <!-- eslint-disable fp/no-mutation, no-param-reassign -->
 
 ```js
