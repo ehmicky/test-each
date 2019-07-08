@@ -6,12 +6,12 @@ import { isPlainObject } from './utils.js'
 // We do it before the cartesian product for performance reasons
 // However titles of input functions must be computed afterwards since we use
 // their return value, which is performed after the cartesian product
-export const addTitles = function(param) {
-  if (typeof param === 'function') {
-    return param
+export const addTitles = function(input) {
+  if (typeof input === 'function') {
+    return input
   }
 
-  return param.map(addTitle)
+  return input.map(addTitle)
 }
 
 const addTitle = function(param) {
