@@ -1,10 +1,10 @@
-import fastCartesian from 'fast-cartesian'
+import { cartesianArray } from 'fast-cartesian'
 
 // Do a cartesian product between arrays, while remembering initial indexes
 export const getCartesianLoops = function(arrays) {
   const arraysA = arrays.map(packParams)
 
-  const loops = fastCartesian(...arraysA)
+  const loops = cartesianArray(...arraysA)
 
   const loopsA = loops.map(unpackParams)
   return loopsA
