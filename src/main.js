@@ -5,7 +5,7 @@ import { addRepeat } from './repeat.js'
 import { normalizeFunc, callFuncs } from './func.js'
 import { addTitles, joinTitles } from './title.js'
 import { fixDuplicates } from './duplicate.js'
-import { packParams, unpackParams } from './cartesian.js'
+import { wrapIndexes, unwrapIndexes } from './indexes.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
@@ -35,12 +35,12 @@ const normalizeInput = function(input) {
   const inputB = addTitles(inputA)
   const inputC = fixDuplicates(inputB)
   const inputD = normalizeFunc(inputC)
-  const inputE = packParams(inputD)
+  const inputE = wrapIndexes(inputD)
   return inputE
 }
 
 const normalizeLoop = function(loop, index) {
-  const loopA = unpackParams(loop, index)
+  const loopA = unwrapIndexes(loop, index)
   const loopB = callFuncs(loopA)
   const loopC = joinTitles(loopB)
   return loopC
