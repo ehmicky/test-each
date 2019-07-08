@@ -19,22 +19,18 @@ const addTitle = function(value) {
   return { value, title }
 }
 
-export const joinTitles = function({
-  index,
-  indexes,
-  values,
-  inputFuncs,
-  titles,
-}) {
+// After input functions have been triggered, we can compute their `titles`.
+// Once all `titles` are known, we can then join them into a single `title`.
+export const joinTitles = function({ index, indexes, values, titles }) {
   const titlesA = titles.map((paramTitle, valueIndex) =>
-    addFuncTitle(paramTitle, values[valueIndex], inputFuncs[valueIndex]),
+    addFuncTitle(paramTitle, values[valueIndex]),
   )
   const title = titlesA.join(' ')
   return { title, titles: titlesA, index, indexes, values }
 }
 
-const addFuncTitle = function(title, value, isInputFunc) {
-  if (!isInputFunc) {
+const addFuncTitle = function(title, value) {
+  if (title !== undefined) {
     return title
   }
 

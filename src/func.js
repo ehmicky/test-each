@@ -30,27 +30,22 @@ export const callFuncs = function({ index, indexes, values, titles }) {
   // of this function
   const info = { index, indexes }
   const valuesA = values.reduce(callFunc.bind(null, info), [])
-
-  // Remember which values were input functions before calling them,
-  // so that their titles can be generated later.
-  const inputFuncs = values.map(isInputFunc)
-
-  return { index, indexes, values: valuesA, inputFuncs, titles }
+  return { index, indexes, values: valuesA, titles }
 }
 
 // eslint-disable-next-line max-params
-const callFunc = function(info, previous, value, valueIndex, values) {
+const callFunc = function(info, previousValues, value, valueIndex, values) {
   if (!isInputFunc(value)) {
-    return [...previous, value]
+    return [...previousValues, value]
   }
 
-  const func = unwrapFunc(value)
+  const inputFunc = unwrapFunc(value)
 
   // Return values from previous input functions can be used, but not next ones
   const nextValues = values.slice(valueIndex).map(unwrapValue)
-  const valueA = func(info, ...previous, ...nextValues)
+  const valueA = inputFunc(info, ...previousValues, ...nextValues)
 
-  return [...previous, valueA]
+  return [...previousValues, valueA]
 }
 
 // Functions passed top-level are fired, but not functions passed inside arrays.
