@@ -10,7 +10,7 @@ import { packParams, unpackParams } from './cartesian.js'
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
 // eslint-disable-next-line max-statements
-const testEach = function*(...inputs) {
+const testEach = function(...inputs) {
   const [inputsA, callback] = parseInputs(inputs)
 
   const inputsB = inputsA.map(addRepeat)
@@ -31,8 +31,7 @@ const testEach = function*(...inputs) {
     const loopB = callFuncs(loopA)
     const loopC = joinTitles(loopB)
 
-    const result = fireCallback(loopC, callback)
-    yield result
+    fireCallback(loopC, callback)
   }
 }
 

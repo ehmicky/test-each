@@ -16,4 +16,3 @@ They can also be run directly
 - [Fuzz testing](fuzz.js)
 - [Test titles](title.js)
 - [Side effects](side_effects.js)
-- [Return values](return.js)

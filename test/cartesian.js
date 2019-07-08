@@ -8,11 +8,6 @@ testSnapshots('Normal iterations', [[['a']], [['a', 'b'], ['c', 'd']]])
 
 testSnapshots('No arguments', [[]])
 
-test('should return an iterable', t => {
-  const iterable = testEach(['a'])
-  t.is(typeof iterable[Symbol.iterator], 'function')
-})
-
 test('should not crash when combinations are huge', t => {
   const inputs = Array.from({ length: 24 }, () => [0, 1])
 

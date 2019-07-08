@@ -6,33 +6,30 @@ import testEach from '../../src/main.js'
 
 // For each `args` in `allArgs`, call `testEach(...args)` and snapshot the
 // return value.
-export const testSnapshots = function(
-  testTitle,
-  allArgs,
-  { useCallback = true } = {},
-) {
-  allArgs.forEach(args => snapshotArgs(args, testTitle, useCallback))
+export const testSnapshots = function(testTitle, allArgs) {
+  allArgs.forEach(args => snapshotArgs(args, testTitle))
 }
 
 // We don't use `testEach()` itself since we are testing it.
-const snapshotArgs = function(args, testTitle, useCallback) {
+const snapshotArgs = function(args, testTitle) {
   const title = prettyFormat(args, { min: true })
   test(`${testTitle} | ${title}`, t => {
-    const loops = getLoops(args, useCallback)
+    const loops = getLoops(args)
     t.snapshot(loops)
   })
 }
 
-const getLoops = function(args, useCallback) {
-  const callback = useCallback ? [defaultCallback] : []
-
+const getLoops = function(args) {
   try {
-    return [...testEach(...args, ...callback)]
+    const params = []
+    testEach(...args, callback.bind(null, params))
+    return params
   } catch (error) {
     return error
   }
 }
 
-const defaultCallback = function(...loopArgs) {
-  return loopArgs
+const callback = function(params, ...args) {
+  // eslint-disable-next-line fp/no-mutating-methods
+  params.push(args)
 }

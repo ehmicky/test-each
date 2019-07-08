@@ -10,7 +10,3 @@ testSnapshots('Invalid inputs', [
   [NaN],
   [Infinity],
 ])
-
-testSnapshots('Optional callback', [[], [['a']], [['a', 'b'], ['c', 'd']]], {
-  useCallback: false,
-})
