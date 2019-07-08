@@ -277,34 +277,54 @@ testEach(
 
 ### Return value
 
-Just like `Array.map()`, `testEach()` aggregates the return value of each
-`callback` and returns it as an `array`.
+`testEach()` returns an
+[`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
+looping through the return value of each `callback`.
 
 ```js
-// `values` will be ['red 0', 'red 5', 'red 50', 'blue 0', 'blue 5', 'blue 50']
-const values = testEach(
+const iterable = testEach(
   ['red', 'blue'],
   [0, 5, 50],
   (info, color, number) => `${color} ${number}`,
 )
+
+for (const value of iterable) {
+  console.log(value)
+}
+// 'red 0'
+// 'red 5'
+// 'red 50'
+// 'blue 0'
+// 'blue 5'
+// 'blue 50'
 ```
 
-If no `callback` is passed, iterations arguments will be returned as is.
+If no `callback` is passed, this iterates over each callback arguments.
 
 <!-- eslint-disable no-empty-function -->
 
 ```js
-const values = testEach(['red', 'blue'], [0, 5, 50])
-values.forEach(([info, color, number]) => {})
+const iterable = testEach(['red', 'blue'], [0, 5, 50])
+
+for (const [info, color, number] of iterable) {
+  console.log(color, number)
+}
+// 'red' 0
+// 'red' 5
+// 'red' 50
+// 'blue' 0
+// 'blue' 5
+// 'blue' 50
 ```
 
 # API
 
-## testEach(...inputs, [callback])
+## testEach(...inputs, callback?)
 
 `inputs`: `Array | integer | function` (one or
 [several](#cartesian-product))<br>`callback`: `function(info, ...params)` <br>
-[_Return value_](#return-value): `any[]`
+[_Return value_](#return-value):
+[`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
 
 ### info
 
