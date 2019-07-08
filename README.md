@@ -93,7 +93,9 @@ const inputs = [['red', 'blue'], [0, 5, 50]]
 testEach(...inputs, function callback(info, color, number) {})
 ```
 
-Fires `callback` once for each possible combination of `inputs`.
+Fires `callback` once for each possible combination of `inputs`. Each `input` is
+an [`array`](#cartesian-product), a [`function`](#input-functions) or an
+[`integer`](#fuzz-testing).
 
 A common use case for `callback` is to define tests (using any test runner).
 
