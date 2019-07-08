@@ -12,16 +12,33 @@ require('./utils.js')
 
 const testEach = require('test-each')
 
-// `values` will be ['red 0', 'red 5', 'red 50', 'blue 0', 'blue 5', 'blue 50']
-const values = testEach(
+const iterable = testEach(
   ['red', 'blue'],
   [0, 5, 50],
   (info, color, number) => `${color} ${number}`,
 )
-console.log(values)
 
-// If no `callback` is passed, iterations arguments will be returned as is.
-const args = testEach(['red', 'blue'], [0, 5, 50])
-args.forEach(([info, color, number]) => {
-  console.log(info, color, number)
-})
+// eslint-disable-next-line fp/no-loops
+for (const value of iterable) {
+  console.log(value)
+}
+// 'red 0'
+// 'red 5'
+// 'red 50'
+// 'blue 0'
+// 'blue 5'
+// 'blue 50'
+
+// If no `callback` is passed, this iterates over each callback arguments.
+const otherIterable = testEach(['red', 'blue'], [0, 5, 50])
+
+// eslint-disable-next-line fp/no-loops
+for (const [, color, number] of otherIterable) {
+  console.log(color, number)
+}
+// 'red' 0
+// 'red' 5
+// 'red' 50
+// 'blue' 0
+// 'blue' 5
+// 'blue' 50
