@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/ehmicky/design/master/test-each/test-each.svg?sanitize=true" width="500"/>
+
 [![Codecov](https://img.shields.io/codecov/c/github/ehmicky/test-each.svg?label=tested&logo=codecov)](https://codecov.io/gh/ehmicky/test-each)
 [![Travis](https://img.shields.io/badge/cross-platform-4cc61e.svg?logo=travis)](https://travis-ci.org/ehmicky/test-each)
 [![Node](https://img.shields.io/node/v/test-each.svg?logo=node.js)](https://www.npmjs.com/package/test-each)
