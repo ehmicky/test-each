@@ -1,5 +1,3 @@
-import { cartesianArray } from 'fast-cartesian'
-
 import { getTitle } from './title.js'
 
 // Inputs can be functions instead of arrays. We wrap those in an array

@@ -1,4 +1,4 @@
-import { cartesianArray } from 'fast-cartesian'
+import { cartesianIterate } from 'fast-cartesian'
 
 import { parseInputs } from './input.js'
 import { addRepeat } from './repeat.js'
@@ -9,7 +9,7 @@ import { packParams, unpackParams } from './cartesian.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
-const testEach = function(...inputs) {
+const testEach = function*(...inputs) {
   const [inputsA, callback] = parseInputs(inputs)
 
   const inputsB = inputsA.map(addRepeat)
@@ -18,14 +18,19 @@ const testEach = function(...inputs) {
   const arrays = inputsD.map(normalizeFunc)
   const arraysA = arrays.map(packParams)
 
-  const loops = cartesianArray(...arraysA)
+  let index = -1
 
-  const loopsA = loops.map(unpackParams)
-  const loopsB = loopsA.map(callFuncs)
-  const loopsC = loopsB.map(joinTitles)
+  // eslint-disable-next-line fp/no-loops
+  for (const loop of cartesianIterate(...arraysA)) {
+    index += 1
 
-  const results = loopsC.map(loop => fireCallback(loop, callback))
-  return results
+    const loopA = unpackParams(loop, index)
+    const loopB = callFuncs(loopA)
+    const loopC = joinTitles(loopB)
+
+    const result = fireCallback(loopC, callback)
+    yield result
+  }
 }
 
 // The `title`, `titles`, etc. are passed as first argument (not the last one)
