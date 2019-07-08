@@ -9,15 +9,10 @@ import { packParams, unpackParams } from './cartesian.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
-// eslint-disable-next-line max-statements
 const testEach = function(...inputs) {
   const [inputsA, callback] = parseInputs(inputs)
 
-  const inputsB = inputsA.map(addRepeat)
-  const inputsC = inputsB.map(addTitles)
-  const inputsD = inputsC.map(fixDuplicates)
-  const arrays = inputsD.map(normalizeFunc)
-  const arraysA = arrays.map(packParams)
+  const arrays = inputsA.map(normalizeInput)
 
   // eslint-disable-next-line fp/no-let
   let index = -1
@@ -25,7 +20,7 @@ const testEach = function(...inputs) {
   // We iterate over each loop instead of calculating all loops in advance
   // in order to minimize memory cost and allow huge number of combinations.
   // eslint-disable-next-line fp/no-loops
-  for (const loop of cartesianIterate(...arraysA)) {
+  for (const loop of cartesianIterate(...arrays)) {
     // eslint-disable-next-line fp/no-mutation
     index += 1
 
@@ -35,6 +30,15 @@ const testEach = function(...inputs) {
 
     fireCallback(loopC, callback)
   }
+}
+
+const normalizeInput = function(input) {
+  const inputA = addRepeat(input)
+  const inputB = addTitles(inputA)
+  const inputC = fixDuplicates(inputB)
+  const inputD = normalizeFunc(inputC)
+  const inputE = packParams(inputD)
+  return inputE
 }
 
 // The `title`, `titles`, etc. are passed as first argument (not the last one)

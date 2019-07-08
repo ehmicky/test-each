@@ -1,6 +1,6 @@
 // Remember indexes in arrays, so we can retrieve it after cartesian product
-export const packParams = function(array) {
-  return array.map(packParam)
+export const packParams = function(inputs) {
+  return inputs.map(packParam)
 }
 
 const packParam = function(paramTitle, index) {
