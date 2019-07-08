@@ -12,28 +12,9 @@ import { wrapIndexes, unwrapIndexes } from './indexes.js'
 const testEach = function(...inputs) {
   const [inputsA, func] = parseInputs(inputs)
 
-  const arrays = inputsA.map(normalizeInput)
+  const inputsB = inputsA.map(normalizeInput)
 
-  // eslint-disable-next-line fp/no-let
-  let index = -1
-
-  // We iterate over each loop instead of calculating all loops in advance
-  // in order to minimize memory cost and allow huge number of combinations.
-  // eslint-disable-next-line fp/no-loops
-  for (const loop of cartesianIterate(...arrays)) {
-    // eslint-disable-next-line fp/no-mutation
-    index += 1
-
-    const { values, ...loopA } = normalizeLoop(loop, index)
-
-    // The `title`, `titles`, etc. are passed as first argument (not the last
-    // one) so that:
-    //  - user can put `params` in an array (if needs be) using variadic
-    //    `...params`
-    //  - user can omit `params` if only the information in the first argument
-    //    is needed
-    func(loopA, ...values)
-  }
+  forEachLoop(inputsB, func)
 }
 
 const normalizeInput = function(input) {
@@ -43,6 +24,33 @@ const normalizeInput = function(input) {
   const inputD = normalizeFunc(inputC)
   const inputE = wrapIndexes(inputD)
   return inputE
+}
+
+// We iterate over each loop instead of calculating all loops in advance
+// in order to minimize memory cost and allow huge number of combinations.
+const forEachLoop = function(inputs, func) {
+  // eslint-disable-next-line fp/no-let
+  let index = -1
+
+  // eslint-disable-next-line fp/no-loops
+  for (const loop of cartesianIterate(...inputs)) {
+    // eslint-disable-next-line fp/no-mutation
+    index += 1
+
+    handleLoop(loop, index, func)
+  }
+}
+
+const handleLoop = function(loop, index, func) {
+  const { values, ...loopA } = normalizeLoop(loop, index)
+
+  // The `title`, `titles`, etc. are passed as first argument (not the last one)
+  // so that:
+  //  - user can put `params` in an array (if needs be) using variadic
+  //    `...params`
+  //  - user can omit `params` if only the information in the first argument is
+  //    needed
+  func(loopA, ...values)
 }
 
 const normalizeLoop = function(loop, index) {
