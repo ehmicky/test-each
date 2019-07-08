@@ -18,7 +18,7 @@ export const normalizeFunc = function(input) {
 //  - the state will be updated on each iteration, regardless of cartesian
 //    dimensions.
 //  - because of this, this is not documented as it leads to wrong usages.
-//    Instead users can:
+//    Instead users should:
 //     - if state should be repeated across cartesian dimentions, either:
 //        - pre-compute array
 //        - use `info.indexes` in input function
@@ -53,7 +53,7 @@ const callFunc = function(info, previous, value, valueIndex, values) {
   return [...previous, valueA]
 }
 
-// Functions passed top-level are fired, but not functions passed inside arrays
+// Functions passed top-level are fired, but not functions passed inside arrays.
 // We wrap the first ones in order to differentiate.
 const funcSymbol = Symbol('function')
 

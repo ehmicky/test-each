@@ -3,9 +3,9 @@ import prettyFormat, { plugins } from 'pretty-format'
 import { isPlainObject } from './utils.js'
 
 // Add `title` to each `param`
-// We do it before the cartesian product for performance reasons
-// However titles of input functions must be computed afterwards since we use
-// their return value, which is performed after the cartesian product
+// We do it before the cartesian product for performance reasons.
+// Titles of input functions must be computed afterwards since we use their
+// return value, which is performed after the cartesian product.
 export const addTitles = function(input) {
   if (typeof input === 'function') {
     return input
@@ -42,7 +42,7 @@ const addFuncTitle = function(title, value, isInputFunc) {
 }
 
 // Retrieve unique titles for each loop.
-// Users can customize titles by using the iterated function parameters.
+// Users can customize titles by using `info`.
 const getTitle = function(value) {
   if (hasTitle(value)) {
     return value.title

@@ -1,4 +1,5 @@
-// Remember indexes in arrays, so we can retrieve it after cartesian product
+// Remember indexes of parameters for each `input`, so we can retrieve it after
+// cartesian product
 export const wrapIndexes = function(inputs) {
   return inputs.map(wrapIndex)
 }

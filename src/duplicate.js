@@ -1,4 +1,6 @@
-// Ensure titles are unique by appending a counter when we find duplicates
+// Ensure titles are unique by appending a counter when we find duplicates.
+// This does not need to be applied to input functions: even if an input
+// function always return the same value, the other parameters won't.
 export const fixDuplicates = function(input) {
   if (typeof input === 'function') {
     return input
