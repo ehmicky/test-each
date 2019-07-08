@@ -1,4 +1,5 @@
 import test from 'ava'
+import isCi from 'is-ci'
 
 import testEach from '../src/main.js'
 
@@ -8,9 +9,12 @@ testSnapshots('Normal iterations', [[['a']], [['a', 'b'], ['c', 'd']]])
 
 testSnapshots('No arguments', [[]])
 
-test('should not crash when combinations are huge', t => {
-  const inputs = Array.from({ length: 24 }, () => [0, 1])
+// This test is very slow, so it is run only in CI
+if (isCi) {
+  test('should not crash when combinations are huge', t => {
+    const inputs = Array.from({ length: 24 }, () => [0, 1])
 
-  // eslint-disable-next-line no-empty-function, max-nested-callbacks
-  t.notThrows(() => testEach(...inputs, () => {}))
-})
+    // eslint-disable-next-line no-empty-function, max-nested-callbacks
+    t.notThrows(() => testEach(...inputs, () => {}))
+  })
+}
