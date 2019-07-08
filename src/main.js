@@ -51,11 +51,6 @@ const normalizeLoop = function(loop, index) {
 //  - user can put `params` in an array (if needs be) using variadic `...params`
 //  - user can omit `params` if only the information in the first argument
 //    is needed
-// `callback` is optional and is a shortcut to `testEach(...).map(([...])=>{})`
-// I.e. it behaves like `Array.map()`:
-//  - more flexible and functional
-//  - `Promise.all(results)` can be use used if `callback` is async
-//  - user can retrieve `params`, `indexes`, etc. outside of `callback`
 const fireCallback = function({ title, titles, index, indexes, params }, func) {
   return func({ title, titles, index, indexes }, ...params)
 }
