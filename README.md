@@ -279,7 +279,7 @@ testEach(
 
 `testEach()` returns an
 [`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
-looping through the return value of each `callback`.
+looping through each `callback`'s return value.
 
 <!-- eslint-disable fp/no-loops, no-empty-function -->
 
