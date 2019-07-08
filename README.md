@@ -129,7 +129,7 @@ its return value instead. The `function` is called with the
 [same arguments](https://github.com/ehmicky/test-each#testeachinputs-callback)
 as the `callback`.
 
-Generated values are included in [test titles](#test-titles).
+The generated values are included in [test titles](#test-titles).
 
 <!-- eslint-disable no-empty-function, max-params -->
 
@@ -261,7 +261,7 @@ testEach([{ color: 'red' }, { color: 'blue' }], (info, param) => {
 ### Side effects
 
 If `callback`'s [parameters](#params) are directly modified, they should be
-cloned to prevent side effects for the next iterations.
+copied to prevent side effects for the next iterations.
 
 <!-- eslint-disable fp/no-mutation, no-param-reassign -->
 
@@ -302,7 +302,7 @@ Like [`params`](#params) but stringified. Should be used in
 
 _Type_: `string[]`
 
-Like [`info.title`](#infotitle) but for each [`params`](#params).
+Like [`info.title`](#infotitle) but for each [`param`](#params).
 
 #### info.index
 
@@ -314,8 +314,8 @@ Incremented on each iteration. Starts at `0`.
 
 _Type_: `integer[]`
 
-Index of each [`params`](#params) inside the initial
-[`inputs`](#testeachinputs-callback).
+Index of each [`params`](#params) inside each initial
+[`input`](#testeachinputs-callback).
 
 ### params
 
