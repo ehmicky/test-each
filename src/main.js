@@ -24,11 +24,9 @@ const testEach = function(...inputs) {
     // eslint-disable-next-line fp/no-mutation
     index += 1
 
-    const loopA = unpackParams(loop, index)
-    const loopB = callFuncs(loopA)
-    const loopC = joinTitles(loopB)
+    const loopA = normalizeLoop(loop, index)
 
-    fireCallback(loopC, callback)
+    fireCallback(loopA, callback)
   }
 }
 
@@ -39,6 +37,13 @@ const normalizeInput = function(input) {
   const inputD = normalizeFunc(inputC)
   const inputE = packParams(inputD)
   return inputE
+}
+
+const normalizeLoop = function(loop, index) {
+  const loopA = unpackParams(loop, index)
+  const loopB = callFuncs(loopA)
+  const loopC = joinTitles(loopB)
+  return loopC
 }
 
 // The `title`, `titles`, etc. are passed as first argument (not the last one)
