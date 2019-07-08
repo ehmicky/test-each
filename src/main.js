@@ -22,6 +22,8 @@ const testEach = function(...inputs) {
   // eslint-disable-next-line fp/no-let
   let index = -1
 
+  // We iterate over each loop instead of calculating all loops in advance
+  // in order to minimize memory cost and allow huge number of combinations.
   // eslint-disable-next-line fp/no-loops
   for (const loop of cartesianIterate(...arraysA)) {
     // eslint-disable-next-line fp/no-mutation
