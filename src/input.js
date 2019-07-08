@@ -2,24 +2,16 @@ import { isRepeat } from './repeat.js'
 
 // Parse and validate main input
 export const parseInputs = function(inputs) {
-  const [inputsA, callback] = splitInputs(inputs)
+  const inputsA = inputs.slice(0, -1)
+  const callback = inputs[inputs.length - 1]
+
   inputsA.forEach(validateInput)
-  return [inputsA, callback]
-}
 
-const splitInputs = function(inputs) {
-  const lastInput = inputs[inputs.length - 1]
-
-  if (typeof lastInput !== 'function') {
-    return [inputs, defaultCallback]
+  if (typeof callback !== 'function') {
+    throw new TypeError('Last argument must be a function')
   }
 
-  return [inputs.slice(0, -1), lastInput]
-}
-
-// `callback` is optional and defaults to returning arguments as is
-const defaultCallback = function(info, ...params) {
-  return [info, ...params]
+  return [inputsA, callback]
 }
 
 const validateInput = function(input) {

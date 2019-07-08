@@ -1,3 +1,7 @@
+import test from 'ava'
+
+import testEach from '../src/main.js'
+
 import { testSnapshots } from './helpers/snapshot.js'
 
 testSnapshots('Invalid inputs', [
@@ -10,3 +14,7 @@ testSnapshots('Invalid inputs', [
   [NaN],
   [Infinity],
 ])
+
+test('Invalid callback', t => {
+  t.throws(() => testEach(['a']))
+})

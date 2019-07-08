@@ -11,9 +11,6 @@ testSnapshots('No arguments', [[]])
 test('should not crash when combinations are huge', t => {
   const inputs = Array.from({ length: 24 }, () => [0, 1])
 
-  // eslint-disable-next-line fp/no-loops, no-empty, no-empty-pattern
-  for (const [] of testEach(...inputs)) {
-  }
-
-  t.pass()
+  // eslint-disable-next-line no-empty-function, max-nested-callbacks
+  t.notThrows(() => testEach(...inputs, () => {}))
 })
