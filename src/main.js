@@ -1,9 +1,11 @@
+import { cartesianArray } from 'fast-cartesian'
+
 import { parseInputs } from './input.js'
 import { addRepeat } from './repeat.js'
-import { getCartesianLoops } from './cartesian.js'
 import { normalizeFunc, callFuncs } from './func.js'
 import { addTitles, joinTitles } from './title.js'
 import { fixDuplicates } from './duplicate.js'
+import { packParams, unpackParams } from './cartesian.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
@@ -14,13 +16,15 @@ const testEach = function(...inputs) {
   const inputsC = inputsB.map(addTitles)
   const inputsD = inputsC.map(fixDuplicates)
   const arrays = inputsD.map(normalizeFunc)
+  const arraysA = arrays.map(packParams)
 
-  const loops = getCartesianLoops(arrays)
+  const loops = cartesianArray(...arraysA)
 
-  const loopsA = loops.map(callFuncs)
-  const loopsB = loopsA.map(joinTitles)
+  const loopsA = loops.map(unpackParams)
+  const loopsB = loopsA.map(callFuncs)
+  const loopsC = loopsB.map(joinTitles)
 
-  const results = loopsB.map(loop => fireCallback(loop, callback))
+  const results = loopsC.map(loop => fireCallback(loop, callback))
   return results
 }
 
