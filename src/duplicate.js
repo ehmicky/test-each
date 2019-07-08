@@ -7,18 +7,14 @@ export const fixDuplicates = function(input) {
   return input.map(fixDuplicate)
 }
 
-const fixDuplicate = function(paramTitle, index, paramTitles) {
-  const duplicateParams = paramTitles.filter(
-    paramTitleA => paramTitleA.title === paramTitle.title,
-  )
+const fixDuplicate = function(param, index, params) {
+  const duplicateParams = params.filter(paramA => paramA.title === param.title)
 
   if (duplicateParams.length === 1) {
-    return paramTitle
+    return param
   }
 
-  const duplicateCounter = duplicateParams.findIndex(
-    paramTitleA => paramTitleA === paramTitle,
-  )
-  const title = `${paramTitle.title} (${duplicateCounter})`
-  return { param: paramTitle.param, title }
+  const duplicateCounter = duplicateParams.findIndex(paramA => paramA === param)
+  const title = `${param.title} (${duplicateCounter})`
+  return { value: param.value, title }
 }

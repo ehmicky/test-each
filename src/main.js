@@ -51,8 +51,8 @@ const normalizeLoop = function(loop, index) {
 //  - user can put `params` in an array (if needs be) using variadic `...params`
 //  - user can omit `params` if only the information in the first argument
 //    is needed
-const fireCallback = function({ title, titles, index, indexes, params }, func) {
-  return func({ title, titles, index, indexes }, ...params)
+const fireCallback = function({ title, titles, index, indexes, values }, func) {
+  return func({ title, titles, index, indexes }, ...values)
 }
 
 // We do not use `export default` because Babel transpiles it in a way that

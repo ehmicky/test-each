@@ -6,8 +6,8 @@ export const normalizeFunc = function(input) {
     return input
   }
 
-  const param = wrapFunc(input)
-  return [{ param }]
+  const value = wrapFunc(input)
+  return [{ value }]
 }
 
 // If an argument is a function, its return value will be used instead:
@@ -25,56 +25,56 @@ export const normalizeFunc = function(input) {
 //     - otherwise, either:
 //        - use `info.index` in input function
 //        - use closures
-export const callFuncs = function({ index, indexes, params, titles }) {
+export const callFuncs = function({ index, indexes, values, titles }) {
   // `title` and `titles` cannot be passed since they rely on the return value
   // of this function
   const info = { index, indexes }
-  const paramsA = params.reduce(callFunc.bind(null, info), [])
+  const valuesA = values.reduce(callFunc.bind(null, info), [])
 
-  // Remember which parameters were input functions before calling them,
+  // Remember which values were input functions before calling them,
   // so that their titles can be generated later.
-  const funcParams = params.map(isInputFunc)
+  const inputFuncs = values.map(isInputFunc)
 
-  return { index, indexes, params: paramsA, funcParams, titles }
+  return { index, indexes, values: valuesA, inputFuncs, titles }
 }
 
 // eslint-disable-next-line max-params
-const callFunc = function(info, previous, param, paramIndex, params) {
-  if (!isInputFunc(param)) {
-    return [...previous, param]
+const callFunc = function(info, previous, value, valueIndex, values) {
+  if (!isInputFunc(value)) {
+    return [...previous, value]
   }
 
-  const func = unwrapFunc(param)
+  const func = unwrapFunc(value)
 
   // Return values from previous input functions can be used, but not next ones
-  const nextParams = params.slice(paramIndex).map(unwrapParam)
-  const paramA = func(info, ...previous, ...nextParams)
+  const nextValues = values.slice(valueIndex).map(unwrapValue)
+  const valueA = func(info, ...previous, ...nextValues)
 
-  return [...previous, paramA]
+  return [...previous, valueA]
 }
 
 // Functions passed top-level are fired, but not functions passed inside arrays
 // We wrap the first ones in order to differentiate.
 const funcSymbol = Symbol('function')
 
-const isInputFunc = function(param) {
+const isInputFunc = function(value) {
   return (
-    param !== undefined && param !== null && param[funcSymbol] !== undefined
+    value !== undefined && value !== null && value[funcSymbol] !== undefined
   )
 }
 
-const wrapFunc = function(param) {
-  return { [funcSymbol]: param }
+const wrapFunc = function(value) {
+  return { [funcSymbol]: value }
 }
 
-const unwrapFunc = function(param) {
-  return param[funcSymbol]
+const unwrapFunc = function(value) {
+  return value[funcSymbol]
 }
 
-const unwrapParam = function(param) {
-  if (isInputFunc(param)) {
-    return unwrapFunc(param)
+const unwrapValue = function(value) {
+  if (isInputFunc(value)) {
+    return unwrapFunc(value)
   }
 
-  return param
+  return value
 }

@@ -14,52 +14,52 @@ export const addTitles = function(input) {
   return input.map(addTitle)
 }
 
-const addTitle = function(param) {
-  const title = getTitle(param)
-  return { param, title }
+const addTitle = function(value) {
+  const title = getTitle(value)
+  return { value, title }
 }
 
 export const joinTitles = function({
   index,
   indexes,
-  params,
-  funcParams,
+  values,
+  inputFuncs,
   titles,
 }) {
-  const titlesA = titles.map((paramTitle, paramIndex) =>
-    addFuncTitle(paramTitle, params[paramIndex], funcParams[paramIndex]),
+  const titlesA = titles.map((paramTitle, valueIndex) =>
+    addFuncTitle(paramTitle, values[valueIndex], inputFuncs[valueIndex]),
   )
   const title = titlesA.join(' ')
-  return { title, titles: titlesA, index, indexes, params }
+  return { title, titles: titlesA, index, indexes, values }
 }
 
-const addFuncTitle = function(title, param, isInputFunc) {
+const addFuncTitle = function(title, value, isInputFunc) {
   if (!isInputFunc) {
     return title
   }
 
-  return getTitle(param)
+  return getTitle(value)
 }
 
 // Retrieve unique titles for each loop.
 // Users can customize titles by using the iterated function parameters.
-const getTitle = function(param) {
-  if (hasTitle(param)) {
-    return param.title
+const getTitle = function(value) {
+  if (hasTitle(value)) {
+    return value.title
   }
 
-  const title = serialize(param)
+  const title = serialize(value)
 
   const titleA = truncateTitle(title)
   return titleA
 }
 
 // `{ title }` can be used to override the serialization logic
-const hasTitle = function(param) {
+const hasTitle = function(value) {
   return (
-    isPlainObject(param) &&
-    typeof param.title === 'string' &&
-    param.title.trim() !== ''
+    isPlainObject(value) &&
+    typeof value.title === 'string' &&
+    value.title.trim() !== ''
   )
 }
 
@@ -71,8 +71,8 @@ const hasTitle = function(param) {
 //  - can minify output (including maxDepth)
 //  - handles circular references
 //  - can serialize DOM
-const serialize = function(param) {
-  return prettyFormat(param, PRETTY_FORMAT_OPTS)
+const serialize = function(value) {
+  return prettyFormat(value, PRETTY_FORMAT_OPTS)
 }
 
 const PRETTY_FORMAT_OPTS = {
