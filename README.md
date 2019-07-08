@@ -118,7 +118,7 @@ testEach(['a', 'b', 'c', 'd', 'e'], (info, param) => {})
 testEach(['a', 'b'], ['c', 'd', 'e'], (info, param, otherParam) => {})
 
 // Nested arrays are not iterated.
-// This runs callback twice with an array `param`: ['a', 'b'] -> ['c', 'd', 'e']
+// Run callback only twice: ['a', 'b'] -> ['c', 'd', 'e']
 testEach([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
 ```
 
@@ -128,6 +128,8 @@ If a `function` is used instead of an array, each iteration fires it and uses
 its return value instead. The `function` is called with the
 [same arguments](https://github.com/ehmicky/test-each#testeachinputs-callback)
 as the `callback`.
+
+Generated values are included in [test titles](#test-titles).
 
 <!-- eslint-disable no-empty-function, max-params -->
 
