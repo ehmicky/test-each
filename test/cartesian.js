@@ -12,3 +12,13 @@ test('should return an iterable', t => {
   const iterable = testEach(['a'])
   t.is(typeof iterable[Symbol.iterator], 'function')
 })
+
+test('should not crash when combinations are huge', t => {
+  const inputs = Array.from({ length: 24 }, () => [0, 1])
+
+  // eslint-disable-next-line fp/no-loops, no-empty, no-empty-pattern
+  for (const [] of testEach(...inputs)) {
+  }
+
+  t.pass()
+})
