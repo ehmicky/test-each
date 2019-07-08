@@ -9,6 +9,7 @@ import { packParams, unpackParams } from './cartesian.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
+// eslint-disable-next-line max-statements
 const testEach = function*(...inputs) {
   const [inputsA, callback] = parseInputs(inputs)
 
@@ -18,10 +19,12 @@ const testEach = function*(...inputs) {
   const arrays = inputsD.map(normalizeFunc)
   const arraysA = arrays.map(packParams)
 
+  // eslint-disable-next-line fp/no-let
   let index = -1
 
   // eslint-disable-next-line fp/no-loops
   for (const loop of cartesianIterate(...arraysA)) {
+    // eslint-disable-next-line fp/no-mutation
     index += 1
 
     const loopA = unpackParams(loop, index)

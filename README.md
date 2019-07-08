@@ -281,6 +281,8 @@ testEach(
 [`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
 looping through the return value of each `callback`.
 
+<!-- eslint-disable fp/no-loops, no-empty-function -->
+
 ```js
 const iterable = testEach(
   ['red', 'blue'],
@@ -301,7 +303,7 @@ for (const value of iterable) {
 
 If no `callback` is passed, this iterates over each callback arguments.
 
-<!-- eslint-disable no-empty-function -->
+<!-- eslint-disable fp/no-loops, no-empty-function -->
 
 ```js
 const iterable = testEach(['red', 'blue'], [0, 5, 50])
