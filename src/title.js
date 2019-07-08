@@ -19,24 +19,31 @@ const addTitle = function(param) {
   return { param, title }
 }
 
-export const joinTitles = function({ index, indexes, paramTitles }) {
-  const params = paramTitles.map(unpackParam)
-  const titles = paramTitles.map(unpackTitle)
-  const title = titles.join(' ')
-  return { title, titles, index, indexes, params }
+export const joinTitles = function({
+  index,
+  indexes,
+  params,
+  funcParams,
+  titles,
+}) {
+  const titlesA = titles.map((paramTitle, paramIndex) =>
+    addFuncTitle(paramTitle, params[paramIndex], funcParams[paramIndex]),
+  )
+  const title = titlesA.join(' ')
+  return { title, titles: titlesA, index, indexes, params }
 }
 
-const unpackParam = function({ param }) {
-  return param
-}
+const addFuncTitle = function(title, param, isInputFunc) {
+  if (!isInputFunc) {
+    return title
+  }
 
-const unpackTitle = function({ title }) {
-  return title
+  return getTitle(param)
 }
 
 // Retrieve unique titles for each loop.
 // Users can customize titles by using the iterated function parameters.
-export const getTitle = function(param) {
+const getTitle = function(param) {
   if (hasTitle(param)) {
     return param.title
   }

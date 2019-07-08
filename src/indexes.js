@@ -3,21 +3,26 @@ export const wrapIndexes = function(inputs) {
   return inputs.map(wrapIndex)
 }
 
-const wrapIndex = function(paramTitle, index) {
-  return { index, paramTitle }
+const wrapIndex = function({ param, title }, index) {
+  return { index, param, title }
 }
 
 // Revert it after cartesian product
 export const unwrapIndexes = function(loop, index) {
   const indexes = loop.map(unwrapIndex)
-  const paramTitles = loop.map(unpackParamTitle)
-  return { index, indexes, paramTitles }
+  const params = loop.map(unpackParam)
+  const titles = loop.map(unpackTitle)
+  return { index, indexes, params, titles }
 }
 
 const unwrapIndex = function({ index }) {
   return index
 }
 
-const unpackParamTitle = function({ paramTitle }) {
-  return paramTitle
+const unpackParam = function({ param }) {
+  return param
+}
+
+const unpackTitle = function({ title }) {
+  return title
 }
