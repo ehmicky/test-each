@@ -10,7 +10,7 @@ import { wrapIndexes, unwrapIndexes } from './indexes.js'
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
 const testEach = function(...inputs) {
-  const [inputsA, callback] = parseInputs(inputs)
+  const [inputsA, func] = parseInputs(inputs)
 
   const arrays = inputsA.map(normalizeInput)
 
@@ -24,9 +24,15 @@ const testEach = function(...inputs) {
     // eslint-disable-next-line fp/no-mutation
     index += 1
 
-    const loopA = normalizeLoop(loop, index)
+    const { values, ...loopA } = normalizeLoop(loop, index)
 
-    fireCallback(loopA, callback)
+    // The `title`, `titles`, etc. are passed as first argument (not the last
+    // one) so that:
+    //  - user can put `params` in an array (if needs be) using variadic
+    //    `...params`
+    //  - user can omit `params` if only the information in the first argument
+    //    is needed
+    func(loopA, ...values)
   }
 }
 
@@ -44,15 +50,6 @@ const normalizeLoop = function(loop, index) {
   const loopB = callFuncs(loopA)
   const loopC = joinTitles(loopB)
   return loopC
-}
-
-// The `title`, `titles`, etc. are passed as first argument (not the last one)
-// so that:
-//  - user can put `params` in an array (if needs be) using variadic `...params`
-//  - user can omit `params` if only the information in the first argument
-//    is needed
-const fireCallback = function({ title, titles, index, indexes, values }, func) {
-  return func({ title, titles, index, indexes }, ...values)
 }
 
 // We do not use `export default` because Babel transpiles it in a way that
