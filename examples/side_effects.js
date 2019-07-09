@@ -10,10 +10,10 @@
 // Ignore the following line: this is only needed for internal purposes.
 require('./utils.js')
 
-const testEach = require('test-each')
+const { each } = require('test-each')
 
 /* eslint-disable fp/no-mutation */
-testEach(
+each(
   ['green', 'red', 'blue'],
   [{ active: true }, { active: false }],
   (info, color, param) => {

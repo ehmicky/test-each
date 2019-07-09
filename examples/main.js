@@ -12,13 +12,13 @@ require('./utils.js')
 
 const assert = require('assert')
 
-const testEach = require('test-each')
+const { each } = require('test-each')
 
 // The code we are testing
 const multiply = require('./multiply.js')
 
 // Repeat test using different inputs and expected outputs
-testEach(
+each(
   [{ first: 2, second: 2, output: 4 }, { first: 3, second: 3, output: 9 }],
   ({ title }, { first, second, output }) => {
     // Assertion titles will be:

@@ -12,13 +12,13 @@ require('./utils.js')
 
 const assert = require('assert')
 
-const testEach = require('test-each')
+const { each } = require('test-each')
 
 // The code we are testing
 const multiply = require('./multiply.js')
 
 // Fuzz testing. Run this test 1000 times using different numbers.
-testEach(1000, Math.random, ({ title }, index, randomNumber) => {
+each(1000, Math.random, ({ title }, index, randomNumber) => {
   assert(
     multiply(randomNumber, 1) === randomNumber,
     `should correctly multiply floats | ${title}`,

@@ -10,9 +10,9 @@
 // Ignore the following line: this is only needed for internal purposes.
 require('./utils.js')
 
-const testEach = require('test-each')
+const { each } = require('test-each')
 
-testEach([{ color: 'red' }, { color: 'blue' }], ({ title }) => {
+each([{ color: 'red' }, { color: 'blue' }], ({ title }) => {
   // Titles will be:
   //    should test color | {"color": "red"}
   //    should test color | {"color": "blue"}
@@ -20,7 +20,7 @@ testEach([{ color: 'red' }, { color: 'blue' }], ({ title }) => {
 })
 
 // Plain objects can override this using a `title` property
-testEach(
+each(
   [{ color: 'red', title: 'Red' }, { color: 'blue', title: 'Blue' }],
   ({ title }) => {
     // Titles will be:
@@ -31,7 +31,7 @@ testEach(
 )
 
 // The `info` argument can be used for dynamic titles
-testEach([{ color: 'red' }, { color: 'blue' }], (info, param) => {
+each([{ color: 'red' }, { color: 'blue' }], (info, param) => {
   // Test titles will be:
   //    should test color | 0 red
   //    should test color | 1 blue

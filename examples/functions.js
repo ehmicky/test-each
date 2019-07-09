@@ -10,16 +10,16 @@
 // Ignore the following line: this is only needed for internal purposes.
 require('./utils.js')
 
-const testEach = require('test-each')
+const { each } = require('test-each')
 
 // Run callback with a different random number each time
-testEach(['red', 'green', 'blue'], Math.random, (info, color, randomNumber) => {
+each(['red', 'green', 'blue'], Math.random, (info, color, randomNumber) => {
   console.log(color, randomNumber)
 })
 
 // Input functions are called with the same arguments as the callback
 /* eslint-disable max-params */
-testEach(
+each(
   ['02', '15', '30'],
   ['January', 'February', 'March'],
   ['1980', '1981'],

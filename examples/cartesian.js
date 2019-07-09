@@ -12,14 +12,14 @@ require('./utils.js')
 
 const assert = require('assert')
 
-const testEach = require('test-each')
+const { each } = require('test-each')
 
 // The code we are testing
 const multiply = require('./multiply.js')
 
 // Cartesian product.
 // Run this test 4 times using every possible combination of inputs
-testEach([0.5, 10], [2.5, 5], ({ title }, first, second) => {
+each([0.5, 10], [2.5, 5], ({ title }, first, second) => {
   assert(
     typeof multiply(first, second) === 'number',
     `should mix integers and floats | ${title}`,
@@ -27,17 +27,17 @@ testEach([0.5, 10], [2.5, 5], ({ title }, first, second) => {
 })
 
 // Run callback five times: a -> b -> c -> d -> e
-testEach(['a', 'b', 'c', 'd', 'e'], (info, param) => {
+each(['a', 'b', 'c', 'd', 'e'], (info, param) => {
   console.log(param)
 })
 
 // Run callback six times: a c -> a d -> a e -> b c -> b d -> b e
-testEach(['a', 'b'], ['c', 'd', 'e'], (info, param, otherParam) => {
+each(['a', 'b'], ['c', 'd', 'e'], (info, param, otherParam) => {
   console.log(param, otherParam)
 })
 
 // Nested arrays are not iterated.
 // This runs callback twice with an array `param`: ['a', 'b'] -> ['c', 'd', 'e']
-testEach([['a', 'b'], ['c', 'd', 'e']], (info, param) => {
+each([['a', 'b'], ['c', 'd', 'e']], (info, param) => {
   console.log(param)
 })

@@ -26,13 +26,13 @@ Repeats tests using different inputs
 ```js
 // The examples use Ava but any test runner works (Jest, Mocha, Jasmine, etc.)
 const test = require('ava')
-const testEach = require('test-each')
+const { each } = require('test-each')
 
 // The code we are testing
 const multiply = require('./multiply.js')
 
 // Repeat test using different inputs and expected outputs
-testEach(
+each(
   [{ first: 2, second: 2, output: 4 }, { first: 3, second: 3, output: 9 }],
   ({ title }, { first, second, output }) => {
     // Test titles will be:
@@ -46,7 +46,7 @@ testEach(
 
 // Snapshot testing. The `output` is automatically set on the first run,
 // then re-used in the next runs.
-testEach(
+each(
   [{ first: 2, second: 2 }, { first: 3, second: 3 }],
   ({ title }, { first, second }) => {
     test(`should multiply outputs | ${title}`, t => {
@@ -57,14 +57,14 @@ testEach(
 
 // Cartesian product.
 // Run this test 4 times using every possible combination of inputs
-testEach([0.5, 10], [2.5, 5], ({ title }, first, second) => {
+each([0.5, 10], [2.5, 5], ({ title }, first, second) => {
   test(`should mix integers and floats | ${title}`, t => {
     t.is(typeof multiply(first, second), 'number')
   })
 })
 
 // Fuzz testing. Run this test 1000 times using different numbers.
-testEach(1000, Math.random, ({ title }, index, randomNumber) => {
+each(1000, Math.random, ({ title }, index, randomNumber) => {
   test(`should correctly multiply floats | ${title}`, t => {
     t.is(multiply(randomNumber, 1), randomNumber)
   })
@@ -89,10 +89,10 @@ npm install -D test-each
 <!-- eslint-disable no-empty-function -->
 
 ```js
-const testEach = require('test-each')
+const { each } = require('test-each')
 
 const inputs = [['red', 'blue'], [0, 5, 50]]
-testEach(...inputs, function callback(info, color, number) {})
+each(...inputs, function callback(info, color, number) {})
 ```
 
 Fires `callback` once for each possible combination of `inputs`.
@@ -114,14 +114,14 @@ If several `inputs` are specified, their
 
 ```js
 // Run callback five times: a -> b -> c -> d -> e
-testEach(['a', 'b', 'c', 'd', 'e'], (info, param) => {})
+each(['a', 'b', 'c', 'd', 'e'], (info, param) => {})
 
 // Run callback six times: a c -> a d -> a e -> b c -> b d -> b e
-testEach(['a', 'b'], ['c', 'd', 'e'], (info, param, otherParam) => {})
+each(['a', 'b'], ['c', 'd', 'e'], (info, param, otherParam) => {})
 
 // Nested arrays are not iterated.
 // Run callback only twice: ['a', 'b'] -> ['c', 'd', 'e']
-testEach([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
+each([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
 ```
 
 ### Input functions
@@ -137,14 +137,10 @@ The generated values are included in [test titles](#test-titles).
 
 ```js
 // Run callback with a different random number each time
-testEach(
-  ['red', 'green', 'blue'],
-  Math.random,
-  (info, color, randomNumber) => {},
-)
+each(['red', 'green', 'blue'], Math.random, (info, color, randomNumber) => {})
 
 // Input functions are called with the same arguments as the callback
-testEach(
+each(
   ['02', '15', '30'],
   ['January', 'February', 'March'],
   ['1980', '1981'],
@@ -169,7 +165,7 @@ with [input functions](#input-functions) and libraries like
 const faker = require('faker')
 
 // Run callback 1000 times with a random UUID and color each time
-testEach(
+each(
   1000,
   faker.random.uuid,
   faker.random.arrayElement(['green', 'red', 'blue']),
@@ -178,7 +174,7 @@ testEach(
 
 // `info.index` can be used as a seed for reproducible randomness.
 // The following series of 1000 UUIDs will remain the same across executions.
-testEach(
+each(
   1000,
   ({ index }) => faker.seed(index) && faker.random.uuid(),
   (info, randomUuid) => {},
@@ -201,7 +197,7 @@ Any library can be used
 ```js
 // The `output` is automatically set on the first run,
 // then re-used in the next runs.
-testEach(
+each(
   [{ first: 2, second: 2 }, { first: 3, second: 3 }],
   ({ title }, { first, second }) => {
     test(`should multiply outputs | ${title}`, t => {
@@ -233,7 +229,7 @@ You can customize titles either by:
 <!-- eslint-disable max-nested-callbacks, no-empty-function -->
 
 ```js
-testEach([{ color: 'red' }, { color: 'blue' }], ({ title }, param) => {
+each([{ color: 'red' }, { color: 'blue' }], ({ title }, param) => {
   // Test titles will be:
   //    should test color | {"color": "red"}
   //    should test color | {"color": "blue"}
@@ -241,7 +237,7 @@ testEach([{ color: 'red' }, { color: 'blue' }], ({ title }, param) => {
 })
 
 // Plain objects can override this using a `title` property
-testEach(
+each(
   [{ color: 'red', title: 'Red' }, { color: 'blue', title: 'Blue' }],
   ({ title }, param) => {
     // Test titles will be:
@@ -252,7 +248,7 @@ testEach(
 )
 
 // The `info` argument can be used for dynamic titles
-testEach([{ color: 'red' }, { color: 'blue' }], (info, param) => {
+each([{ color: 'red' }, { color: 'blue' }], (info, param) => {
   // Test titles will be:
   //    should test color | 0 red
   //    should test color | 1 blue
@@ -268,7 +264,7 @@ copied to prevent side effects for the next iterations.
 <!-- eslint-disable fp/no-mutation, no-param-reassign -->
 
 ```js
-testEach(
+each(
   ['green', 'red', 'blue'],
   [{ active: true }, { active: false }],
   (info, color, param) => {
@@ -284,7 +280,7 @@ testEach(
 
 # API
 
-## testEach(...inputs, callback)
+## each(...inputs, callback)
 
 `inputs`: `Array | function | integer` (one or
 [several](#cartesian-product))<br>`callback`: `function(info, ...params)` <br>
