@@ -279,6 +279,40 @@ each(
 )
 ```
 
+### Iterables
+
+`iterable()` can be used to iterate over each combination instead of providing a
+callback.
+
+<!-- eslint-disable no-empty-function, fp/no-loops -->
+
+```js
+const { iterable } = require('test-each')
+
+const combinations = iterable(
+  ['green', 'red', 'blue'],
+  [{ active: true }, { active: false }],
+)
+
+for (const [{ title }, color, param] of combinations) {
+  test(`should test color | ${title}`, () => {})
+}
+```
+
+The return value is an
+[`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables).
+This can be converted to an array using the spread operator.
+
+<!-- eslint-disable max-nested-callbacks, no-empty-function -->
+
+```js
+const array = [...combinations]
+
+array.forEach(({ title }, color, param) => {
+  test(`should test color | ${title}`, () => {})
+})
+```
+
 # API
 
 ## each(...inputs, callback)
