@@ -320,11 +320,17 @@ array.forEach(({ title }, color, param) => {
 `inputs`: `Array | function | integer` (one or
 [several](#cartesian-product))<br>`callback`: `function(info, ...params)` <br>
 
+Fire `callback` with each combination of `params`.
+
 ## iterable(...inputs)
 
 `inputs`: `Array | function | integer` (one or
 [several](#cartesian-product))<br>_Return value_:
 [`Iterable<[info, ...params]>`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables)
+
+Returns an
+[`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables)
+looping through each combination of `params`.
 
 ### info
 
