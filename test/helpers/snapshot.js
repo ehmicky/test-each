@@ -2,7 +2,7 @@
 import test from 'ava'
 import prettyFormat from 'pretty-format'
 
-import { each } from '../../src/main.js'
+import { each, iterable } from '../../src/main.js'
 
 // For each `args` in `allArgs`, call `each|iterable(...args)` and snapshot the
 // return value.
@@ -27,6 +27,12 @@ const METHODS = [
         allParams.push(params)
       })
       return allParams
+    },
+  },
+  {
+    name: 'iterable()',
+    getParams(args) {
+      return [...iterable(...args)]
     },
   },
 ]
