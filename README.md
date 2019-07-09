@@ -308,7 +308,7 @@ This can be converted to an array with the spread operator.
 ```js
 const array = [...combinations]
 
-array.forEach(({ title }, color, param) => {
+array.forEach(([{ title }, color, param]) => {
   test(`should test color | ${title}`, () => {})
 })
 ```
