@@ -1,7 +1,7 @@
 import test from 'ava'
 import isCi from 'is-ci'
 
-import testEach from '../src/main.js'
+import { each } from '../src/main.js'
 
 import { testSnapshots } from './helpers/snapshot.js'
 
@@ -15,6 +15,6 @@ if (isCi) {
     const inputs = Array.from({ length: 24 }, () => [0, 1])
 
     // eslint-disable-next-line no-empty-function, max-nested-callbacks
-    t.notThrows(() => testEach(...inputs, () => {}))
+    t.notThrows(() => each(...inputs, () => {}))
   })
 }

@@ -9,7 +9,7 @@ import { wrapIndexes, unwrapIndexes } from './indexes.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
-const testEach = function(...inputs) {
+export const each = function(...inputs) {
   const [inputsA, func] = parseInputs(inputs)
 
   const inputsB = inputsA.map(normalizeInput)
@@ -59,7 +59,3 @@ const normalizeLoop = function(loop, index) {
   const loopC = joinTitles(loopB)
   return loopC
 }
-
-// We do not use `export default` because Babel transpiles it in a way that
-// requires CommonJS users to `require(...).default` instead of `require(...)`.
-module.exports = testEach

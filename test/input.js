@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import testEach from '../src/main.js'
+import { each } from '../src/main.js'
 
 import { testSnapshots } from './helpers/snapshot.js'
 
@@ -16,5 +16,5 @@ testSnapshots('Invalid inputs', [
 ])
 
 test('Invalid callback', t => {
-  t.throws(() => testEach(['a']))
+  t.throws(() => each(['a']))
 })

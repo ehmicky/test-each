@@ -2,7 +2,7 @@
 import test from 'ava'
 import prettyFormat from 'pretty-format'
 
-import testEach from '../../src/main.js'
+import { each } from '../../src/main.js'
 
 // For each `args` in `allArgs`, call `testEach(...args)` and snapshot the
 // return value.
@@ -22,7 +22,7 @@ const snapshotArgs = function(args, testTitle) {
 const getLoops = function(args) {
   try {
     const params = []
-    testEach(...args, callback.bind(null, params))
+    each(...args, callback.bind(null, params))
     return params
   } catch (error) {
     return error
