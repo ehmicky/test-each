@@ -1,7 +1,7 @@
 import test from 'ava'
 import isCi from 'is-ci'
 
-import { each } from '../src/main.js'
+import { each, iterable } from '../src/main.js'
 
 import { testSnapshots } from './helpers/snapshot.js'
 
@@ -19,4 +19,12 @@ const identifyFunc = () => {}
 
 ciTest('should not crash when combinations are huge | each()', t => {
   t.notThrows(() => each(...inputs, identifyFunc))
+})
+
+ciTest('should not crash when combinations are huge | iterable()', t => {
+  t.notThrows(() => {
+    // eslint-disable-next-line no-empty-pattern, no-empty, fp/no-loops
+    for (const [] of iterable(...inputs)) {
+    }
+  })
 })
