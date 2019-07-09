@@ -19,7 +19,7 @@ const snapshotMethod = function(args, testTitle) {
 
 const METHODS = [
   {
-    name: 'each',
+    name: 'each()',
     getParams(args) {
       const allParams = []
       each(...args, (...params) => {
@@ -32,9 +32,9 @@ const METHODS = [
 ]
 
 // We don't use `test-each` itself since we are testing it.
-const snapshotArgs = function({ args, testTitle, getParams }) {
+const snapshotArgs = function({ args, testTitle, name, getParams }) {
   const title = prettyFormat(args, { min: true })
-  test(`${testTitle} | ${title}`, t => {
+  test(`${testTitle} | ${name} ${title}`, t => {
     const loops = eGetParams(getParams, args)
     t.snapshot(loops)
   })
