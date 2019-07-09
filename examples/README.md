@@ -11,8 +11,8 @@ They can also be run directly
 ## Examples
 
 - [Main usage](main.js)
+- [Test titles](title.js)
 - [Cartesian product](cartesian.js)
 - [Input functions](functions.js)
 - [Fuzz testing](fuzz.js)
-- [Test titles](title.js)
 - [Side effects](side_effects.js)

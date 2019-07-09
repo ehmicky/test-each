@@ -13,10 +13,11 @@ Repeats tests using different inputs
 ([Data-Driven Testing](https://en.wikipedia.org/wiki/Data-driven_testing)):
 
 - test runner independent: works with your current setup
+- generates [test titles](#test-titles) that are descriptive, unique, for any
+  JavaScript type (not just JSON).
 - loops over every possible combination of inputs
   ([cartesian product](#cartesian-product))
 - can use random functions ([fuzz testing](#fuzz-testing))
-- generates [nice test titles](#test-titles)
 - [snapshot testing](#snapshot-testing) friendly
 
 # Example
@@ -104,6 +105,55 @@ A common use case for `callback` is to define tests (using any test runner).
 
 [`info`](#info) is an `object` whose properties can be used to generate
 [test titles](#test-titles).
+
+### Test titles
+
+Each combination of parameters is stringified as a `title` available in the
+`callback`'s [first argument](#infotitle).
+
+Titles should be included in test titles to make them descriptive and unique.
+
+Long titles are truncated. An incrementing counter is appended to duplicates.
+
+Any JavaScript type is
+[stringified](https://github.com/facebook/jest/tree/master/packages/pretty-format),
+not just JSON.
+
+You can customize titles either by:
+
+- defining `title` properties in `inputs` that are
+  [plain objects](https://stackoverflow.com/a/52453477/1526301)
+- using the [`info` argument](#info)
+
+<!-- eslint-disable max-nested-callbacks, no-empty-function -->
+
+```js
+each([{ color: 'red' }, { color: 'blue' }], ({ title }, param) => {
+  // Test titles will be:
+  //    should test color | {"color": "red"}
+  //    should test color | {"color": "blue"}
+  test(`should test color | ${title}`, () => {})
+})
+
+// Plain objects can override this using a `title` property
+each(
+  [{ color: 'red', title: 'Red' }, { color: 'blue', title: 'Blue' }],
+  ({ title }, param) => {
+    // Test titles will be:
+    //    should test color | Red
+    //    should test color | Blue
+    test(`should test color | ${title}`, () => {})
+  },
+)
+
+// The `info` argument can be used for dynamic titles
+each([{ color: 'red' }, { color: 'blue' }], (info, param) => {
+  // Test titles will be:
+  //    should test color | 0 red
+  //    should test color | 1 blue
+  test(`should test color | ${info.index} ${param.color}`, () => {})
+})
+```
 
 ### Cartesian product
 
@@ -205,55 +255,6 @@ each(
     })
   },
 )
-```
-
-### Test titles
-
-Each combination of parameters is stringified as a `title` available in the
-`callback`'s [first argument](#infotitle).
-
-Titles should be included in test titles to make them descriptive and unique.
-
-Long titles are truncated. An incrementing counter is appended to duplicates.
-
-Any JavaScript type is
-[stringified](https://github.com/facebook/jest/tree/master/packages/pretty-format),
-not just JSON.
-
-You can customize titles either by:
-
-- defining `title` properties in `inputs` that are
-  [plain objects](https://stackoverflow.com/a/52453477/1526301)
-- using the [`info` argument](#info)
-
-<!-- eslint-disable max-nested-callbacks, no-empty-function -->
-
-```js
-each([{ color: 'red' }, { color: 'blue' }], ({ title }, param) => {
-  // Test titles will be:
-  //    should test color | {"color": "red"}
-  //    should test color | {"color": "blue"}
-  test(`should test color | ${title}`, () => {})
-})
-
-// Plain objects can override this using a `title` property
-each(
-  [{ color: 'red', title: 'Red' }, { color: 'blue', title: 'Blue' }],
-  ({ title }, param) => {
-    // Test titles will be:
-    //    should test color | Red
-    //    should test color | Blue
-    test(`should test color | ${title}`, () => {})
-  },
-)
-
-// The `info` argument can be used for dynamic titles
-each([{ color: 'red' }, { color: 'blue' }], (info, param) => {
-  // Test titles will be:
-  //    should test color | 0 red
-  //    should test color | 1 blue
-  test(`should test color | ${info.index} ${param.color}`, () => {})
-})
 ```
 
 ### Side effects
