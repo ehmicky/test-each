@@ -14,7 +14,7 @@ Repeats tests using different inputs
 
 - test runner independent: works with your current setup
 - generates [test titles](#test-titles) that are descriptive, unique, for any
-  JavaScript type (not just JSON).
+  JavaScript type (not just JSON)
 - loops over every possible combination of inputs
   ([cartesian product](#cartesian-product))
 - can use random functions ([fuzz testing](#fuzz-testing))
