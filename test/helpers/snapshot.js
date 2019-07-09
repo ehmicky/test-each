@@ -4,32 +4,46 @@ import prettyFormat from 'pretty-format'
 
 import { each } from '../../src/main.js'
 
-// For each `args` in `allArgs`, call `each(...args)` and snapshot the
+// For each `args` in `allArgs`, call `each|iterable(...args)` and snapshot the
 // return value.
 export const testSnapshots = function(testTitle, allArgs) {
-  allArgs.forEach(args => snapshotArgs(args, testTitle))
+  allArgs.forEach(args => snapshotMethod(args, testTitle))
 }
 
-// We don't use `each()` itself since we are testing it.
-const snapshotArgs = function(args, testTitle) {
+// Run test for both `each()` and `iterable()`
+const snapshotMethod = function(args, testTitle) {
+  METHODS.forEach(({ name, getParams }) =>
+    snapshotArgs({ args, testTitle, name, getParams }),
+  )
+}
+
+const METHODS = [
+  {
+    name: 'each',
+    getParams(args) {
+      const allParams = []
+      each(...args, (...params) => {
+        // eslint-disable-next-line fp/no-mutating-methods
+        allParams.push(params)
+      })
+      return allParams
+    },
+  },
+]
+
+// We don't use `test-each` itself since we are testing it.
+const snapshotArgs = function({ args, testTitle, getParams }) {
   const title = prettyFormat(args, { min: true })
   test(`${testTitle} | ${title}`, t => {
-    const loops = getLoops(args)
+    const loops = eGetParams(getParams, args)
     t.snapshot(loops)
   })
 }
 
-const getLoops = function(args) {
+const eGetParams = function(getParams, args) {
   try {
-    const params = []
-    each(...args, callback.bind(null, params))
-    return params
+    return getParams(args)
   } catch (error) {
     return error
   }
-}
-
-const callback = function(params, ...args) {
-  // eslint-disable-next-line fp/no-mutating-methods
-  params.push(args)
 }
