@@ -10,11 +10,13 @@ testSnapshots('Normal iterations', [[['a']], [['a', 'b'], ['c', 'd']]])
 testSnapshots('No arguments', [[]])
 
 // This test is very slow, so it is run only in CI
-if (isCi) {
-  test('should not crash when combinations are huge | each()', t => {
-    const inputs = Array.from({ length: 24 }, () => [0, 1])
+const ciTest = isCi ? test : test.skip
 
-    // eslint-disable-next-line no-empty-function, max-nested-callbacks
-    t.notThrows(() => each(...inputs, () => {}))
-  })
-}
+const inputs = Array.from({ length: 24 }, () => [0, 1])
+
+// eslint-disable-next-line no-empty-function
+const identifyFunc = () => {}
+
+ciTest('should not crash when combinations are huge | each()', t => {
+  t.notThrows(() => each(...inputs, identifyFunc))
+})
