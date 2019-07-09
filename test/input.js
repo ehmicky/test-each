@@ -15,6 +15,6 @@ testSnapshots('Invalid inputs', [
   [Infinity],
 ])
 
-test('Invalid callback', t => {
+test('Invalid callback | each()', t => {
   t.throws(() => each(['a']))
 })
