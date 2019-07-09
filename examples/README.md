@@ -16,3 +16,4 @@ They can also be run directly
 - [Input functions](functions.js)
 - [Fuzz testing](fuzz.js)
 - [Side effects](side_effects.js)
+- [Iterables](iterables.js)
