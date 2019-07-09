@@ -12,7 +12,7 @@ testSnapshots('No arguments', [[]])
 // This test is very slow, so it is run only in CI
 const ciTest = isCi ? test : test.skip
 
-const inputs = Array.from({ length: 24 }, () => [0, 1])
+const inputs = Array.from({ length: 23 }, () => [0, 1])
 
 // eslint-disable-next-line no-empty-function
 const identifyFunc = () => {}
