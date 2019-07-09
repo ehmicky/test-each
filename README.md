@@ -281,8 +281,8 @@ each(
 
 ### Iterables
 
-`iterable()` can be used to iterate over each combination instead of providing a
-callback.
+[`iterable()`](#iterableinputs) can be used to iterate over each combination
+instead of providing a callback.
 
 <!-- eslint-disable no-empty-function, fp/no-loops -->
 
@@ -319,6 +319,12 @@ array.forEach(({ title }, color, param) => {
 
 `inputs`: `Array | function | integer` (one or
 [several](#cartesian-product))<br>`callback`: `function(info, ...params)` <br>
+
+## iterable(...inputs)
+
+`inputs`: `Array | function | integer` (one or
+[several](#cartesian-product))<br>_Return value_:
+[`Iterable<[info, ...params]>`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables)
 
 ### info
 
