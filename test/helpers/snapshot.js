@@ -4,13 +4,13 @@ import prettyFormat from 'pretty-format'
 
 import { each } from '../../src/main.js'
 
-// For each `args` in `allArgs`, call `testEach(...args)` and snapshot the
+// For each `args` in `allArgs`, call `each(...args)` and snapshot the
 // return value.
 export const testSnapshots = function(testTitle, allArgs) {
   allArgs.forEach(args => snapshotArgs(args, testTitle))
 }
 
-// We don't use `testEach()` itself since we are testing it.
+// We don't use `each()` itself since we are testing it.
 const snapshotArgs = function(args, testTitle) {
   const title = prettyFormat(args, { min: true })
   test(`${testTitle} | ${title}`, t => {
