@@ -16,7 +16,7 @@ export const each = function(...inputs) {
   const inputsB = inputsA.map(normalizeInput)
 
   // eslint-disable-next-line fp/no-loops
-  for (const [info, values] of forEachLoop(inputsB)) {
+  for (const [info, ...values] of forEachLoop(inputsB)) {
     // The `title`, `titles`, etc. are passed as first argument (not the last
     // one) so that:
     //  - user can put `params` in an array (if needs be) using variadic
@@ -58,7 +58,7 @@ const forEachLoop = function*(inputs) {
     index += 1
 
     const { values, ...info } = normalizeLoop(loop, index)
-    yield [info, values]
+    yield [info, ...values]
   }
 }
 
