@@ -320,7 +320,7 @@ array.forEach(([{ title }, color, param]) => {
 `inputs`: `Array | function | integer` (one or
 [several](#cartesian-product))<br>`callback`: `function(info, ...params)` <br>
 
-Fire `callback` with each combination of [`params`](#params).
+Fires `callback` with each combination of [`params`](#params).
 
 ## iterable(...inputs)
 
