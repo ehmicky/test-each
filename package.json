@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "core-js": "^3.2.1",
-    "fast-cartesian": "^2.0.2",
+    "fast-cartesian": "^2.0.3",
     "pretty-format": "^24.9.0"
   },
   "devDependencies": {
