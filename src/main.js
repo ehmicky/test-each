@@ -1,4 +1,4 @@
-import { iterate } from 'fast-cartesian'
+import bigCartesian from 'big-cartesian'
 
 import { parseInputs, validateInputs } from './input.js'
 import { addRepeat } from './repeat.js'
@@ -53,7 +53,7 @@ const forEachLoop = function*(inputs) {
   let index = -1
 
   // eslint-disable-next-line fp/no-loops
-  for (const loop of iterate(inputs)) {
+  for (const loop of bigCartesian(inputs)) {
     // eslint-disable-next-line fp/no-mutation
     index += 1
 

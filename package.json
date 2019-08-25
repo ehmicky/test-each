@@ -51,8 +51,8 @@
     "test": "test"
   },
   "dependencies": {
+    "big-cartesian": "^1.0.0",
     "core-js": "^3.2.1",
-    "fast-cartesian": "^4.0.0",
     "pretty-format": "^24.9.0"
   },
   "devDependencies": {
