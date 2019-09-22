@@ -1,6 +1,5 @@
 import prettyFormat, { plugins } from 'pretty-format'
-
-import { isPlainObject } from './utils.js'
+import isPlainObj from 'is-plain-obj'
 
 // Add `title` to each `param`
 // We do it before the cartesian product for performance reasons.
@@ -53,7 +52,7 @@ const getTitle = function(value) {
 // `{ title }` can be used to override the serialization logic
 const hasTitle = function(value) {
   return (
-    isPlainObject(value) &&
+    isPlainObj(value) &&
     typeof value.title === 'string' &&
     value.title.trim() !== ''
   )
