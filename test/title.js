@@ -55,6 +55,12 @@ testSnapshots('Titles serialization', [
   [[new WeakMap([[{}, 'a'], [{}, 'b']])]],
   [[new WeakSet([{}])]],
 
+  // Newlines
+  [['a\nb\nc']],
+  [['a\r\nb\r\nc']],
+  [['a\fb\fc']],
+  [['a\vb\vc']],
+
   // Keys should be sorted
   [[{ argB: true, argA: true, [Symbol('arg')]: true }]],
 

@@ -67,7 +67,9 @@ const hasTitle = function(value) {
 //  - handles circular references
 //  - can serialize DOM
 const serialize = function(value) {
-  return prettyFormat(value, PRETTY_FORMAT_OPTS)
+  const title = prettyFormat(value, PRETTY_FORMAT_OPTS)
+  const titleA = ESCAPE_SEQUENCES.reduce(escapeSequence, title)
+  return titleA
 }
 
 const PRETTY_FORMAT_OPTS = {
@@ -81,6 +83,18 @@ const PRETTY_FORMAT_OPTS = {
     plugins.ConvertAnsi,
   ],
 }
+
+// Escape newline characters to ensure title is on a single line
+const escapeSequence = function(title, [regExp, replacement]) {
+  return title.replace(regExp, replacement)
+}
+
+const ESCAPE_SEQUENCES = [
+  [/\n/gu, '\\n'],
+  [/\r/gu, '\\r'],
+  [/\f/gu, '\\f'],
+  [/\v/gu, '\\v'],
+]
 
 // Make titles short by truncating them in the middle
 const truncateTitle = function(title) {
