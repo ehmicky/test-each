@@ -21,7 +21,10 @@ each([{ color: 'red' }, { color: 'blue' }], ({ title }) => {
 
 // Plain objects can override this using a `title` property
 each(
-  [{ color: 'red', title: 'Red' }, { color: 'blue', title: 'Blue' }],
+  [
+    { color: 'red', title: 'Red' },
+    { color: 'blue', title: 'Blue' },
+  ],
   ({ title }) => {
     // Titles will be:
     //    should test color | Red

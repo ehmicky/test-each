@@ -50,9 +50,23 @@ testSnapshots('Titles serialization', [
   [[['a', 'b']]],
   [[new ArrayBuffer(2)]],
   [[new Custom()]],
-  [[new Map([[{}, 'a'], [{}, 'b']])]],
+  [
+    [
+      new Map([
+        [{}, 'a'],
+        [{}, 'b'],
+      ]),
+    ],
+  ],
   [[new Set(['a', 'b'])]],
-  [[new WeakMap([[{}, 'a'], [{}, 'b']])]],
+  [
+    [
+      new WeakMap([
+        [{}, 'a'],
+        [{}, 'b'],
+      ]),
+    ],
+  ],
   [[new WeakSet([{}])]],
 
   // Newlines

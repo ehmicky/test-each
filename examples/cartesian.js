@@ -38,6 +38,12 @@ each(['a', 'b'], ['c', 'd', 'e'], (info, param, otherParam) => {
 
 // Nested arrays are not iterated.
 // This runs callback twice with an array `param`: ['a', 'b'] -> ['c', 'd', 'e']
-each([['a', 'b'], ['c', 'd', 'e']], (info, param) => {
-  console.log(param)
-})
+each(
+  [
+    ['a', 'b'],
+    ['c', 'd', 'e'],
+  ],
+  (info, param) => {
+    console.log(param)
+  },
+)

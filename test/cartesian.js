@@ -5,7 +5,13 @@ import { each, iterable } from '../src/main.js'
 
 import { testSnapshots } from './helpers/snapshot.js'
 
-testSnapshots('Normal iterations', [[['a']], [['a', 'b'], ['c', 'd']]])
+testSnapshots('Normal iterations', [
+  [['a']],
+  [
+    ['a', 'b'],
+    ['c', 'd'],
+  ],
+])
 
 testSnapshots('No arguments', [[]])
 

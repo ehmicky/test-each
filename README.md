@@ -34,7 +34,10 @@ const multiply = require('./multiply.js')
 
 // Repeat test using different inputs and expected outputs
 each(
-  [{ first: 2, second: 2, output: 4 }, { first: 3, second: 3, output: 9 }],
+  [
+    { first: 2, second: 2, output: 4 },
+    { first: 3, second: 3, output: 9 },
+  ],
   ({ title }, { first, second, output }) => {
     // Test titles will be:
     //    should multiply | {"first": 2, "second": 2, "output": 4}
@@ -48,7 +51,10 @@ each(
 // Snapshot testing. The `output` is automatically set on the first run,
 // then re-used in the next runs.
 each(
-  [{ first: 2, second: 2 }, { first: 3, second: 3 }],
+  [
+    { first: 2, second: 2 },
+    { first: 3, second: 3 },
+  ],
   ({ title }, { first, second }) => {
     test(`should multiply outputs | ${title}`, t => {
       t.snapshot(multiply(first, second))
@@ -92,7 +98,10 @@ npm install -D test-each
 ```js
 const { each } = require('test-each')
 
-const inputs = [['red', 'blue'], [0, 5, 50]]
+const inputs = [
+  ['red', 'blue'],
+  [0, 5, 50],
+]
 each(...inputs, function callback(info, color, number) {})
 ```
 
@@ -137,7 +146,10 @@ each([{ color: 'red' }, { color: 'blue' }], ({ title }, param) => {
 
 // Plain objects can override this using a `title` property
 each(
-  [{ color: 'red', title: 'Red' }, { color: 'blue', title: 'Blue' }],
+  [
+    { color: 'red', title: 'Red' },
+    { color: 'blue', title: 'Blue' },
+  ],
   ({ title }, param) => {
     // Test titles will be:
     //    should test color | Red
@@ -171,7 +183,13 @@ each(['a', 'b'], ['c', 'd', 'e'], (info, param, otherParam) => {})
 
 // Nested arrays are not iterated.
 // Run callback only twice: ['a', 'b'] -> ['c', 'd', 'e']
-each([['a', 'b'], ['c', 'd', 'e']], (info, param) => {})
+each(
+  [
+    ['a', 'b'],
+    ['c', 'd', 'e'],
+  ],
+  (info, param) => {},
+)
 ```
 
 ### Input functions
@@ -248,7 +266,10 @@ Any library can be used
 // The `output` is automatically set on the first run,
 // then re-used in the next runs.
 each(
-  [{ first: 2, second: 2 }, { first: 3, second: 3 }],
+  [
+    { first: 2, second: 2 },
+    { first: 3, second: 3 },
+  ],
   ({ title }, { first, second }) => {
     test(`should multiply outputs | ${title}`, t => {
       t.snapshot(multiply(first, second))

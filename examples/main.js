@@ -19,7 +19,10 @@ const multiply = require('./multiply.js')
 
 // Repeat test using different inputs and expected outputs
 each(
-  [{ first: 2, second: 2, output: 4 }, { first: 3, second: 3, output: 9 }],
+  [
+    { first: 2, second: 2, output: 4 },
+    { first: 3, second: 3, output: 9 },
+  ],
   ({ title }, { first, second, output }) => {
     // Assertion titles will be:
     //    should multiply | {"first": 2, "second": 2, "output": 4}
