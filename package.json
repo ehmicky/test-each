@@ -57,7 +57,7 @@
     "pretty-format": "^24.9.0"
   },
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^0.30.54",
+    "@ehmicky/dev-tasks": "^0.30.55",
     "ava": "^2.4.0",
     "gulp": "^4.0.2",
     "husky": "^3.0.9",
