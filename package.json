@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "big-cartesian": "^1.1.1",
-    "core-js": "^3.4.2",
+    "core-js": "^3.4.5",
     "is-plain-obj": "^2.0.0",
     "pretty-format": "^24.9.0"
   },
