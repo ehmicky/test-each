@@ -60,7 +60,7 @@
     "@ehmicky/dev-tasks": "^0.31.7",
     "ava": "^3.3.0",
     "gulp": "^4.0.2",
-    "husky": "^4.2.1",
+    "husky": "^4.2.3",
     "is-ci": "^2.0.0"
   },
   "engines": {
