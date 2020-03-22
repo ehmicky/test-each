@@ -11,7 +11,7 @@ testSnapshots('Invalid inputs', [
   [-1],
   // eslint-disable-next-line no-magic-numbers
   [1.5],
-  [NaN],
+  [Number.NaN],
   [Infinity],
 ])
 
