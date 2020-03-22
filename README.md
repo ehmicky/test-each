@@ -42,7 +42,7 @@ each(
     // Test titles will be:
     //    should multiply | {"first": 2, "second": 2, "output": 4}
     //    should multiply | {"first": 3, "second": 3, "output": 9}
-    test(`should multiply | ${title}`, t => {
+    test(`should multiply | ${title}`, (t) => {
       t.is(multiply(first, second), output)
     })
   },
@@ -56,7 +56,7 @@ each(
     { first: 3, second: 3 },
   ],
   ({ title }, { first, second }) => {
-    test(`should multiply outputs | ${title}`, t => {
+    test(`should multiply outputs | ${title}`, (t) => {
       t.snapshot(multiply(first, second))
     })
   },
@@ -65,14 +65,14 @@ each(
 // Cartesian product.
 // Run this test 4 times using every possible combination of inputs
 each([0.5, 10], [2.5, 5], ({ title }, first, second) => {
-  test(`should mix integers and floats | ${title}`, t => {
+  test(`should mix integers and floats | ${title}`, (t) => {
     t.is(typeof multiply(first, second), 'number')
   })
 })
 
 // Fuzz testing. Run this test 1000 times using different numbers.
 each(1000, Math.random, ({ title }, index, randomNumber) => {
-  test(`should correctly multiply floats | ${title}`, t => {
+  test(`should correctly multiply floats | ${title}`, (t) => {
     t.is(multiply(randomNumber, 1), randomNumber)
   })
 })
@@ -271,7 +271,7 @@ each(
     { first: 3, second: 3 },
   ],
   ({ title }, { first, second }) => {
-    test(`should multiply outputs | ${title}`, t => {
+    test(`should multiply outputs | ${title}`, (t) => {
       t.snapshot(multiply(first, second))
     })
   },

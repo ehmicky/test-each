@@ -10,7 +10,7 @@ import { wrapIndexes, unwrapIndexes } from './indexes.js'
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
 // Pass each combination to the final callback.
-export const each = function(...inputs) {
+export const each = function (...inputs) {
   const [inputsA, func] = parseInputs(inputs)
 
   const inputsB = inputsA.map(normalizeInput)
@@ -28,7 +28,7 @@ export const each = function(...inputs) {
 }
 
 // Same but returns an iterable
-export const iterable = function*(...inputs) {
+export const iterable = function* (...inputs) {
   validateInputs(inputs)
 
   const inputsA = inputs.map(normalizeInput)
@@ -36,7 +36,7 @@ export const iterable = function*(...inputs) {
   yield* forEachLoop(inputsA)
 }
 
-const normalizeInput = function(input) {
+const normalizeInput = function (input) {
   const inputA = addRepeat(input)
   const inputB = addTitles(inputA)
   const inputC = fixDuplicates(inputB)
@@ -48,7 +48,7 @@ const normalizeInput = function(input) {
 // We iterate over each loop instead of calculating all loops in advance
 // in order to minimize memory cost and allow huge number of combinations.
 // For the same reason, `each()` does not return anything.
-const forEachLoop = function*(inputs) {
+const forEachLoop = function* (inputs) {
   // eslint-disable-next-line fp/no-let
   let index = -1
 
@@ -62,7 +62,7 @@ const forEachLoop = function*(inputs) {
   }
 }
 
-const normalizeLoop = function(loop, index) {
+const normalizeLoop = function (loop, index) {
   const loopA = unwrapIndexes(loop, index)
   const loopB = callFuncs(loopA)
   const loopC = joinTitles(loopB)

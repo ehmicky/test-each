@@ -1,19 +1,19 @@
 import { testSnapshots } from './helpers/snapshot.js'
 
-const getIndex = function({ index }) {
+const getIndex = function ({ index }) {
   return index
 }
 
-const getIndexes = function({ indexes }) {
+const getIndexes = function ({ indexes }) {
   return indexes
 }
 
-const getTrue = function() {
+const getTrue = function () {
   return true
 }
 
 // eslint-disable-next-line max-params
-const concatArgs = function(info, argA, argB, argC) {
+const concatArgs = function (info, argA, argB, argC) {
   return [argA, argB, argC]
 }
 

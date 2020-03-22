@@ -5,7 +5,7 @@ import isPlainObj from 'is-plain-obj'
 // We do it before the cartesian product for performance reasons.
 // Titles of input functions must be computed afterwards since we use their
 // return value, which is performed after the cartesian product.
-export const addTitles = function(input) {
+export const addTitles = function (input) {
   if (typeof input === 'function') {
     return input
   }
@@ -13,14 +13,14 @@ export const addTitles = function(input) {
   return input.map(addTitle)
 }
 
-const addTitle = function(value) {
+const addTitle = function (value) {
   const title = getTitle(value)
   return { value, title }
 }
 
 // After input functions have been triggered, we can compute their `titles`.
 // Once all `titles` are known, we can then join them into a single `title`.
-export const joinTitles = function({ index, indexes, values, titles }) {
+export const joinTitles = function ({ index, indexes, values, titles }) {
   const titlesA = titles.map((paramTitle, valueIndex) =>
     addFuncTitle(paramTitle, values[valueIndex]),
   )
@@ -28,7 +28,7 @@ export const joinTitles = function({ index, indexes, values, titles }) {
   return { title, titles: titlesA, index, indexes, values }
 }
 
-const addFuncTitle = function(title, value) {
+const addFuncTitle = function (title, value) {
   if (title !== undefined) {
     return title
   }
@@ -38,7 +38,7 @@ const addFuncTitle = function(title, value) {
 
 // Retrieve unique titles for each loop.
 // Users can customize titles by using `info`.
-const getTitle = function(value) {
+const getTitle = function (value) {
   if (hasTitle(value)) {
     return value.title
   }
@@ -50,7 +50,7 @@ const getTitle = function(value) {
 }
 
 // `{ title }` can be used to override the serialization logic
-const hasTitle = function(value) {
+const hasTitle = function (value) {
   return (
     isPlainObj(value) &&
     typeof value.title === 'string' &&
@@ -66,7 +66,7 @@ const hasTitle = function(value) {
 //  - can minify output (including maxDepth)
 //  - handles circular references
 //  - can serialize DOM
-const serialize = function(value) {
+const serialize = function (value) {
   const title = prettyFormat(value, PRETTY_FORMAT_OPTS)
   const titleA = ESCAPE_SEQUENCES.reduce(escapeSequence, title)
   return titleA
@@ -85,7 +85,7 @@ const PRETTY_FORMAT_OPTS = {
 }
 
 // Escape newline characters to ensure title is on a single line
-const escapeSequence = function(title, [regExp, replacement]) {
+const escapeSequence = function (title, [regExp, replacement]) {
   return title.replace(regExp, replacement)
 }
 
@@ -97,7 +97,7 @@ const ESCAPE_SEQUENCES = [
 ]
 
 // Make titles short by truncating them in the middle
-const truncateTitle = function(title) {
+const truncateTitle = function (title) {
   if (title.length <= MAX_TITLE_SIZE) {
     return title
   }

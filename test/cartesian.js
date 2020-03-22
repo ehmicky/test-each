@@ -23,11 +23,11 @@ const inputs = Array.from({ length: 23 }, () => [0, 1])
 // eslint-disable-next-line no-empty-function
 const identifyFunc = () => {}
 
-ciTest('should not crash when combinations are huge | each()', t => {
+ciTest('should not crash when combinations are huge | each()', (t) => {
   t.notThrows(() => each(...inputs, identifyFunc))
 })
 
-ciTest('should not crash when combinations are huge | iterable()', t => {
+ciTest('should not crash when combinations are huge | iterable()', (t) => {
   t.notThrows(() => {
     // eslint-disable-next-line no-empty-pattern, no-empty, fp/no-loops
     for (const [] of iterable(...inputs)) {

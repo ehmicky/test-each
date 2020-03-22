@@ -14,14 +14,14 @@ testSnapshots('Truncating titles', [
   [['a'.repeat(119)]],
 ])
 
-const getNamedFunction = function() {
+const getNamedFunction = function () {
   // eslint-disable-next-line no-empty-function
   return function func() {}
 }
 
-const getAnonymousFunction = function() {
+const getAnonymousFunction = function () {
   // eslint-disable-next-line no-empty-function, func-names
-  return function() {}
+  return function () {}
 }
 
 const self = {}

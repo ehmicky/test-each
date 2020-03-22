@@ -1,7 +1,7 @@
 // Inputs can be functions instead of arrays. We wrap those in an array
 // before performing the cartesian product so they are multiplied, then we
 // trigger each of them.
-export const normalizeFunc = function(input) {
+export const normalizeFunc = function (input) {
   if (typeof input !== 'function') {
     return input
   }
@@ -25,7 +25,7 @@ export const normalizeFunc = function(input) {
 //     - otherwise, either:
 //        - use `info.index` in input function
 //        - use closures
-export const callFuncs = function({ index, indexes, values, titles }) {
+export const callFuncs = function ({ index, indexes, values, titles }) {
   // `title` and `titles` cannot be passed since they rely on the return value
   // of this function
   const info = { index, indexes }
@@ -34,7 +34,7 @@ export const callFuncs = function({ index, indexes, values, titles }) {
 }
 
 // eslint-disable-next-line max-params
-const callFunc = function(info, previousValues, value, valueIndex, values) {
+const callFunc = function (info, previousValues, value, valueIndex, values) {
   if (!isInputFunc(value)) {
     return [...previousValues, value]
   }
@@ -52,21 +52,21 @@ const callFunc = function(info, previousValues, value, valueIndex, values) {
 // We wrap the first ones in order to differentiate.
 const funcSymbol = Symbol('function')
 
-const isInputFunc = function(value) {
+const isInputFunc = function (value) {
   return (
     value !== undefined && value !== null && value[funcSymbol] !== undefined
   )
 }
 
-const wrapFunc = function(value) {
+const wrapFunc = function (value) {
   return { [funcSymbol]: value }
 }
 
-const unwrapFunc = function(value) {
+const unwrapFunc = function (value) {
   return value[funcSymbol]
 }
 
-const unwrapValue = function(value) {
+const unwrapValue = function (value) {
   if (isInputFunc(value)) {
     return unwrapFunc(value)
   }
