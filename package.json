@@ -54,7 +54,7 @@
     "big-cartesian": "^2.0.0",
     "core-js": "^3.6.4",
     "is-plain-obj": "^2.1.0",
-    "pretty-format": "^25.1.0"
+    "pretty-format": "^25.2.6"
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^0.31.31",
