@@ -1,11 +1,11 @@
 import bigCartesian from 'big-cartesian'
 
+import { fixDuplicates } from './duplicate.js'
+import { normalizeFunc, callFuncs } from './func.js'
+import { wrapIndexes, unwrapIndexes } from './indexes.js'
 import { parseInputs, validateInputs } from './input.js'
 import { addRepeat } from './repeat.js'
-import { normalizeFunc, callFuncs } from './func.js'
 import { addTitles, joinTitles } from './title.js'
-import { fixDuplicates } from './duplicate.js'
-import { wrapIndexes, unwrapIndexes } from './indexes.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.

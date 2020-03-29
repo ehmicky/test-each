@@ -1,5 +1,5 @@
-import prettyFormat, { plugins } from 'pretty-format'
 import isPlainObj from 'is-plain-obj'
+import prettyFormat, { plugins } from 'pretty-format'
 
 // Add `title` to each `param`
 // We do it before the cartesian product for performance reasons.
