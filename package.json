@@ -52,7 +52,6 @@
   },
   "dependencies": {
     "big-cartesian": "^2.0.0",
-    "core-js": "^3.6.5",
     "is-plain-obj": "^2.1.0",
     "pretty-format": "^25.3.0"
   },
