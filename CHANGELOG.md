@@ -1,3 +1,9 @@
+# 2.0.1
+
+## Dependencies
+
+- Remove `core-js`
+
 # 2.0.0
 
 ## Breaking changes
