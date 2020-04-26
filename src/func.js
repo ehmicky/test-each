@@ -29,7 +29,7 @@ export const callFuncs = function ({ index, indexes, values, titles }) {
   // `title` and `titles` cannot be passed since they rely on the return value
   // of this function
   const info = { index, indexes }
-  const valuesA = values.reduce(callFunc.bind(null, info), [])
+  const valuesA = values.reduce(callFunc.bind(undefined, info), [])
   return { index, indexes, values: valuesA, titles }
 }
 

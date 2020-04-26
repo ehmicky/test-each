@@ -33,6 +33,7 @@ class Custom {}
 
 testSnapshots('Titles serialization', [
   [[true]],
+  // eslint-disable-next-line unicorn/no-null
   [[null]],
   [[undefined]],
   // eslint-disable-next-line no-magic-numbers
