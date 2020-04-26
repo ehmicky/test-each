@@ -53,7 +53,7 @@
   "dependencies": {
     "big-cartesian": "^2.0.0",
     "is-plain-obj": "^2.1.0",
-    "pretty-format": "^25.4.0"
+    "pretty-format": "^25.5.0"
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^0.31.43",
