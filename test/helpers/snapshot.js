@@ -7,14 +7,16 @@ import { each, iterable } from '../../src/main.js'
 // For each `args` in `allArgs`, call `each|iterable(...args)` and snapshot the
 // return value.
 export const testSnapshots = function (testTitle, allArgs) {
-  allArgs.forEach((args) => snapshotMethod(args, testTitle))
+  allArgs.forEach((args) => {
+    snapshotMethod(args, testTitle)
+  })
 }
 
 // Run test for both `each()` and `iterable()`
 const snapshotMethod = function (args, testTitle) {
-  METHODS.forEach(({ name, getParams }) =>
-    snapshotArgs({ args, testTitle, name, getParams }),
-  )
+  METHODS.forEach(({ name, getParams }) => {
+    snapshotArgs({ args, testTitle, name, getParams })
+  })
 }
 
 const METHODS = [
