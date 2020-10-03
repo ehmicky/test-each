@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/ehmicky/design/master/test-each/test-each.svg?sanitize=true" width="500"/>
+<img src="https://raw.githubusercontent.com/ehmicky/design/main/test-each/test-each.svg?sanitize=true" width="500"/>
 
 [![Codecov](https://img.shields.io/codecov/c/github/ehmicky/test-each.svg?label=tested&logo=codecov)](https://codecov.io/gh/ehmicky/test-each)
 [![Build](https://github.com/ehmicky/test-each/workflows/Build/badge.svg)](https://github.com/ehmicky/test-each/actions)
