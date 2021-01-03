@@ -39,7 +39,7 @@ testSnapshots('Titles serialization', [
   // eslint-disable-next-line no-magic-numbers
   [[3e8]],
   [[-0]],
-  [[-Infinity]],
+  [[Number.NEGATIVE_INFINITY]],
   [[Number.NaN]],
   [[Symbol('a')]],
   [[getNamedFunction]],

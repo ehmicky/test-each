@@ -13,7 +13,7 @@ testSnapshots('Invalid inputs', [
   // eslint-disable-next-line no-magic-numbers
   [1.5],
   [Number.NaN],
-  [Infinity],
+  [Number.POSITIVE_INFINITY],
 ])
 
 test('Invalid callback | each()', (t) => {
