@@ -18,9 +18,7 @@ const fixDuplicate = function (param, index, params) {
     return param
   }
 
-  const duplicateCounter = duplicateParams.findIndex(
-    (paramA) => paramA === param,
-  )
+  const duplicateCounter = duplicateParams.indexOf(param)
   const title = `${param.title} (${duplicateCounter})`
   return { value: param.value, title }
 }
