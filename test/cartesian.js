@@ -29,7 +29,7 @@ ciTest('should not crash when combinations are huge | each()', (t) => {
 
 ciTest('should not crash when combinations are huge | iterable()', (t) => {
   t.notThrows(() => {
-    // eslint-disable-next-line no-empty-pattern, no-empty, fp/no-loops, unicorn/empty-brace-spaces
+    // eslint-disable-next-line no-empty-pattern, no-empty, fp/no-loops
     for (const [] of iterable(...inputs)) {
     }
   })
