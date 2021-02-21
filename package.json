@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^0.31.84",
-    "is-ci": "^2.0.0"
+    "is-ci": "^3.0.0"
   },
   "engines": {
     "node": ">=10.17.0"
