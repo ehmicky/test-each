@@ -55,7 +55,7 @@
     "pretty-format": "^26.6.2"
   },
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^0.31.84",
+    "@ehmicky/dev-tasks": "^0.31.85",
     "is-ci": "^3.0.0"
   },
   "engines": {
