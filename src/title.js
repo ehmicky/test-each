@@ -1,5 +1,5 @@
 import isPlainObj from 'is-plain-obj'
-import prettyFormat, { plugins } from 'pretty-format'
+import prettyFormat from 'pretty-format'
 
 // Add `title` to each `param`
 // We do it before the cartesian product for performance reasons.
@@ -76,11 +76,11 @@ const PRETTY_FORMAT_OPTS = {
   min: true,
   maxDepth: 2,
   plugins: [
-    plugins.DOMElement,
-    plugins.DOMCollection,
-    plugins.ReactElement,
-    plugins.Immutable,
-    plugins.ConvertAnsi,
+    prettyFormat.plugins.DOMElement,
+    prettyFormat.plugins.DOMCollection,
+    prettyFormat.plugins.ReactElement,
+    prettyFormat.plugins.Immutable,
+    prettyFormat.plugins.ConvertAnsi,
   ],
 }
 
