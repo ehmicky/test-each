@@ -5,9 +5,8 @@
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/test-each
 
-'use strict'
-
-const { iterable } = require('test-each')
+// eslint-disable-next-line node/no-missing-import
+import { iterable } from 'test-each'
 
 const combinations = iterable(
   ['green', 'red', 'blue'],

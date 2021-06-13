@@ -5,14 +5,13 @@
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/test-each
 
-'use strict'
+import assert from 'assert'
 
-const assert = require('assert')
-
-const { each } = require('test-each')
+// eslint-disable-next-line node/no-missing-import
+import { each } from 'test-each'
 
 // The code we are testing
-const multiply = require('./multiply.js')
+import { multiply } from './multiply.js'
 
 // Fuzz testing. Run this test 1000 times using different numbers.
 each(1000, Math.random, ({ title }, index, randomNumber) => {

@@ -5,9 +5,8 @@
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/test-each
 
-'use strict'
-
-const { each } = require('test-each')
+// eslint-disable-next-line node/no-missing-import
+import { each } from 'test-each'
 
 // Run callback with a different random number each time
 each(['red', 'green', 'blue'], Math.random, (info, color, randomNumber) => {
