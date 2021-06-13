@@ -21,15 +21,15 @@ Repeats tests using different inputs
 
 # Example
 
-<!-- eslint-disable max-nested-callbacks -->
+<!-- eslint-skip -->
 
 ```js
 // The examples use Ava but any test runner works (Jest, Mocha, Jasmine, etc.)
-const test = require('ava')
-const { each } = require('test-each')
+import test from 'ava'
+import { each } from 'test-each'
 
 // The code we are testing
-const multiply = require('./multiply.js')
+import multiply from './multiply.js'
 
 // Repeat test using different inputs and expected outputs
 each(
@@ -92,10 +92,10 @@ npm install -D test-each
 
 # Usage
 
-<!-- eslint-disable no-empty-function -->
+<!-- eslint-disable no-empty-function, node/no-missing-import -->
 
 ```js
-const { each } = require('test-each')
+import { each } from 'test-each'
 
 const inputs = [
   ['red', 'blue'],
@@ -133,7 +133,7 @@ You can customize titles either by:
   [plain objects](https://stackoverflow.com/a/52453477/1526301)
 - using the [`info` argument](#info)
 
-<!-- eslint-disable max-nested-callbacks, no-empty-function -->
+<!-- eslint-disable max-nested-callbacks, no-empty-function, import/unambiguous -->
 
 ```js
 each([{ color: 'red' }, { color: 'blue' }], ({ title }, param) => {
@@ -171,7 +171,7 @@ each([{ color: 'red' }, { color: 'blue' }], (info, param) => {
 If several `inputs` are specified, their
 [cartesian product](https://github.com/ehmicky/fast-cartesian) is used.
 
-<!-- eslint-disable no-empty-function -->
+<!-- eslint-disable no-empty-function, import/unambiguous -->
 
 ```js
 // Run callback five times: a -> b -> c -> d -> e
@@ -200,7 +200,7 @@ as the `callback`.
 
 The generated values are included in [test titles](#test-titles).
 
-<!-- eslint-disable no-empty-function, max-params -->
+<!-- eslint-disable no-empty-function, max-params, import/unambiguous -->
 
 ```js
 // Run callback with a different random number each time
@@ -226,10 +226,10 @@ with [input functions](#input-functions) and libraries like
 [chance.js](https://github.com/chancejs/chancejs) or
 [json-schema-faker](https://github.com/json-schema-faker/json-schema-faker).
 
-<!-- eslint-disable no-empty-function -->
+<!-- eslint-disable no-empty-function, node/no-missing-import -->
 
 ```js
-const faker = require('faker')
+import faker from 'faker'
 
 // Run callback 1000 times with a random UUID and color each time
 each(
@@ -259,7 +259,7 @@ Any library can be used
 [Jest snapshots](https://jestjs.io/docs/en/snapshot-testing),
 [Node TAP snapshots](https://www.node-tap.org/snapshots/), etc.).
 
-<!-- eslint-disable max-nested-callbacks -->
+<!-- eslint-disable max-nested-callbacks, import/unambiguous -->
 
 ```js
 // The `output` is automatically set on the first run,
@@ -282,7 +282,7 @@ each(
 If `callback`'s [parameters](#params) are directly modified, they should be
 copied to prevent side effects for the next iterations.
 
-<!-- eslint-disable fp/no-mutation, no-param-reassign -->
+<!-- eslint-disable fp/no-mutation, no-param-reassign, import/unambiguous -->
 
 ```js
 each(
@@ -304,10 +304,10 @@ each(
 [`iterable()`](#iterableinputs) can be used to iterate over each combination
 instead of providing a callback.
 
-<!-- eslint-disable no-empty-function, fp/no-loops -->
+<!-- eslint-disable no-empty-function, fp/no-loops, node/no-missing-import -->
 
 ```js
-const { iterable } = require('test-each')
+import { iterable } from 'test-each'
 
 const combinations = iterable(
   ['green', 'red', 'blue'],
@@ -323,7 +323,7 @@ The return value is an
 [`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables).
 This can be converted to an array with the spread operator.
 
-<!-- eslint-disable max-nested-callbacks, no-empty-function -->
+<!-- eslint-disable max-nested-callbacks, no-empty-function, import/unambiguous -->
 
 ```js
 const array = [...combinations]
