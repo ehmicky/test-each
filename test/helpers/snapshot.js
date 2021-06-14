@@ -1,8 +1,8 @@
 // eslint-disable-next-line ava/no-ignored-test-files
 import test from 'ava'
 import prettyFormat from 'pretty-format'
-
-import { each, iterable } from '../../src/main.js'
+// eslint-disable-next-line import/no-unresolved, node/no-missing-import
+import { each, iterable } from 'test-each'
 
 // For each `args` in `allArgs`, call `each|iterable(...args)` and snapshot the
 // return value.

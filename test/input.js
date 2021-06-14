@@ -1,6 +1,6 @@
 import test from 'ava'
-
-import { each } from '../src/main.js'
+// eslint-disable-next-line import/no-unresolved, node/no-missing-import
+import { each } from 'test-each'
 
 import { testSnapshots } from './helpers/snapshot.js'
 
