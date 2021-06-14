@@ -7,9 +7,6 @@
 
 'use strict'
 
-// Ignore the following line: this is only needed for internal purposes.
-require('./utils.js')
-
 const { each } = require('test-each')
 
 /* eslint-disable fp/no-mutation */
