@@ -333,7 +333,7 @@ The return value is an
 [`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables).
 This can be converted to an array with the spread operator.
 
-<!-- eslint-disable max-nested-callbacks, no-empty-function, import/unambiguous -->
+<!-- eslint-disable max-nested-callbacks, no-empty-function -->
 
 ```js
 const array = [...combinations]
