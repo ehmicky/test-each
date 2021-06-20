@@ -133,9 +133,11 @@ You can customize titles either by:
   [plain objects](https://stackoverflow.com/a/52453477/1526301)
 - using the [`info` argument](#info)
 
-<!-- eslint-disable max-nested-callbacks, no-empty-function, import/unambiguous -->
+<!-- eslint-disable max-nested-callbacks, no-empty-function, node/no-missing-import -->
 
 ```js
+import { each } from 'test-each'
+
 each([{ color: 'red' }, { color: 'blue' }], ({ title }, param) => {
   // Test titles will be:
   //    should test color | {"color": "red"}
@@ -171,9 +173,11 @@ each([{ color: 'red' }, { color: 'blue' }], (info, param) => {
 If several `inputs` are specified, their
 [cartesian product](https://github.com/ehmicky/fast-cartesian) is used.
 
-<!-- eslint-disable no-empty-function, import/unambiguous -->
+<!-- eslint-disable no-empty-function, node/no-missing-import -->
 
 ```js
+import { each } from 'test-each'
+
 // Run callback five times: a -> b -> c -> d -> e
 each(['a', 'b', 'c', 'd', 'e'], (info, param) => {})
 
@@ -200,9 +204,11 @@ as the `callback`.
 
 The generated values are included in [test titles](#test-titles).
 
-<!-- eslint-disable no-empty-function, max-params, import/unambiguous -->
+<!-- eslint-disable no-empty-function, max-params, node/no-missing-import -->
 
 ```js
+import { each } from 'test-each'
+
 // Run callback with a different random number each time
 each(['red', 'green', 'blue'], Math.random, (info, color, randomNumber) => {})
 
@@ -259,9 +265,11 @@ Any library can be used
 [Jest snapshots](https://jestjs.io/docs/en/snapshot-testing),
 [Node TAP snapshots](https://www.node-tap.org/snapshots/), etc.).
 
-<!-- eslint-disable max-nested-callbacks, import/unambiguous -->
+<!-- eslint-disable max-nested-callbacks, node/no-missing-import -->
 
 ```js
+import { each } from 'test-each'
+
 // The `output` is automatically set on the first run,
 // then re-used in the next runs.
 each(
@@ -282,9 +290,11 @@ each(
 If `callback`'s [parameters](#params) are directly modified, they should be
 copied to prevent side effects for the next iterations.
 
-<!-- eslint-disable fp/no-mutation, no-param-reassign, import/unambiguous -->
+<!-- eslint-disable fp/no-mutation, no-param-reassign, node/no-missing-import -->
 
 ```js
+import { each } from 'test-each'
+
 each(
   ['green', 'red', 'blue'],
   [{ active: true }, { active: false }],
