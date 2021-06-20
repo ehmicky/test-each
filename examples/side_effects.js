@@ -5,7 +5,6 @@
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/test-each
 
-// eslint-disable-next-line node/no-missing-import
 import { each } from 'test-each'
 
 /* eslint-disable fp/no-mutation */

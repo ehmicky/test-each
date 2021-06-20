@@ -7,7 +7,6 @@
 
 import assert from 'assert'
 
-// eslint-disable-next-line node/no-missing-import
 import { each } from 'test-each'
 
 // The code we are testing
