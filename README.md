@@ -92,7 +92,7 @@ npm install -D test-each
 
 # Usage
 
-<!-- eslint-disable no-empty-function, node/no-missing-import -->
+<!-- eslint-disable no-empty-function -->
 
 ```js
 import { each } from 'test-each'
@@ -133,7 +133,7 @@ You can customize titles either by:
   [plain objects](https://stackoverflow.com/a/52453477/1526301)
 - using the [`info` argument](#info)
 
-<!-- eslint-disable max-nested-callbacks, no-empty-function, node/no-missing-import -->
+<!-- eslint-disable max-nested-callbacks, no-empty-function -->
 
 ```js
 import { each } from 'test-each'
@@ -173,7 +173,7 @@ each([{ color: 'red' }, { color: 'blue' }], (info, param) => {
 If several `inputs` are specified, their
 [cartesian product](https://github.com/ehmicky/fast-cartesian) is used.
 
-<!-- eslint-disable no-empty-function, node/no-missing-import -->
+<!-- eslint-disable no-empty-function -->
 
 ```js
 import { each } from 'test-each'
@@ -204,7 +204,7 @@ as the `callback`.
 
 The generated values are included in [test titles](#test-titles).
 
-<!-- eslint-disable no-empty-function, max-params, node/no-missing-import -->
+<!-- eslint-disable no-empty-function, max-params -->
 
 ```js
 import { each } from 'test-each'
@@ -232,7 +232,7 @@ with [input functions](#input-functions) and libraries like
 [chance.js](https://github.com/chancejs/chancejs) or
 [json-schema-faker](https://github.com/json-schema-faker/json-schema-faker).
 
-<!-- eslint-disable no-empty-function, node/no-missing-import -->
+<!-- eslint-disable no-empty-function -->
 
 ```js
 import faker from 'faker'
@@ -265,7 +265,7 @@ Any library can be used
 [Jest snapshots](https://jestjs.io/docs/en/snapshot-testing),
 [Node TAP snapshots](https://www.node-tap.org/snapshots/), etc.).
 
-<!-- eslint-disable max-nested-callbacks, node/no-missing-import -->
+<!-- eslint-disable max-nested-callbacks -->
 
 ```js
 import { each } from 'test-each'
@@ -290,7 +290,7 @@ each(
 If `callback`'s [parameters](#params) are directly modified, they should be
 copied to prevent side effects for the next iterations.
 
-<!-- eslint-disable fp/no-mutation, no-param-reassign, node/no-missing-import -->
+<!-- eslint-disable fp/no-mutation, no-param-reassign -->
 
 ```js
 import { each } from 'test-each'
@@ -314,7 +314,7 @@ each(
 [`iterable()`](#iterableinputs) can be used to iterate over each combination
 instead of providing a callback.
 
-<!-- eslint-disable no-empty-function, fp/no-loops, node/no-missing-import -->
+<!-- eslint-disable no-empty-function, fp/no-loops -->
 
 ```js
 import { iterable } from 'test-each'
