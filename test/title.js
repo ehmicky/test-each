@@ -15,12 +15,11 @@ testSnapshots('Truncating titles', [
 ])
 
 const getNamedFunction = function () {
-  // eslint-disable-next-line no-empty-function
   return function func() {}
 }
 
 const getAnonymousFunction = function () {
-  // eslint-disable-next-line no-empty-function, func-names
+  // eslint-disable-next-line func-names
   return function () {}
 }
 
