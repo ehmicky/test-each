@@ -1,6 +1,6 @@
 // eslint-disable-next-line ava/no-ignored-test-files
 import test from 'ava'
-import prettyFormat from 'pretty-format'
+import { format } from 'pretty-format'
 import { each, iterable } from 'test-each'
 
 // For each `args` in `allArgs`, call `each|iterable(...args)` and snapshot the
@@ -40,7 +40,7 @@ const METHODS = [
 
 // We don't use `test-each` itself since we are testing it.
 const snapshotArgs = function ({ args, testTitle, name, getParams }) {
-  const title = prettyFormat(args, { min: true })
+  const title = format(args, { min: true })
   test(`${testTitle} | ${name} ${title}`, (t) => {
     const loops = eGetParams(getParams, args)
     t.snapshot(loops)

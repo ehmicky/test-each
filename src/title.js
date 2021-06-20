@@ -1,5 +1,5 @@
 import isPlainObj from 'is-plain-obj'
-import prettyFormat from 'pretty-format'
+import { format, plugins } from 'pretty-format'
 
 // Add `title` to each `param`
 // We do it before the cartesian product for performance reasons.
@@ -67,7 +67,7 @@ const hasTitle = function (value) {
 //  - handles circular references
 //  - can serialize DOM
 const serialize = function (value) {
-  const title = prettyFormat(value, PRETTY_FORMAT_OPTS)
+  const title = format(value, PRETTY_FORMAT_OPTS)
   const titleA = ESCAPE_SEQUENCES.reduce(escapeSequence, title)
   return titleA
 }
@@ -76,11 +76,11 @@ const PRETTY_FORMAT_OPTS = {
   min: true,
   maxDepth: 2,
   plugins: [
-    prettyFormat.plugins.DOMElement,
-    prettyFormat.plugins.DOMCollection,
-    prettyFormat.plugins.ReactElement,
-    prettyFormat.plugins.Immutable,
-    prettyFormat.plugins.ConvertAnsi,
+    plugins.DOMElement,
+    plugins.DOMCollection,
+    plugins.ReactElement,
+    plugins.Immutable,
+    plugins.ConvertAnsi,
   ],
 }
 
