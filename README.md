@@ -92,8 +92,6 @@ npm install -D test-each
 
 # Usage
 
-<!-- eslint-disable no-empty-function -->
-
 ```js
 import { each } from 'test-each'
 
@@ -133,7 +131,7 @@ You can customize titles either by:
   [plain objects](https://stackoverflow.com/a/52453477/1526301)
 - using the [`info` argument](#info)
 
-<!-- eslint-disable max-nested-callbacks, no-empty-function -->
+<!-- eslint-disable max-nested-callbacks -->
 
 ```js
 import { each } from 'test-each'
@@ -173,8 +171,6 @@ each([{ color: 'red' }, { color: 'blue' }], (info, param) => {
 If several `inputs` are specified, their
 [cartesian product](https://github.com/ehmicky/fast-cartesian) is used.
 
-<!-- eslint-disable no-empty-function -->
-
 ```js
 import { each } from 'test-each'
 
@@ -204,7 +200,7 @@ as the `callback`.
 
 The generated values are included in [test titles](#test-titles).
 
-<!-- eslint-disable no-empty-function, max-params -->
+<!-- eslint-disable max-params -->
 
 ```js
 import { each } from 'test-each'
@@ -231,8 +227,6 @@ with [input functions](#input-functions) and libraries like
 [faker.js](https://github.com/marak/Faker.js),
 [chance.js](https://github.com/chancejs/chancejs) or
 [json-schema-faker](https://github.com/json-schema-faker/json-schema-faker).
-
-<!-- eslint-disable no-empty-function -->
 
 ```js
 import faker from 'faker'
@@ -314,7 +308,7 @@ each(
 [`iterable()`](#iterableinputs) can be used to iterate over each combination
 instead of providing a callback.
 
-<!-- eslint-disable no-empty-function, fp/no-loops -->
+<!-- eslint-disable fp/no-loops -->
 
 ```js
 import { iterable } from 'test-each'
@@ -333,7 +327,7 @@ The return value is an
 [`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables).
 This can be converted to an array with the spread operator.
 
-<!-- eslint-disable max-nested-callbacks, no-empty-function -->
+<!-- eslint-disable max-nested-callbacks -->
 
 ```js
 const array = [...combinations]
