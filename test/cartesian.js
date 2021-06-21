@@ -1,6 +1,5 @@
 import test from 'ava'
 import isCi from 'is-ci'
-// eslint-disable-next-line import/no-unresolved, node/no-missing-import
 import { each, iterable } from 'test-each'
 
 import { testSnapshots } from './helpers/snapshot.js'
