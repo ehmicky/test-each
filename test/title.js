@@ -70,9 +70,9 @@ testSnapshots('Titles serialization', [
   [[new WeakSet([{}])]],
 
   // Newlines
-  [['a\nb\nc']],
-  [['a\r\nb\r\nc']],
-  [['a\fb\fc']],
+  // [['a\nb\nc']],
+  // [['a\r\nb\r\nc']],
+  // [['a\fb\fc']],
   [['a\vb\vc']],
 
   // Keys should be sorted
