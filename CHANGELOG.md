@@ -1,3 +1,9 @@
+# 4.0.0
+
+- The default test titles now truncate arrays with more than 5 elements. This is
+  only a breaking change if you use test snapshots and some of the test
+  parameters have long arrays.
+
 # 3.0.1
 
 ## Bug fixes
