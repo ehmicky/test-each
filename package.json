@@ -52,7 +52,7 @@
     "pretty-format": "^28.0.0-alpha.3"
   },
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^1.0.65",
+    "@ehmicky/dev-tasks": "^1.0.66",
     "is-ci": "^3.0.1"
   },
   "engines": {
