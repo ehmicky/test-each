@@ -75,6 +75,7 @@ const serialize = function (value) {
 const PRETTY_FORMAT_OPTS = {
   min: true,
   maxDepth: 2,
+  maxWidth: 5,
   plugins: [
     plugins.DOMElement,
     plugins.DOMCollection,

@@ -87,6 +87,9 @@ testSnapshots('Titles serialization', [
   // Serializing deep objects
   [[{ argA: { argB: { argC: true } } }]],
 
+  // Serializing long arrays
+  [[[1, 1, 1, 1, 1, 1]]],
+
   // Serializing ANSI sequences
   [['\u001B[31mtext\u001B[39m']],
 ])
