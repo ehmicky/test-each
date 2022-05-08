@@ -1,3 +1,9 @@
+# 5.0.0
+
+## Breaking changes
+
+- Minimal supported Node.js version is now `14.18.0`
+
 # 4.0.0
 
 - The default test titles now truncate arrays with more than 5 elements. This is
