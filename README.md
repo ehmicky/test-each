@@ -20,7 +20,7 @@ Repeats tests using different inputs
 
 # Example
 
-<!-- eslint-skip -->
+<!-- eslint-disable max-nested-callbacks -->
 
 ```js
 // The examples use Ava but any test runner works (Jest, Mocha, Jasmine, etc.)
