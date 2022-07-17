@@ -187,9 +187,13 @@ export function iterable<InputArrays extends InputArraysArgs>(
  * ```
  */
 export function each<InputArrays extends InputArraysArgs>(
-  inputs: [...InputArrays],
+  ...args: EachArguments<InputArrays>
+): void
+
+type EachArguments<InputArrays extends InputArraysArgs> = [
+  ...inputs: [...InputArrays],
   callback: (
     info: Info<InputArrays>,
     ...params: CartesianProduct<InputArrays>
   ) => void,
-): void
+]

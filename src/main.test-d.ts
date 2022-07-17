@@ -10,7 +10,7 @@ const inputs: [(boolean | string)[], number[]] = [
   [true, 'a'],
   [1, 2],
 ]
-each(inputs, (info, a, b) => {
+each(...inputs, (info, a, b) => {
   expectType<boolean | string>(a)
   expectType<number>(b)
 
@@ -43,24 +43,42 @@ for (const [info, a, b] of iterable(...inputs)) {
 expectAssignable<Generator<[Info, boolean | string, number], void, void>>(
   iterable(...inputs),
 )
-each([[true, 'a'], 1], (info: Info, a: boolean | string, b: number) => {})
+each([true, 'a'], 1, (info: Info, a: boolean | string, b: number) => {})
 expectAssignable<Generator<[Info, boolean | string, number], void, void>>(
   iterable([true, 'a'], 1),
 )
-each([[true, 'a'], (info: Info) => 1], (info: Info) => {})
+each(
+  [true, 'a'],
+  (info: Info) => 1,
+  (info: Info) => {},
+)
 expectAssignable<Generator<[Info, boolean | string, number], void, void>>(
   iterable([true, 'a'], (info: Info) => 1),
 )
-each([[true, 'a'], (info: Info) => 1], (info: Info, a: boolean | string) => {})
+each(
+  [true, 'a'],
+  (info: Info) => 1,
+  (info: Info, a: boolean | string) => {},
+)
 expectAssignable<Generator<[Info, boolean | string, number], void, void>>(
   iterable([true, 'a'], (info: Info, arg: boolean | string) => 1),
 )
-expectError(each([[true, 'a'], (info: Info) => 1], (arg: boolean) => {}))
+expectError(
+  each(
+    [true, 'a'],
+    (info: Info) => 1,
+    (arg: boolean) => {},
+  ),
+)
 expectAssignable<Generator<[Info, boolean | string, never], void, void>>(
   iterable([true, 'a'], (arg: boolean) => 1),
 )
 expectError(
-  each([[true, 'a'], (info: Info) => 1], (info: Info, arg: number) => {}),
+  each(
+    [true, 'a'],
+    (info: Info) => 1,
+    (info: Info, arg: number) => {},
+  ),
 )
 expectAssignable<Generator<[Info, boolean | string, never], void, void>>(
   iterable([true, 'a'], (info: Info, arg: number) => 1),
@@ -83,7 +101,7 @@ for (const [, a] of iterable([{ b: true }])) {
   expectType<boolean>(a.b)
   expectError((a.b = false))
 }
-each([[{ b: true }]], (info, a) => {
+each([{ b: true }], (info, a) => {
   expectType<boolean>(a.b)
   expectError((a.b = false))
 })
