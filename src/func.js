@@ -19,7 +19,7 @@ export const normalizeFunc = function (input) {
 //    dimensions.
 //  - because of this, this is not documented as it leads to wrong usages.
 //    Instead users should:
-//     - if state should be repeated across cartesian dimentions, either:
+//     - if state should be repeated across cartesian dimensions, either:
 //        - pre-compute array
 //        - use `info.indexes` in input function
 //     - otherwise, either:
