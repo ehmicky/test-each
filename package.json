@@ -47,7 +47,7 @@
     "test": "test"
   },
   "dependencies": {
-    "big-cartesian": "^4.0.0",
+    "big-cartesian": "^4.1.0",
     "is-plain-obj": "^4.1.0",
     "pretty-format": "^28.1.1"
   },
