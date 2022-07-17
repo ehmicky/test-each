@@ -126,7 +126,7 @@ type InputFunctionArgs<InputArrays extends InputArraysArgs> = {
  * ```
  */
 export function iterable<InputArrays extends InputArraysArgs>(
-  inputs: [...InputArrays],
+  ...inputs: [...InputArrays]
 ): Generator<[Info<InputArrays>, ...CartesianProduct<InputArrays>], void, void>
 
 /**

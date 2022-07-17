@@ -25,7 +25,7 @@ each(inputs, (info, a, b) => {
   expectType<typeof inputs.length>(indices.length)
 })
 
-for (const [info, a, b] of iterable(inputs)) {
+for (const [info, a, b] of iterable(...inputs)) {
   expectType<boolean | string>(a)
   expectType<number>(b)
 
@@ -41,29 +41,29 @@ for (const [info, a, b] of iterable(inputs)) {
 }
 
 expectAssignable<Generator<[Info, boolean | string, number], void, void>>(
-  iterable(inputs),
+  iterable(...inputs),
 )
 each([[true, 'a'], 1], (info: Info, a: boolean | string, b: number) => {})
 expectAssignable<Generator<[Info, boolean | string, number], void, void>>(
-  iterable([[true, 'a'], 1]),
+  iterable([true, 'a'], 1),
 )
 each([[true, 'a'], (info: Info) => 1], (info: Info) => {})
 expectAssignable<Generator<[Info, boolean | string, number], void, void>>(
-  iterable([[true, 'a'], (info: Info) => 1]),
+  iterable([true, 'a'], (info: Info) => 1),
 )
 each([[true, 'a'], (info: Info) => 1], (info: Info, a: boolean | string) => {})
 expectAssignable<Generator<[Info, boolean | string, number], void, void>>(
-  iterable([[true, 'a'], (info: Info, arg: boolean | string) => 1]),
+  iterable([true, 'a'], (info: Info, arg: boolean | string) => 1),
 )
 expectError(each([[true, 'a'], (info: Info) => 1], (arg: boolean) => {}))
 expectAssignable<Generator<[Info, boolean | string, never], void, void>>(
-  iterable([[true, 'a'], (arg: boolean) => 1]),
+  iterable([true, 'a'], (arg: boolean) => 1),
 )
 expectError(
   each([[true, 'a'], (info: Info) => 1], (info: Info, arg: number) => {}),
 )
 expectAssignable<Generator<[Info, boolean | string, never], void, void>>(
-  iterable([[true, 'a'], (info: Info, arg: number) => 1]),
+  iterable([true, 'a'], (info: Info, arg: number) => 1),
 )
 
 expectAssignable<InputFunction>(() => {})
@@ -79,7 +79,7 @@ expectNotAssignable<InputFunction<[[true, 'a'], [1, 2]]>>(
   (info: Info, a: number, b: number) => {},
 )
 
-for (const [, a] of iterable([[{ b: true }]])) {
+for (const [, a] of iterable([{ b: true }])) {
   expectType<boolean>(a.b)
   expectError((a.b = false))
 }
