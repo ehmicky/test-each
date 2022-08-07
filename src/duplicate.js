@@ -6,19 +6,30 @@ export const fixDuplicates = function (input) {
     return input
   }
 
-  return input.map(fixDuplicate)
+  const nParams = input.map(normalizeParam)
+  return input.map((param, index) => fixDuplicate(param, index, nParams))
 }
 
-const fixDuplicate = function (param, index, params) {
-  const duplicateParams = params.filter(
-    (paramA) => paramA.title === param.title,
+const fixDuplicate = function (param, index, nParams) {
+  const nParam = nParams[index]
+  const duplicateParams = nParams.filter(
+    (nParamA) => nParamA.title === nParam.title,
   )
 
   if (duplicateParams.length === 1) {
     return param
   }
 
-  const duplicateCounter = duplicateParams.indexOf(param)
+  const duplicateCounter = duplicateParams.indexOf(nParam)
   const title = `${param.title} (${duplicateCounter})`
   return { value: param.value, title }
 }
+
+// Some test runners like Ava normalize|squash spaces when checking for
+// duplicate test titles.
+// This normalization is not kept, it is only used for the duplicate counters.
+const normalizeParam = function ({ value, title }) {
+  return { value, title: title.replace(SPACES_REGEXP, ' ') }
+}
+
+const SPACES_REGEXP = /\s+/gu
