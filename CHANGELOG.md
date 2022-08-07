@@ -1,3 +1,9 @@
+# 5.1.2
+
+## Bug fixes
+
+- Fix test titles differing only by their whitespaces
+
 # 5.1.1
 
 ## Bug fixes
