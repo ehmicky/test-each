@@ -1,6 +1,6 @@
 {
   "name": "test-each",
-  "version": "5.1.2",
+  "version": "5.2.0",
   "type": "module",
   "exports": "./build/src/main.js",
   "main": "./build/src/main.js",
