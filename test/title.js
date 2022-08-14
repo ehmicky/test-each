@@ -78,7 +78,7 @@ testSnapshots('Titles serialization', [
   // Keys should be sorted
   [[{ argB: true, argA: true, [Symbol('arg')]: true }]],
 
-  // Serialiazing circular references
+  // Serializing circular references
   [[self]],
 
   // Titles of objects with `toJSON()`
@@ -93,3 +93,20 @@ testSnapshots('Titles serialization', [
   // Serializing ANSI sequences
   [['\u001B[31mtext\u001B[39m']],
 ])
+
+testSnapshots(
+  'Titles serialization for unsafe properties',
+  [
+    [
+      [
+        {
+          // eslint-disable-next-line fp/no-get-set
+          get argA() {
+            throw new Error('test')
+          },
+        },
+      ],
+    ],
+  ],
+  true,
+)

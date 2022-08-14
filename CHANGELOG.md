@@ -1,3 +1,9 @@
+# 5.2.1
+
+## Bug fixes
+
+- Handle `get` methods that throw errors
+
 # 5.2.0
 
 ## Features

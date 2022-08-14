@@ -1,20 +1,21 @@
 // eslint-disable-next-line ava/no-ignored-test-files
 import test from 'ava'
 import { format } from 'pretty-format'
+import safeJsonValue from 'safe-json-value'
 import { each, iterable } from 'test-each'
 
 // For each `args` in `allArgs`, call `each|iterable(...args)` and snapshot the
 // return value.
-export const testSnapshots = function (testTitle, allArgs) {
+export const testSnapshots = function (testTitle, allArgs, unsafe = false) {
   allArgs.forEach((args) => {
-    snapshotMethod(args, testTitle)
+    snapshotMethod(args, testTitle, unsafe)
   })
 }
 
 // Run test for both `each()` and `iterable()`
-const snapshotMethod = function (args, testTitle) {
+const snapshotMethod = function (args, testTitle, unsafe) {
   METHODS.forEach(({ name, getParams }) => {
-    snapshotArgs({ args, testTitle, name, getParams })
+    snapshotArgs({ args, testTitle, name, getParams, unsafe })
   })
 }
 
@@ -39,11 +40,12 @@ const METHODS = [
 ]
 
 // We don't use `test-each` itself since we are testing it.
-const snapshotArgs = function ({ args, testTitle, name, getParams }) {
-  const title = format(args, { min: true })
+const snapshotArgs = function ({ args, testTitle, name, getParams, unsafe }) {
+  const title = unsafe ? '' : format(args, { min: true })
   test(`${testTitle} | ${name} ${title}`, (t) => {
     const loops = eGetParams(getParams, args)
-    t.snapshot(loops)
+    const loopsA = unsafe ? safeJsonValue(loops).value : loops
+    t.snapshot(loopsA)
   })
 }
 

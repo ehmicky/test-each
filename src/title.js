@@ -1,4 +1,5 @@
 import isPlainObj from 'is-plain-obj'
+import normalizeException from 'normalize-exception'
 import { format, plugins } from 'pretty-format'
 
 // Add `title` to each `param`
@@ -67,9 +68,17 @@ const hasTitle = function (value) {
 //  - handles circular references
 //  - can serialize DOM
 const serialize = function (value) {
-  const title = format(value, PRETTY_FORMAT_OPTS)
+  const title = safeFormat(value)
   const titleA = ESCAPE_SEQUENCES.reduce(escapeSequence, title)
   return titleA
+}
+
+const safeFormat = function (value) {
+  try {
+    return format(value, PRETTY_FORMAT_OPTS)
+  } catch (error) {
+    return String(normalizeException(error))
+  }
 }
 
 const PRETTY_FORMAT_OPTS = {
