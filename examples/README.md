@@ -1,12 +1,7 @@
-This directory contains examples of this library.
+This directory contains examples of this library. They can be run and edited:
 
-To execute them, first [install](../README.md#install) `test-each`. Then run
-`node node_modules/test-each/examples/FILE.js`.
-
-You can edit the examples.
-
-They can also be run directly
-[in your browser](https://repl.it/@ehmicky/test-each).
+- either directly [in your browser](https://repl.it/@ehmicky/test-each)
+- or in a terminal by cloning this repository
 
 ## Examples
 
