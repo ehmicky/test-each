@@ -1,3 +1,9 @@
+# 5.2.0
+
+## Features
+
+- Reduce npm package size
+
 # 5.1.2
 
 ## Bug fixes
