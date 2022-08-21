@@ -1,3 +1,9 @@
+# 5.3.0
+
+## Features
+
+- Improve error handling
+
 # 5.2.1
 
 ## Bug fixes
