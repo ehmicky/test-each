@@ -1,3 +1,9 @@
+# 5.4.0
+
+## Features
+
+- Strip ANSI sequences in titles
+
 # 5.3.0
 
 ## Features

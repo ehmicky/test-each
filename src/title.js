@@ -1,6 +1,7 @@
 import isPlainObj from 'is-plain-obj'
 import normalizeException from 'normalize-exception'
 import { format, plugins } from 'pretty-format'
+import stripAnsi from 'strip-ansi'
 
 // Add `title` to each `param`
 // We do it before the cartesian product for performance reasons.
@@ -69,8 +70,9 @@ const hasTitle = function (value) {
 //  - can serialize DOM
 const serialize = function (value) {
   const title = safeFormat(value)
-  const titleA = ESCAPE_SEQUENCES.reduce(escapeSequence, title)
-  return titleA
+  const titleA = stripAnsi(title)
+  const titleB = ESCAPE_SEQUENCES.reduce(escapeSequence, titleA)
+  return titleB
 }
 
 const safeFormat = function (value) {
@@ -90,7 +92,6 @@ const PRETTY_FORMAT_OPTS = {
     plugins.DOMCollection,
     plugins.ReactElement,
     plugins.Immutable,
-    plugins.ConvertAnsi,
   ],
 }
 
