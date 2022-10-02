@@ -5,7 +5,6 @@ import { testSnapshots } from './helpers/snapshot.js'
 
 testSnapshots('Invalid inputs', [
   [undefined],
-  // eslint-disable-next-line unicorn/no-null
   [null],
   [true],
   [-1],
