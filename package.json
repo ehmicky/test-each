@@ -52,7 +52,7 @@
     "pretty-format": "^29.0.1"
   },
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^1.0.88",
+    "@ehmicky/dev-tasks": "^1.0.89",
     "is-ci": "^3.0.1",
     "safe-json-value": "^1.8.0",
     "strip-ansi": "^7.0.1"
