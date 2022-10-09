@@ -53,9 +53,13 @@ const callFunc = function (info, previousValues, value, valueIndex, values) {
 const funcSymbol = Symbol('function')
 
 const isInputFunc = function (value) {
-  return (
-    value !== undefined && value !== null && value[funcSymbol] !== undefined
-  )
+  try {
+    return (
+      value !== undefined && value !== null && value[funcSymbol] !== undefined
+    )
+  } catch {
+    return false
+  }
 }
 
 const wrapFunc = function (value) {

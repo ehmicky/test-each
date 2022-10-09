@@ -53,11 +53,15 @@ const getTitle = function (value) {
 
 // `{ title }` can be used to override the serialization logic
 const hasTitle = function (value) {
-  return (
-    isPlainObj(value) &&
-    typeof value.title === 'string' &&
-    value.title.trim() !== ''
-  )
+  try {
+    return (
+      isPlainObj(value) &&
+      typeof value.title === 'string' &&
+      value.title.trim() !== ''
+    )
+  } catch {
+    return false
+  }
 }
 
 // We use `pretty-format` because it:
@@ -71,8 +75,7 @@ const hasTitle = function (value) {
 const serialize = function (value) {
   const title = safeFormat(value)
   const titleA = stripAnsi(title)
-  const titleB = ESCAPE_SEQUENCES.reduce(escapeSequence, titleA)
-  return titleB
+  return ESCAPE_SEQUENCES.reduce(escapeSequence, titleA)
 }
 
 const safeFormat = function (value) {

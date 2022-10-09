@@ -1,3 +1,9 @@
+# 5.4.1
+
+## Bug fixes
+
+- Handle `Proxy` methods that throw errors
+
 # 5.4.0
 
 ## Features
