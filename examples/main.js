@@ -5,7 +5,7 @@
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/test-each
 
-import assert from 'assert'
+import assert from 'node:assert'
 
 import { each } from 'test-each'
 
