@@ -1,3 +1,9 @@
+# 5.4.2
+
+## Bug fixes
+
+- Fix `package.json` dependencies
+
 # 5.4.1
 
 ## Bug fixes

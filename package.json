@@ -53,13 +53,13 @@
     "big-cartesian": "^4.2.0",
     "is-plain-obj": "^4.1.0",
     "normalize-exception": "^2.9.0",
-    "pretty-format": "^29.0.1"
+    "pretty-format": "^29.0.1",
+    "strip-ansi": "^7.0.1"
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^1.0.99",
     "is-ci": "^3.0.1",
-    "safe-json-value": "^1.8.0",
-    "strip-ansi": "^7.0.1"
+    "safe-json-value": "^1.8.0"
   },
   "engines": {
     "node": ">=14.18.0"
