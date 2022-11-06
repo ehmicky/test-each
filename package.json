@@ -52,7 +52,7 @@
   "dependencies": {
     "big-cartesian": "^4.3.0",
     "is-plain-obj": "^4.1.0",
-    "normalize-exception": "^2.9.0",
+    "normalize-exception": "^2.10.0",
     "pretty-format": "^29.0.1",
     "strip-ansi": "^7.0.1"
   },
