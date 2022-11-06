@@ -1,6 +1,6 @@
 {
   "name": "test-each",
-  "version": "5.4.2",
+  "version": "5.5.0",
   "type": "module",
   "exports": {
     "types": "./build/types/main.d.ts",
