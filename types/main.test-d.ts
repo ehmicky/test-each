@@ -5,7 +5,7 @@ import {
   expectError,
 } from 'tsd'
 
-import { each, iterable, Info, InputFunction } from './main.js'
+import { each, iterable, Info, InputFunction } from 'test-each'
 
 const inputs: [(boolean | string)[], number[]] = [
   [true, 'a'],
