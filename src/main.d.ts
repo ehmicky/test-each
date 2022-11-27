@@ -100,10 +100,10 @@ type InputFunctionArgs<InputArrays extends InputArraysArgs> = {
   [index in keyof InputArrays]: Readonly<
     InputArrays[index] extends Array<infer InputElement>
       ? InputElement
-      : InputArrays[index] extends number
-      ? number
       : InputArrays[index] extends Function
       ? InputArrays[index]
+      : InputArrays[index] extends number
+      ? number
       : never
   >
 }
