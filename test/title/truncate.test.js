@@ -1,4 +1,4 @@
-import { testSnapshots } from '../helpers/snapshot.js'
+import { testSnapshots } from '../helpers/snapshot.test.js'
 
 testSnapshots('Truncating titles', [
   // eslint-disable-next-line no-magic-numbers

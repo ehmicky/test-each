@@ -1,4 +1,4 @@
-import { testSnapshots } from './helpers/snapshot.js'
+import { testSnapshots } from './helpers/snapshot.test.js'
 
 const getIndex = function ({ index }) {
   return index
