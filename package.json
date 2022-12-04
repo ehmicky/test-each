@@ -59,7 +59,7 @@
     "strip-ansi": "^7.0.1"
   },
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^2.0.32",
+    "@ehmicky/dev-tasks": "^2.0.33",
     "is-ci": "^3.0.1",
     "safe-json-value": "^1.10.0"
   },
