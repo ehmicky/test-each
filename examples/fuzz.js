@@ -7,10 +7,11 @@
 
 import assert from 'node:assert'
 
+import { multiply } from './multiply.js'
+
 import { each } from 'test-each'
 
 // The code we are testing
-import { multiply } from './multiply.js'
 
 // Fuzz testing. Run this test 1000 times using different numbers.
 each(1000, Math.random, ({ title }, index, randomNumber) => {

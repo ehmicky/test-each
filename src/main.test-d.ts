@@ -1,6 +1,6 @@
 import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
 
-import { each, iterable, Info, InputFunction } from 'test-each'
+import { each, iterable, type Info, type InputFunction } from 'test-each'
 
 const inputs: [(boolean | string)[], number[]] = [
   [true, 'a'],
@@ -21,6 +21,7 @@ each(...inputs, (info, a, b) => {
   expectType<typeof inputs.length>(indices.length)
 })
 
+// eslint-disable-next-line fp/no-loops
 for (const [info, a, b] of iterable(...inputs)) {
   expectType<boolean | string>(a)
   expectType<number>(b)
@@ -91,13 +92,17 @@ expectNotAssignable<InputFunction<[[true, 'a'], [1, 2]]>>(
   (info: Info, a: number, b: number) => {},
 )
 
+// eslint-disable-next-line fp/no-loops
 for (const [, a] of iterable([{ b: true }])) {
   expectType<boolean>(a.b)
   // @ts-expect-error
+  // eslint-disable-next-line fp/no-mutation
   a.b = false
 }
+
 each([{ b: true }], (info, a) => {
   expectType<boolean>(a.b)
   // @ts-expect-error
+  // eslint-disable-next-line fp/no-mutation, no-param-reassign
   a.b = false
 })

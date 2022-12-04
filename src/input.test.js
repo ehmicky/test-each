@@ -1,7 +1,8 @@
 import test from 'ava'
-import { each } from 'test-each'
 
 import { testSnapshots } from './helpers/snapshot.test.js'
+
+import { each } from 'test-each'
 
 testSnapshots('Invalid inputs', [
   [undefined],

@@ -31,10 +31,12 @@ Repeats tests using different inputs
 ```js
 // The examples use Ava but any test runner works (Jest, Mocha, Jasmine, etc.)
 import test from 'ava'
+
+import multiply from './multiply.js'
+
 import { each } from 'test-each'
 
 // The code we are testing
-import multiply from './multiply.js'
 
 // Repeat test using different inputs and expected outputs
 each(

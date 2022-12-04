@@ -7,10 +7,11 @@
 
 import assert from 'node:assert'
 
+import { multiply } from './multiply.js'
+
 import { each } from 'test-each'
 
 // The code we are testing
-import { multiply } from './multiply.js'
 
 // Repeat test using different inputs and expected outputs
 each(

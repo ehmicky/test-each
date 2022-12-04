@@ -7,10 +7,11 @@
 
 import assert from 'node:assert'
 
+import { multiply } from './multiply.js'
+
 import { each } from 'test-each'
 
 // The code we are testing
-import { multiply } from './multiply.js'
 
 // Cartesian product.
 // Run this test 4 times using every possible combination of inputs

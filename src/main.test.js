@@ -1,8 +1,9 @@
 import test from 'ava'
 import isCi from 'is-ci'
-import { each, iterable } from 'test-each'
 
 import { testSnapshots } from './helpers/snapshot.test.js'
+
+import { each, iterable } from 'test-each'
 
 testSnapshots('Normal iterations', [
   [['a']],
