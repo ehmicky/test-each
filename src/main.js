@@ -5,7 +5,7 @@ import { normalizeFunc, callFuncs } from './func.js'
 import { wrapIndexes, unwrapIndexes } from './indexes.js'
 import { parseInputs, validateInputs } from './input.js'
 import { addRepeat } from './repeat.js'
-import { addTitles, joinTitles } from './title/main.js'
+import { addTitles, joinTitles } from './title.js'
 
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
