@@ -1,7 +1,7 @@
 /**
  * Object whose properties can be used to generate test titles.
  */
-export type Info<InputArrays = Array<any[]>> = Readonly<{
+export type Info<InputArrays = unknown[][]> = Readonly<{
   /**
    * Each combination of parameters is stringified as a `title`.
    * Titles should be included in test titles to make them descriptive and
@@ -57,11 +57,13 @@ export type Info<InputArrays = Array<any[]>> = Readonly<{
   indices: { [index in keyof InputArrays]: number }
 }>
 
-type InputArraysArgs = Array<any[] | number | Function>
+type UnknownFunction = (...args: never[]) => unknown
+
+type InputArraysArgs = (unknown[] | number | UnknownFunction)[]
 
 type CartesianProduct<InputArrays extends InputArraysArgs> = {
   [index in keyof InputArrays]: Readonly<
-    InputArrays[index] extends Array<infer InputElement>
+    InputArrays[index] extends (infer InputElement)[]
       ? InputElement
       : InputArrays[index] extends number
       ? number
@@ -91,16 +93,16 @@ type CartesianProduct<InputArrays extends InputArraysArgs> = {
  * )
  * ```
  */
-export type InputFunction<InputArrays extends InputArraysArgs = any[][]> = (
+export type InputFunction<InputArrays extends InputArraysArgs = unknown[][]> = (
   info: Info,
   ...args: InputFunctionArgs<InputArrays>
-) => any
+) => unknown
 
 type InputFunctionArgs<InputArrays extends InputArraysArgs> = {
-  [index in keyof InputArrays]: Readonly<
-    InputArrays[index] extends Array<infer InputElement>
+  readonly [index in keyof InputArrays]: Readonly<
+    InputArrays[index] extends (infer InputElement)[]
       ? InputElement
-      : InputArrays[index] extends Function
+      : InputArrays[index] extends UnknownFunction
       ? InputArrays[index]
       : InputArrays[index] extends number
       ? number
