@@ -1,9 +1,4 @@
-import {
-  expectType,
-  expectAssignable,
-  expectNotAssignable,
-  expectError,
-} from 'tsd'
+import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
 
 import { each, iterable, Info, InputFunction } from 'test-each'
 
@@ -64,22 +59,20 @@ each(
 expectAssignable<Generator<[Info, boolean | string, number], void, void>>(
   iterable([true, 'a'], (info: Info, arg: boolean | string) => 1),
 )
-expectError(
-  each(
-    [true, 'a'],
-    (info: Info) => 1,
-    (arg: boolean) => {},
-  ),
+each(
+  [true, 'a'],
+  (info: Info) => 1,
+  // @ts-expect-error
+  (arg: boolean) => {},
 )
 expectAssignable<Generator<[Info, boolean | string, never], void, void>>(
   iterable([true, 'a'], (arg: boolean) => 1),
 )
-expectError(
-  each(
-    [true, 'a'],
-    (info: Info) => 1,
-    (info: Info, arg: number) => {},
-  ),
+each(
+  [true, 'a'],
+  (info: Info) => 1,
+  // @ts-expect-error
+  (info: Info, arg: number) => {},
 )
 expectAssignable<Generator<[Info, boolean | string, never], void, void>>(
   iterable([true, 'a'], (info: Info, arg: number) => 1),
@@ -100,9 +93,11 @@ expectNotAssignable<InputFunction<[[true, 'a'], [1, 2]]>>(
 
 for (const [, a] of iterable([{ b: true }])) {
   expectType<boolean>(a.b)
-  expectError((a.b = false))
+  // @ts-expect-error
+  a.b = false
 }
 each([{ b: true }], (info, a) => {
   expectType<boolean>(a.b)
-  expectError((a.b = false))
+  // @ts-expect-error
+  a.b = false
 })
