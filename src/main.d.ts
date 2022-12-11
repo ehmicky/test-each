@@ -57,8 +57,9 @@ export type Info = Readonly<{
   indices: number[]
 }>
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type InputArraysArgs = (unknown[] | number | Function)[]
+type UnknownFunction = (...args: never[]) => unknown
+
+type InputArraysArgs = (unknown[] | number | UnknownFunction)[]
 
 type CartesianProduct<InputArrays extends InputArraysArgs> = {
   [index in keyof InputArrays]: Readonly<
@@ -101,8 +102,7 @@ type InputFunctionArgs<InputArrays extends InputArraysArgs> = {
   readonly [index in keyof InputArrays]: Readonly<
     InputArrays[index] extends (infer InputElement)[]
       ? InputElement
-      : // eslint-disable-next-line @typescript-eslint/ban-types
-      InputArrays[index] extends Function
+      : InputArrays[index] extends UnknownFunction
       ? InputArrays[index]
       : InputArrays[index] extends number
       ? number
