@@ -1,3 +1,9 @@
+# 5.7.1
+
+## Bug fixes
+
+- Fix TypeScript types
+
 # 5.7.0
 
 ## Features
