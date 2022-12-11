@@ -13,12 +13,10 @@ each(...inputs, (info, a, b) => {
   expectAssignable<Info>(info)
   const { title, titles, index, indices } = info
   expectType<string>(title)
-  expectType<string>(titles[0])
-  expectType<typeof inputs.length>(titles.length)
+  expectType<string>(titles[0]!)
 
   expectType<number>(index)
-  expectType<number>(indices[0])
-  expectType<typeof inputs.length>(indices.length)
+  expectType<number>(indices[0]!)
 })
 
 // eslint-disable-next-line fp/no-loops
@@ -29,12 +27,10 @@ for (const [info, a, b] of iterable(...inputs)) {
   expectAssignable<Info>(info)
   const { title, titles, index, indices } = info
   expectType<string>(title)
-  expectType<string>(titles[0])
-  expectType<typeof inputs.length>(titles.length)
+  expectType<string>(titles[0]!)
 
   expectType<number>(index)
-  expectType<number>(indices[0])
-  expectType<typeof inputs.length>(indices.length)
+  expectType<number>(indices[0]!)
 }
 
 expectAssignable<Generator<[Info, boolean | string, number], void, void>>(

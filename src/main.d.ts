@@ -1,7 +1,7 @@
 /**
  * Object whose properties can be used to generate test titles.
  */
-export type Info<InputArrays = unknown[][]> = Readonly<{
+export type Info = Readonly<{
   /**
    * Each combination of parameters is stringified as a `title`.
    * Titles should be included in test titles to make them descriptive and
@@ -44,7 +44,7 @@ export type Info<InputArrays = unknown[][]> = Readonly<{
   /**
    * Like `info.title` but for each input.
    */
-  titles: { [index in keyof InputArrays]: string }
+  titles: string[]
 
   /**
    * Incremented on each iteration. Starts at `0`.
@@ -54,7 +54,7 @@ export type Info<InputArrays = unknown[][]> = Readonly<{
   /**
    * Index of each parameter inside each initial input.
    */
-  indices: { [index in keyof InputArrays]: number }
+  indices: number[]
 }>
 
 type UnknownFunction = (...args: never[]) => unknown
@@ -129,7 +129,7 @@ type InputFunctionArgs<InputArrays extends InputArraysArgs> = {
  */
 export function iterable<InputArrays extends InputArraysArgs>(
   ...inputs: [...InputArrays]
-): Generator<[Info<InputArrays>, ...CartesianProduct<InputArrays>], void, void>
+): Generator<[Info, ...CartesianProduct<InputArrays>], void, void>
 
 /**
  * Fires `callback` with each combination of the inputs.
@@ -191,9 +191,6 @@ export function iterable<InputArrays extends InputArraysArgs>(
 export function each<InputArrays extends InputArraysArgs>(
   ...args: [
     ...inputs: [...InputArrays],
-    callback: (
-      info: Info<InputArrays>,
-      ...params: CartesianProduct<InputArrays>
-    ) => void,
+    callback: (info: Info, ...params: CartesianProduct<InputArrays>) => void,
   ]
 ): void
