@@ -51,7 +51,7 @@
     "lib": "src"
   },
   "dependencies": {
-    "big-cartesian": "^4.6.0",
+    "big-cartesian": "^4.7.0",
     "is-plain-obj": "^4.1.0",
     "normalize-exception": "^2.11.0",
     "pretty-format": "^29.0.1",
