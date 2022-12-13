@@ -1,21 +1,13 @@
 import { testSnapshots } from './helpers/snapshot.test.js'
 
-const getIndex = function ({ index }) {
-  return index
-}
+const getIndex = ({ index }) => index
 
-const getIndexes = function ({ indexes }) {
-  return indexes
-}
+const getIndexes = ({ indexes }) => indexes
 
-const getTrue = function () {
-  return true
-}
+const getTrue = () => true
 
 // eslint-disable-next-line max-params
-const concatArgs = function (info, argA, argB, argC) {
-  return [argA, argB, argC]
-}
+const concatArgs = (info, argA, argB, argC) => [argA, argB, argC]
 
 testSnapshots('Function parameters', [
   [() => 'a'],

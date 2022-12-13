@@ -1,7 +1,7 @@
 import { isRepeat } from './repeat.js'
 
 // Parse and validate main input
-export const parseInputs = function (inputs) {
+export const parseInputs = (inputs) => {
   const inputsA = inputs.slice(0, -1)
   const callback = inputs[inputs.length - 1]
 
@@ -14,11 +14,11 @@ export const parseInputs = function (inputs) {
   return [inputsA, callback]
 }
 
-export const validateInputs = function (inputs) {
+export const validateInputs = (inputs) => {
   inputs.forEach(validateInput)
 }
 
-const validateInput = function (input) {
+const validateInput = (input) => {
   if (
     !Array.isArray(input) &&
     !isRepeat(input) &&

@@ -1,7 +1,7 @@
 // Ensure titles are unique by appending a counter when we find duplicates.
 // This does not need to be applied to input functions: even if an input
 // function always return the same value, the other parameters won't.
-export const fixDuplicates = function (input) {
+export const fixDuplicates = (input) => {
   if (typeof input === 'function') {
     return input
   }
@@ -10,7 +10,7 @@ export const fixDuplicates = function (input) {
   return input.map((param, index) => fixDuplicate(param, index, nParams))
 }
 
-const fixDuplicate = function (param, index, nParams) {
+const fixDuplicate = (param, index, nParams) => {
   const nParam = nParams[index]
   const duplicateParams = nParams.filter(
     (nParamA) => nParamA.title === nParam.title,
@@ -28,8 +28,9 @@ const fixDuplicate = function (param, index, nParams) {
 // Some test runners like Ava normalize|squash spaces when checking for
 // duplicate test titles.
 // This normalization is not kept, it is only used for the duplicate counters.
-const normalizeParam = function ({ value, title }) {
-  return { value, title: title.replace(SPACES_REGEXP, ' ') }
-}
+const normalizeParam = ({ value, title }) => ({
+  value,
+  title: title.replace(SPACES_REGEXP, ' '),
+})
 
 const SPACES_REGEXP = /\s+/gu

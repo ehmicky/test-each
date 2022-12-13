@@ -7,14 +7,14 @@ import { each, iterable } from 'test-each'
 
 // For each `args` in `allArgs`, call `each|iterable(...args)` and snapshot the
 // return value.
-export const testSnapshots = function (testTitle, allArgs, unsafe = false) {
+export const testSnapshots = (testTitle, allArgs, unsafe = false) => {
   allArgs.forEach((args) => {
     snapshotMethod(args, testTitle, unsafe)
   })
 }
 
 // Run test for both `each()` and `iterable()`
-const snapshotMethod = function (args, testTitle, unsafe) {
+const snapshotMethod = (args, testTitle, unsafe) => {
   METHODS.forEach(({ name, getParams }) => {
     snapshotArgs({ args, testTitle, name, getParams, unsafe })
   })
@@ -23,7 +23,7 @@ const snapshotMethod = function (args, testTitle, unsafe) {
 const METHODS = [
   {
     name: 'each()',
-    getParams(args) {
+    getParams: (args) => {
       const allParams = []
       each(...args, (...params) => {
         // eslint-disable-next-line fp/no-mutating-methods
@@ -34,14 +34,12 @@ const METHODS = [
   },
   {
     name: 'iterable()',
-    getParams(args) {
-      return [...iterable(...args)]
-    },
+    getParams: (args) => [...iterable(...args)],
   },
 ]
 
 // We don't use `test-each` itself since we are testing it.
-const snapshotArgs = function ({ args, testTitle, name, getParams, unsafe }) {
+const snapshotArgs = ({ args, testTitle, name, getParams, unsafe }) => {
   const title = unsafe ? '' : format(args, { min: true })
   test(`${testTitle} | ${name} ${title}`, (t) => {
     const loops = eGetParams(getParams, args)
@@ -50,7 +48,7 @@ const snapshotArgs = function ({ args, testTitle, name, getParams, unsafe }) {
   })
 }
 
-const eGetParams = function (getParams, args) {
+const eGetParams = (getParams, args) => {
   try {
     return getParams(args)
   } catch (error) {

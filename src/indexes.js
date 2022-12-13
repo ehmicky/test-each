@@ -1,29 +1,19 @@
 // Remember indexes of parameters for each `input`, so we can retrieve it after
 // cartesian product
-export const wrapIndexes = function (inputs) {
-  return inputs.map(wrapIndex)
-}
+export const wrapIndexes = (inputs) => inputs.map(wrapIndex)
 
-const wrapIndex = function ({ value, title }, index) {
-  return { index, value, title }
-}
+const wrapIndex = ({ value, title }, index) => ({ index, value, title })
 
 // Revert it after cartesian product
-export const unwrapIndexes = function (loop, index) {
+export const unwrapIndexes = (loop, index) => {
   const indexes = loop.map(unwrapIndex)
   const values = loop.map(unpackValue)
   const titles = loop.map(unpackTitle)
   return { index, indexes, values, titles }
 }
 
-const unwrapIndex = function ({ index }) {
-  return index
-}
+const unwrapIndex = ({ index }) => index
 
-const unpackValue = function ({ value }) {
-  return value
-}
+const unpackValue = ({ value }) => value
 
-const unpackTitle = function ({ title }) {
-  return title
-}
+const unpackTitle = ({ title }) => title

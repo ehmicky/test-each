@@ -10,7 +10,7 @@ import { addTitles, joinTitles } from './title.js'
 // Repeat a function with a combination of parameters.
 // Meant for data-driven testing and fuzzy testing.
 // Pass each combination to the final callback.
-export const each = function (...inputs) {
+export const each = (...inputs) => {
   const [inputsA, func] = parseInputs(inputs)
 
   const inputsB = inputsA.map(normalizeInput)
@@ -36,7 +36,7 @@ export const iterable = function* (...inputs) {
   yield* forEachLoop(inputsA)
 }
 
-const normalizeInput = function (input) {
+const normalizeInput = (input) => {
   const inputA = addRepeat(input)
   const inputB = addTitles(inputA)
   const inputC = fixDuplicates(inputB)
@@ -62,7 +62,7 @@ const forEachLoop = function* (inputs) {
   }
 }
 
-const normalizeLoop = function (loop, index) {
+const normalizeLoop = (loop, index) => {
   const loopA = unwrapIndexes(loop, index)
   const loopB = callFuncs(loopA)
   const loopC = joinTitles(loopB)

@@ -112,7 +112,7 @@ const inputs = [
   ['red', 'blue'],
   [0, 5, 50],
 ]
-each(...inputs, function callback(info, color, number) {})
+each(...inputs, (info, color, number) => {})
 ```
 
 Fires `callback` once for each possible combination of `inputs`.
@@ -355,7 +355,7 @@ array.forEach(([{ title }, color, param]) => {
 ## each(...inputs, callback)
 
 `inputs`: `Array | function | integer` (one or [several](#cartesian-product))\
-`callback`: `function(info, ...params)`
+`callback`: `(info, ...params) => void`
 
 Fires `callback` with each combination of [`params`](#params).
 

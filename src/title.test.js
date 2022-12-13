@@ -1,13 +1,10 @@
 import { testSnapshots } from './helpers/snapshot.test.js'
 
-const getNamedFunction = function () {
-  return function func() {}
-}
+// eslint-disable-next-line prefer-arrow-functions/prefer-arrow-functions, unicorn/consistent-function-scoping
+const getNamedFunction = () => function func() {}
 
-const getAnonymousFunction = function () {
-  // eslint-disable-next-line func-names
-  return function () {}
-}
+// eslint-disable-next-line unicorn/consistent-function-scoping
+const getAnonymousFunction = () => () => {}
 
 const self = {}
 // eslint-disable-next-line fp/no-mutation
@@ -122,7 +119,7 @@ PROXY_METHODS.forEach((proxyMethod) => {
           new Proxy(
             {},
             {
-              [proxyMethod]() {
+              [proxyMethod]: () => {
                 throw new Error('unsafe')
               },
             },
