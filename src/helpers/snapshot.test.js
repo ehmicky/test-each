@@ -2,7 +2,6 @@
 import test from 'ava'
 import { format } from 'pretty-format'
 import safeJsonValue from 'safe-json-value'
-
 import { each, iterable } from 'test-each'
 
 // For each `args` in `allArgs`, call `each|iterable(...args)` and snapshot the
