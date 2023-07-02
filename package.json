@@ -55,7 +55,7 @@
     "is-plain-obj": "^4.1.0",
     "normalize-exception": "^3.0.0",
     "pretty-format": "^29.0.1",
-    "strip-ansi": "^7.0.1"
+    "strip-ansi": "^7.1.0"
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^2.0.83",
