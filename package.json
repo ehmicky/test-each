@@ -42,7 +42,10 @@
   ],
   "license": "Apache-2.0",
   "homepage": "https://www.github.com/ehmicky/test-each",
-  "repository": "ehmicky/test-each",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehmicky/test-each.git"
+  },
   "bugs": {
     "url": "https://github.com/ehmicky/test-each/issues"
   },
