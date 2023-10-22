@@ -3,7 +3,7 @@ import { isRepeat } from './repeat.js'
 // Parse and validate main input
 export const parseInputs = (inputs) => {
   const inputsA = inputs.slice(0, -1)
-  const callback = inputs[inputs.length - 1]
+  const callback = inputs.at(-1)
 
   validateInputs(inputsA)
 

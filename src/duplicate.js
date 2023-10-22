@@ -30,7 +30,7 @@ const fixDuplicate = (param, index, nParams) => {
 // This normalization is not kept, it is only used for the duplicate counters.
 const normalizeParam = ({ value, title }) => ({
   value,
-  title: title.replace(SPACES_REGEXP, ' '),
+  title: title.replaceAll(SPACES_REGEXP, ' '),
 })
 
 const SPACES_REGEXP = /\s+/gu
