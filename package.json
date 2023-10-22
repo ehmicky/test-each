@@ -57,8 +57,7 @@
     "big-cartesian": "^5.0.0",
     "is-plain-obj": "^4.1.0",
     "normalize-exception": "^3.0.0",
-    "pretty-format": "^29.7.0",
-    "strip-ansi": "^7.1.0"
+    "pretty-format": "^29.7.0"
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^2.0.101",

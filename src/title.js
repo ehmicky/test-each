@@ -1,7 +1,8 @@
+import { stripVTControlCharacters } from 'node:util'
+
 import isPlainObj from 'is-plain-obj'
 import normalizeException from 'normalize-exception'
 import { format, plugins } from 'pretty-format'
-import stripAnsi from 'strip-ansi'
 
 // Add `title` to each `param`
 // We do it before the cartesian product for performance reasons.
@@ -74,7 +75,7 @@ const hasTitle = (value) => {
 //  - can serialize DOM
 const serialize = (value) => {
   const title = safeFormat(value)
-  const titleA = stripAnsi(title)
+  const titleA = stripVTControlCharacters(title)
   return ESCAPE_SEQUENCES.reduce(escapeSequence, titleA)
 }
 
