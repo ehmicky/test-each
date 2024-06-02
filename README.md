@@ -249,7 +249,7 @@ Integers can be used instead of arrays to multiply the number of iterations.
 
 This enables [fuzz testing](https://en.wikipedia.org/wiki/Fuzzing) when combined
 with [input functions](#input-functions) and libraries like
-[faker.js](https://github.com/marak/Faker.js),
+[faker.js](https://github.com/tzuryby/Faker.js),
 [chance.js](https://github.com/chancejs/chancejs) or
 [json-schema-faker](https://github.com/json-schema-faker/json-schema-faker).
 
@@ -282,7 +282,7 @@ Any library can be used
 ([`snap-shot-it`](https://github.com/bahmutov/snap-shot-it),
 [Ava snapshots](https://github.com/avajs/ava/blob/master/docs/04-snapshot-testing.md),
 [Jest snapshots](https://jestjs.io/docs/en/snapshot-testing),
-[Node TAP snapshots](https://www.node-tap.org/snapshots/), etc.).
+[Node TAP snapshots](https://node-tap.org/plugins/snapshot/), etc.).
 
 <!-- eslint-disable max-nested-callbacks -->
 
@@ -408,7 +408,7 @@ Incremented on each iteration. Starts at `0`.
 _Type_: `integer[]`
 
 Index of each [`params`](#params) inside each initial
-[`input`](#testeachinputs-callback).
+[`input`](#eachinputs-callback).
 
 ### params
 
