@@ -374,7 +374,8 @@ Fires `callback` with each combination of [`params`](#params).
 ## iterable(...inputs)
 
 `inputs`: `Array | function | integer` (one or [several](#cartesian-product))\
-_Return value_: [`Iterable<[info, ...params]>`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables)
+_Return value_:
+[`Iterable<[info, ...params]>`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables)
 
 Returns an
 [`Iterable`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#Iterables)

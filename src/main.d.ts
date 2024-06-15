@@ -66,10 +66,10 @@ type CartesianProduct<InputArrays extends InputArraysArgs> = {
     InputArrays[index] extends (infer InputElement)[]
       ? InputElement
       : InputArrays[index] extends number
-      ? number
-      : InputArrays[index] extends InputFunction<InputArrays>
-      ? ReturnType<InputArrays[index]>
-      : never
+        ? number
+        : InputArrays[index] extends InputFunction<InputArrays>
+          ? ReturnType<InputArrays[index]>
+          : never
   >
 }
 
@@ -103,10 +103,10 @@ type InputFunctionArgs<InputArrays extends InputArraysArgs> = {
     InputArrays[index] extends (infer InputElement)[]
       ? InputElement
       : InputArrays[index] extends UnknownFunction
-      ? InputArrays[index]
-      : InputArrays[index] extends number
-      ? number
-      : never
+        ? InputArrays[index]
+        : InputArrays[index] extends number
+          ? number
+          : never
   >
 }
 
