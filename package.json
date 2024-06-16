@@ -60,7 +60,7 @@
     "pretty-format": "^29.7.0"
   },
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^2.0.132",
+    "@ehmicky/dev-tasks": "^2.0.133",
     "is-ci": "^3.0.1",
     "safe-json-value": "^3.0.0"
   },
