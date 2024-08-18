@@ -93,13 +93,6 @@ each(1000, Math.random, ({ title }, index, randomNumber) => {
 })
 ```
 
-# Demo
-
-You can try this library:
-
-- either directly [in your browser](https://repl.it/@ehmicky/test-each).
-- or by executing the [`examples` files](examples/README.md) in a terminal.
-
 # Install
 
 ```
