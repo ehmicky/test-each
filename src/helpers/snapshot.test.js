@@ -26,7 +26,6 @@ const METHODS = [
     getParams: (args) => {
       const allParams = []
       each(...args, (...params) => {
-        // eslint-disable-next-line fp/no-mutating-methods
         allParams.push(params)
       })
       return allParams
