@@ -1,4 +1,4 @@
-import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
+import { expectAssignable, expectNotAssignable, expectType } from 'tsd'
 
 import { each, iterable, type Info, type InputFunction } from 'test-each'
 

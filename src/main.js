@@ -1,8 +1,8 @@
 import bigCartesian from 'big-cartesian'
 
 import { fixDuplicates } from './duplicate.js'
-import { normalizeFunc, callFuncs } from './func.js'
-import { wrapIndexes, unwrapIndexes } from './indexes.js'
+import { callFuncs, normalizeFunc } from './func.js'
+import { unwrapIndexes, wrapIndexes } from './indexes.js'
 import { parseInputs, validateInputs } from './input.js'
 import { addRepeat } from './repeat.js'
 import { addTitles, joinTitles } from './title.js'
