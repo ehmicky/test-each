@@ -56,7 +56,7 @@
   "dependencies": {
     "big-cartesian": "^6.1.1",
     "is-plain-obj": "^4.1.0",
-    "normalize-exception": "^4.0.0",
+    "normalize-exception": "^4.0.1",
     "pretty-format": "^29.7.0"
   },
   "devDependencies": {
