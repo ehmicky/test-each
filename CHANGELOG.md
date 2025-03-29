@@ -1,3 +1,9 @@
+# 7.0.1
+
+## Documentation
+
+- Update `README.md`
+
 # 7.0.0
 
 ## Breaking changes
